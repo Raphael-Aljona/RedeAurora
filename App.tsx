@@ -6,6 +6,8 @@ import {
     Montserrat_700Bold,
     useFonts
 } from "@expo-google-fonts/montserrat";
+import React from 'react';
+import Login from './src/app/login';
 
 export default function App() {
 
@@ -24,7 +26,7 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{flex: 1}}>
-                <ListagemItem></ListagemItem>
+                <Login/>
             </SafeAreaView>
         </SafeAreaProvider>
     );

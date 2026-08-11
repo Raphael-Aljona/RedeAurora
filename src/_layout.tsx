@@ -1,5 +1,6 @@
 import {Stack} from "expo-router";
 import {ListagemItem} from "./app/listagem_item";
+import React from "react";
 
 export default function RootLayout() {
     return (
