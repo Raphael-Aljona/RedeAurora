@@ -1,11 +1,5 @@
 export const Colors = {
-    corDeFundo: "#F3F4F6",
-    corBtnVerde: "#10B981",
-    corTextoSecundario: "#7D7D7D",
-    inputBorder: '#E5E5E7',
-    colorBtnBlue: '#006FFF',
-    btn_verde: '#10B981',
-    inputBg: '#F2F2F4',
+    laranja_btn: "#F06A22"
 }
 
 export const Fonts = {
@@ -27,7 +21,7 @@ export const TitleLabel = {
 export const Button = {
     padding: 10,
     borderRadius: 5,
-    backgroundColor: Colors.corBtnVerde
+    backgroundColor: Colors.laranja_btn
 }
 export const ButtonText = {
     color: "#F3F4F6",

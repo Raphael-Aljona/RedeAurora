@@ -1,16 +1,17 @@
-import { Image, Pressable, StyleSheet, Text, TextInput, TouchableOpacity, useWindowDimensions, View } from "react-native";
-import { Button, ButtonText, Colors, Title, TitleLabel } from "../../constants/theme";
-import { useRouter } from "expo-router";
+import {View, Text, TextInput, StyleSheet} from "react-native";
+import AuroraButton from "../../components/aurora_button/aurora_button";
+import {navigate} from "expo-router/build/global-state/routing";
+import {useRouter} from "expo-router";
 import React from "react";
 
-
-const router = useRouter();
-
-function acessar(){
-    router.push("/lista")
-}
-
 export default function Login(){
+
+    const router = useRouter();
+
+    function acessar() {
+        router.push("/listagem_item")
+    }
+
     return (
         <View>
             <View style={estilos.container}>
@@ -20,14 +21,11 @@ export default function Login(){
                 <TextInput>Digite seu e-mail</TextInput>
                 <Text>Senha</Text>
                 <TextInput>Digite sua Senha</TextInput>
-                <TouchableOpacity onPress={acessar}>
-          <Text>Acessar o sistema</Text>
-        </TouchableOpacity>
+            <AuroraButton text="Pressione" onPress={acessar} />
             </View>
         </View>
-    )
+)
 }
-
 const estilos = StyleSheet.create({
     container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
     main: {

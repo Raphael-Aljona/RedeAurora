@@ -1,7 +1,7 @@
 import React from "react";
 import {Text, View} from "react-native";
 
-export function ListagemItem() {
+export default function ListagemItem() {
     return (
         <View>
             <Text>
