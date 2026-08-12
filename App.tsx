@@ -6,6 +6,7 @@ import {
     useFonts
 } from "@expo-google-fonts/montserrat";
 import Login from "./src/app/login";
+import React from 'react';
 
 export default function App() {
 
@@ -23,6 +24,7 @@ export default function App() {
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{flex: 1}}>
+                <Login/>
             </SafeAreaView>
         </SafeAreaProvider>
     );
