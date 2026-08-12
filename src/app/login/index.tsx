@@ -1,11 +1,9 @@
 import {View} from "react-native";
 import AuroraButton from "../../components/aurora_button/aurora_button";
-import {navigate} from "expo-router/build/global-state/routing";
 import {useRouter} from "expo-router";
 
 
-
-export default function Login(){
+export default function Login() {
 
     const router = useRouter();
 
@@ -15,7 +13,8 @@ export default function Login(){
 
     return (
         <View>
-            <AuroraButton text="Pressione" onPress={acessar} />
+            <AuroraButton text="Pressione" onPress={() => {
+            }}/>
         </View>
     )
 }

@@ -13,40 +13,12 @@ export default function TabsLayout() {
                 }}
             >
                 <Tabs.Screen
-                    name="listagemItem/index"
+                    name="dashboard/index"
                     options={{
                         title: "Dashboard",
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons
-                                name="list-outline"
-                                color={color}
-                                size={size}
-                            />
-                        ),
-                    }}
-                />
-
-                <Tabs.Screen
-                    name="exportar_itens/index"
-                    options={{
-                        title: "Listagem",
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons
-                                name="add-circle-outline"
-                                color={color}
-                                size={size}
-                            />
-                        ),
-                    }}
-                />
-
-                <Tabs.Screen
-                    name="detalhes_item/index"
-                    options={{
-                        title: "Detalhes",
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons
-                                name="notifications-outline"
+                                name="home"
                                 color={color}
                                 size={size}
                             />
@@ -60,13 +32,28 @@ export default function TabsLayout() {
                         title: "Adicionar",
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons
-                                name="person-outline"
+                                name="add-circle-outline"
                                 color={color}
                                 size={size}
                             />
                         ),
                     }}
                 />
+
+                <Tabs.Screen
+                    name="detalhes_item/index"
+                    options={{
+                        title: "Perfil",
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons
+                                name="notifications-outline"
+                                color={color}
+                                size={size}
+                            />
+                        ),
+                    }}
+                />
+
             </Tabs>
         </SafeAreaView>
     )
