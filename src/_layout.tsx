@@ -12,7 +12,7 @@ export default function RootLayout() {
                 }}
             />
             <Stack.Screen
-                name="CriarItem/index"
+                name="criar_item/index"
                 options={{
                     title: "Criar Item"
                 }}
