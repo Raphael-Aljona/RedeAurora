@@ -1,23 +1,43 @@
 import {Stack} from "expo-router";
-import {ListagemItem} from "./app/listagem_item";
+import {
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    useFonts
+} from "@expo-google-fonts/montserrat";
+import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
+import React from "react";
 
 export default function RootLayout() {
-    return (
-        <Stack>
-            <Stack.Screen
-                name="login/index"
-                options={{
-                    title:"login",
-                    headerShown: false
-                }}
-            />
-            <Stack.Screen
-                name="ListagemItem/index"
-                options={{
-                    title:"Listagem"
 
-                }}
-            />
-        </Stack>
-    )
+    const [loaded] = useFonts({
+        Montserrat_400Regular,
+        Montserrat_600SemiBold,
+        Montserrat_700Bold
+    })
+
+    if (!loaded) {
+        return;
+    }
+
+    return (
+        <SafeAreaProvider>
+            <Stack>
+                <Stack.Screen
+                    name="login/index"
+                    options={{
+                        title: "login",
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="(tabs)"
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+
+            </Stack>
+        </SafeAreaProvider>
+    );
 }

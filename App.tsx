@@ -1,11 +1,12 @@
 import {SafeAreaProvider, SafeAreaView} from 'react-native-safe-area-context';
-import {ListagemItem} from "./src/app/listagem_item";
 import {
     Montserrat_400Regular,
     Montserrat_600SemiBold,
     Montserrat_700Bold,
     useFonts
 } from "@expo-google-fonts/montserrat";
+import Login from "./src/app/login";
+import React from 'react';
 
 export default function App() {
 
@@ -16,15 +17,14 @@ export default function App() {
         Montserrat_700Bold
     })
 
-    if(!loaded) {
+    if (!loaded) {
         return;
     }
-
 
     return (
         <SafeAreaProvider>
             <SafeAreaView style={{flex: 1}}>
-                <ListagemItem></ListagemItem>
+                <Login/>
             </SafeAreaView>
         </SafeAreaProvider>
     );
