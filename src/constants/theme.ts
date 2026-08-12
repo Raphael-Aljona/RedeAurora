@@ -1,5 +1,11 @@
 export const Colors = {
-    laranja_btn: "#F06A22"
+    laranja_btn: "#F06A22",
+    marrom_claro: "#584238",
+    marrom_escuro: "#501B00",
+    branco: "#FFFFFF",
+    backgroundColor: "#FFF7ED",
+    cinza: "#636467"
+
 }
 
 export const Fonts = {
@@ -10,7 +16,7 @@ export const Fonts = {
 
 export const Title = {
     fontSize: 30,
-    fontFamily: Fonts.bold
+    fontFamily: Fonts.bold,
 }
 export const TitleLabel = {
     fontFamily: Fonts.semiBold,
