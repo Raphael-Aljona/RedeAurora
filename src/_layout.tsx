@@ -6,6 +6,7 @@ import {
     useFonts
 } from "@expo-google-fonts/montserrat";
 import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
+import React from "react";
 
 export default function RootLayout() {
 

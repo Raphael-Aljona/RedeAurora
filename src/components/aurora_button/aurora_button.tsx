@@ -1,5 +1,6 @@
 import {Pressable, StyleSheet, Text} from "react-native";
 import {ButtonText, Colors} from "../../constants/theme";
+import React from "react";
 
 type ButtonProps = {
     onPress: () => void;
@@ -16,8 +17,8 @@ export default function AuroraButton({onPress, text}: ButtonProps) {
 
 const styles = StyleSheet.create({
     button: {
-        height: 50,
-        width: "100%",
+        padding: 20,
+        marginTop: "5%",
         backgroundColor: Colors.laranja_btn,
 
         display: "flex",
