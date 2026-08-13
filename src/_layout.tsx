@@ -1,11 +1,11 @@
-import {Stack} from "expo-router";
+import { Stack } from "expo-router";
 import {
     Montserrat_400Regular,
     Montserrat_600SemiBold,
     Montserrat_700Bold,
     useFonts
 } from "@expo-google-fonts/montserrat";
-import {SafeAreaProvider, SafeAreaView} from "react-native-safe-area-context";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 
 export default function RootLayout() {
