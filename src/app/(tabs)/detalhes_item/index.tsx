@@ -16,8 +16,8 @@ export default function DetalhesItem() {
                     <Text style={estilos.texto}>#PA-2024-01</Text>
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
-                            <Image source={require('../../../../assets/descricao.png')} />
-                            <Text style={estilos.Titulo}>Descrição completa</Text>
+                            <Image source={require('../../../../assets/descricao.png')}/>
+                            <Text style={estilos.Titulo}> Descrição completa</Text>
                         </View>
                         <Text style={estilos.texto}>
                             Cadeira ergonômica de alto padrão,
@@ -55,20 +55,20 @@ export default function DetalhesItem() {
                             <Image source={require('../../../../assets/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> unidade: </Text>
                             <Text style={estilos.texto}>sede</Text>
-                        </View>
+                        </View>    
+                    </View>
                         <View style={estilos.Data}>
                             <Image source={require('../../../../assets/icon_data.png')} style={estilos.iconesData}/>
                             <View style={estilos.dataRegistro}>
-                                <Text>Data de registro</Text>
-                                <Text>12/05/2024</Text>
+                                <Text style={estilos.textoData}>Data de registro</Text>
+                                <Text style={estilos.textoData}>12/05/2024</Text>
                             </View>
                             <View style={estilos.dataAlteracao}>
-                                <Text>Data de registro</Text>
-                                <Text>12/05/2024</Text>
+                                <Text style={estilos.textoData}>Data de registro</Text>
+                                <Text style={estilos.textoData}>12/05/2024</Text>
                             </View>
                             <Image source={require('../../../../assets/icon_relogio.png')} style={estilos.iconesData}/>
                         </View>
-                    </View>
                 </View>
             </ScrollView>
         </View>
@@ -80,15 +80,15 @@ const estilos = StyleSheet.create({
     Titulo: {
         color: "#A33F00",
         fontFamily: Fonts.bold,
-        fontSize: 30,
+        fontSize: 25,
     },
     Header: {
         marginBottom: "2%",
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        gap: "5%",
-        marginLeft: "2%",
+        gap: "1%",
+        marginLeft: "1%",
         width: "100%",
     },
     seta: {
@@ -104,6 +104,7 @@ const estilos = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
+        height:"auto"
     },
     Tela: {
         flex: 1,
@@ -128,7 +129,7 @@ const estilos = StyleSheet.create({
     Classificacao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "25%",
+        height: "15%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -149,7 +150,7 @@ const estilos = StyleSheet.create({
     Atribuicao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "20%",
+        height: "15%",
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -170,29 +171,36 @@ const estilos = StyleSheet.create({
     Data: {
         borderWidth: 0.7,
         width: "90%",
-        height: "25%",
+        height: "10%",
         borderColor: "#A33F00",
-        alignItems: "flex-start",
         justifyContent: "center",
+        alignItems: "center",
         marginTop: "10%",
         padding: "5%",
+        gap:"5%",
+        backgroundColor:"#FFF1EC",
+        flexDirection: "row",
     },
     dataRegistro: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         marginTop: "8%",
     },
     dataAlteracao: {
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
         marginTop: "8%",
     },
     iconesData: {
-        height: 25,
-        width: 25
+        height: 20,
+        width: 20
     },
+    textoData:{
+        fontFamily: Fonts.regular,
+        fontSize: 16
+    }
 })
