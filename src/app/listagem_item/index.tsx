@@ -1,6 +1,6 @@
 import React from "react";
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import Card from "../../../components/card/card";
+import Card from "../../components/card/card";
 
 export default function ListagemItem() {
     return (
