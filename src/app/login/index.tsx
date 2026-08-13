@@ -1,19 +1,50 @@
-import {View, Text, TextInput, StyleSheet} from "react-native";
+import {View, Text, TextInput, StyleSheet, Alert} from "react-native";
 import AuroraButton from "../../components/aurora_button/aurora_button";
 import {useRouter} from "expo-router";
+import React, { useState } from 'react';
+
 
 export default function Login(){
     const router = useRouter();
 
     function acessar() {
-        router.push("/listagem_item")
+        router.push("/listagem_item") 
     }
      function recuperarSenha() {
         router.push("/recuperar_senha")
     }
      function criarConta() {
         router.push("/criar_conta")
+    } // function so pra trocar de tela
+
+    const[email, setEmail] = useState('');
+    const[senha, setSenha] = useState(''); // estados para armazenar os valores 
+    const [loading, setLoading] = useState(false); //testando isso aqui ainda 
+    
+    async function Autenticar() {
+    if (!email || !senha) {
+      Alert.alert("Atenção", "Preencha todos os campos!");
+      return;
     }
+
+    setLoading(true);
+    try {
+      await(email, senha);
+      
+      // Toast nativo / Alerta
+      Alert.alert("Sucesso", "Login realizado com sucesso!");
+      
+      // Redireciona para a tela principal
+      router.push("/home");
+    } catch (error) {
+      Alert.alert("Erro", "E-mail ou senha inválidos.");
+    } finally {
+      setLoading(false);
+    }
+  }
+
+//testando umas coisa ai
+
 
     return (
         <View style={estilos.main}>
