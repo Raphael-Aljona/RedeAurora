@@ -48,13 +48,13 @@ export default function DetalhesItem() {
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../../assets/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> tipo: </Text>
-                            <Text style={estilos.texto}>mobiliário</Text>
+                            <Text style={estilos.texto}> Setor: </Text>
+                            <Text style={estilos.texto}>Escritório</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../../assets/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> unidade: </Text>
-                            <Text style={estilos.texto}>sede</Text>
+                            <Text style={estilos.texto}> Responsável: </Text>
+                            <Text style={estilos.texto}>João Silva</Text>
                         </View>    
                     </View>
                         <View style={estilos.Data}>
