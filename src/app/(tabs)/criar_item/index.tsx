@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { Colors, Fonts, Title, TitleLabel } from "../../constants/theme";
+import { Colors, Fonts, Title, TitleLabel } from "../../../constants/theme";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import SelectDropdown from "react-native-select-dropdown";
 
@@ -15,6 +15,7 @@ export default function CriarItem() {
         "Necessita Reparo",
         "Quebrado",
     ];
+    // Fim das opções do SelectDropdown
 
     // Constante e condicionais para o uso do DateTimePicker
     const [dataEntrada, setDataEntrada] = useState(new Date());
@@ -130,17 +131,17 @@ const styles = StyleSheet.create({
 
     },
     inputTexto: {
-       
+
     },
     dropdownButtonStyle: {
         height: "9%",
         borderRadius: 10,
+        padding: 15,
         borderWidth: 1.5,
         borderColor: Colors.inputBorder,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        padding: 15,
     },
     dropdownButtonTxtStyle: {
         flex: 1,

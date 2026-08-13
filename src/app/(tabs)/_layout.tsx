@@ -1,8 +1,8 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
-import {SafeAreaView} from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
-import {Colors} from "../../constants/theme";
+import { Colors } from "../../constants/theme";
 import {
     Montserrat_400Regular,
     Montserrat_600SemiBold,
@@ -26,7 +26,7 @@ export default function TabsLayout() {
 
 
     return (
-        <SafeAreaView style={{flex: 1}}>
+        <SafeAreaView style={{ flex: 1 }}>
             <Tabs
                 screenOptions={{
                     headerShown: false,
