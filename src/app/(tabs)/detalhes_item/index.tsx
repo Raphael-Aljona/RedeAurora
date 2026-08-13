@@ -73,7 +73,6 @@ export default function DetalhesItem() {
                         <Text style={estilos.textoBotao}>Editar patrimônio</Text>
                     </Pressable>
                     <Pressable style={estilos.botao}>
-                        <Image source={require('../../../../assets/icon_download.png')}/>
                         <Text style={estilos.textoBotao}>Baixar relatório em tabela / PDF</Text>
                     </Pressable>
                 </View>
@@ -218,12 +217,12 @@ const estilos = StyleSheet.create({
         justifyContent: 'center',
         padding: '5%',
         borderRadius: 45,
-        height: '6%',
+        height: '5%',
         width: "80%",
         marginBottom: "2%"
     },
     textoBotao:{
         fontFamily: Fonts.bold,
-        fontSize: 20
+        fontSize: 14
     }
 })
