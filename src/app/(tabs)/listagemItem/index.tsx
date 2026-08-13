@@ -1,5 +1,6 @@
 import React from "react";
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
+import Card from "../../../components/card/card";
 
 export default function ListagemItem() {
     return (
@@ -18,7 +19,7 @@ export default function ListagemItem() {
                 <Image style={estilos.ImagemExportar} source={require('../../../../assets/imgs/exportar.png')} />
                 <Text style={estilos.TextoExportar}>Exportar Lista</Text>
             </Pressable>
-
+                <Card></Card>
             <View style={estilos.NavegacaoPagina}>
                 <Pressable style={estilos.BotaoEsquerda}><Image style={estilos.ImagemEsquerda} source={require('../../../../assets/imgs/setaEsquerda.png')}/></Pressable>
                 <Text style={estilos.TextoPagina}>Pagina 1 de 12</Text>
@@ -35,10 +36,11 @@ export default function ListagemItem() {
             flex: 1,
             flexDirection: "column",
             backgroundColor: "rgba(255, 248, 246, 1)",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "flex-start",
             paddingLeft: 20,
-            paddingRight: 20
+            paddingRight: 20,
+            paddingTop: 24
         },
 
         Titulo:{
@@ -63,7 +65,8 @@ export default function ListagemItem() {
             alignItems: "center",
             paddingLeft: 10,
             backgroundColor: "white",
-            marginBottom: 12
+            marginBottom: 12,
+            marginTop: 5
             
         },
 
