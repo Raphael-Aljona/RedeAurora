@@ -76,7 +76,22 @@ export default function TabsLayout() {
                     }}
                 />
 
+                <Tabs.Screen
+                    name="perfil/index"
+                    options={{
+                        title: "Perfil",
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons
+                                name="person-outline"
+                                color={color}
+                                size={size}
+                            />
+                        ),
+                    }}
+                />
+
             </Tabs>
+
         </SafeAreaView>
     )
 }
