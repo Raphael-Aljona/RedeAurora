@@ -8,9 +8,10 @@ type CardProps = {
     onPress?: () => void;
     color: string;
     icon: keyof typeof Ionicons.glyphMap;
+    name: string;
 }
 
-export default function CardUnidade ({icon, color, onPress}:CardProps) {
+export default function CardUnidade ({icon, color, onPress, name}:CardProps) {
     return (
         <View style={styles.card}>
             <View style={styles.card_direita}>
@@ -24,7 +25,7 @@ export default function CardUnidade ({icon, color, onPress}:CardProps) {
                 </View>
                 <View>
                     <Text style={styles.title_card}>
-                        Unidade Norte
+                        {name}
                     </Text>
                     <Text style={styles.subtitle_card}>42 itens</Text>
                 </View>
