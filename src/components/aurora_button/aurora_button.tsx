@@ -1,6 +1,5 @@
 import {Pressable, StyleSheet, Text} from "react-native";
 import {ButtonText, Colors} from "../../constants/theme";
-import React from "react";
 
 type ButtonProps = {
     onPress: () => void;
