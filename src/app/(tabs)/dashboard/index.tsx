@@ -3,8 +3,34 @@ import {Colors, Title, TitleLabel} from "../../../constants/theme";
 import CardUnidade from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
+import {useEffect, useState} from "react";
+import {getAllUnidades} from "../../../services/unidades_service";
+
+type Unidades = {
+    "id_unidade": number,
+    "nome": string
+}
 
 export default function Dashboard() {
+
+    const [unidades, setUnidades] = useState<Unidades[]>([]);
+
+    async function getTodasUnidades() {
+        try {
+            const dados = await getAllUnidades();
+
+            setUnidades(dados);
+        } catch (error) {
+            console.error(error)
+        }
+    }
+
+    useEffect(() => {
+        getTodasUnidades();
+    }, [])
+
+    console.log(unidades);
+    console.log("unidades");
 
     return (
 
@@ -28,9 +54,13 @@ export default function Dashboard() {
                 </View>
                 <View>
                     <Text style={styles.section_text}>Outras Unidades</Text>
-                    <CardUnidade color={Colors.laranja_btn} icon={'construct'}></CardUnidade>
-                    <CardUnidade color={Colors.laranja_btn} icon={'construct'}></CardUnidade>
-                    {/*<FlatList data={ordens} renderItem={() => CardUnidade()} />*/}
+
+
+                    <FlatList data={unidades}
+                              keyExtractor={(item) => item.id_unidade.toString()}
+                              renderItem={(item) =>
+                                  <CardUnidade name={item.item.nome} color={Colors.laranja_btn}
+                                                                 icon={'construct'}></CardUnidade>}/>
                 </View>
             </View>
             <AuroraButton onPress={() => {
