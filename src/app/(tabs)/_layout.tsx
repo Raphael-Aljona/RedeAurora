@@ -1,7 +1,6 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import {SafeAreaView} from "react-native-safe-area-context";
-import React from "react";
 import {Colors} from "../../constants/theme";
 import {
     Montserrat_400Regular,
@@ -76,7 +75,22 @@ export default function TabsLayout() {
                     }}
                 />
 
+                <Tabs.Screen
+                    name="perfil/index"
+                    options={{
+                        title: "Perfil",
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons
+                                name="person-outline"
+                                color={color}
+                                size={size}
+                            />
+                        ),
+                    }}
+                />
+
             </Tabs>
+
         </SafeAreaView>
     )
 }
