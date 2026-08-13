@@ -1,7 +1,6 @@
 import {View, Text, TextInput, StyleSheet} from "react-native";
 import AuroraButton from "../../components/aurora_button/aurora_button";
 import {useRouter} from "expo-router";
-import React from "react";
 
 export default function Login(){
     const router = useRouter();
@@ -9,9 +8,15 @@ export default function Login(){
     function acessar() {
         router.push("/listagem_item")
     }
+     function recuperarSenha() {
+        router.push("/recuperar_senha")
+    }
+     function criarConta() {
+        router.push("/criar_conta")
+    }
 
     return (
-        <View style={estilos.main}> {/* Adiciona o estilo 'main' ao View pai */}
+        <View style={estilos.main}>
             <View style={estilos.container}>
                 <Text style={estilos.titulo}>Login</Text>
                 <Text style={estilos.subtitulo}>Acesse sua conta para gerenciar ativos</Text>
@@ -30,6 +35,7 @@ export default function Login(){
                 />
                 
                 <AuroraButton text="Pressione" onPress={acessar} />
+                <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
             </View>
         </View>
     )
@@ -37,24 +43,24 @@ export default function Login(){
 
 const estilos = StyleSheet.create({
     main: {
-        flex: 1, // Ocupa toda a altura da tela
+        flex: 1,
         justifyContent: 'center', 
-        alignItems: 'center', // Centraliza horizontalmente e verticalmente
+        alignItems: 'center',
         backgroundColor: "#FFF8F6"
     },
     container: {
-        width: "80%", // Aumentei para 80% para ficar mais visível, ou use 'auto' com maxWidth
-        maxWidth: 400, // Opcional: limita a largura máxima
+        width: "80%",
+        maxWidth: 400,
         justifyContent: 'center', 
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
         borderWidth: 2,
         borderColor: "#F06A22",
         padding: 20,
-        borderRadius: 10, // Opcional: arredonda as bordas
+        borderRadius: 10,
     },
     input: {
-        width: "100%", // Faz o input ocupar a largura do container
+        width: "100%",
         borderWidth: 1,
         borderColor: "#ddd",
         padding: 12,
@@ -79,5 +85,8 @@ const estilos = StyleSheet.create({
         marginLeft: 5,
         marginBottom: 5,
         fontWeight: '500'
+    },
+    recuperarSenha:{
+        color: "#F06A22"
     }
 })

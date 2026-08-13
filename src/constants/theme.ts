@@ -36,6 +36,11 @@ export const Text = {
     fontSize: 16,
     marginBottom: 8,
 }
+export const TextoInput = {
+    fontFamily: Fonts.regular,
+    fontSize: 16,
+
+}
 export const ButtonText = {
     color: "#F3F4F6",
     fontFamily: Fonts.bold,
