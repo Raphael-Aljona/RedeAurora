@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable} from "react-native";
 import { Fonts } from "../../../constants/theme";
 import { ScrollView } from "react-native";
 
@@ -69,6 +69,13 @@ export default function DetalhesItem() {
                             </View>
                             <Image source={require('../../../../assets/icon_relogio.png')} style={estilos.iconesData}/>
                         </View>
+                    <Pressable style={estilos.botao}>
+                        <Text style={estilos.textoBotao}>Editar patrimônio</Text>
+                    </Pressable>
+                    <Pressable style={estilos.botao}>
+                        <Image source={require('../../../../assets/icon_download.png')}/>
+                        <Text style={estilos.textoBotao}>Baixar relatório em tabela / PDF</Text>
+                    </Pressable>
                 </View>
             </ScrollView>
         </View>
@@ -98,6 +105,7 @@ const estilos = StyleSheet.create({
     NomePatrimonio: {
         fontFamily: Fonts.bold,
         fontSize: 25,
+        marginTop: '5%'
     },
     Main: {
         display: "flex",
@@ -119,7 +127,7 @@ const estilos = StyleSheet.create({
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: "10%",
+        marginTop: "5%",
         padding: "5%"
     },
     texto: {
@@ -133,7 +141,7 @@ const estilos = StyleSheet.create({
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
-        marginTop: "10%",
+        marginTop: "5%",
         padding: "5%",
     },
     tipoClassificacao: {
@@ -154,7 +162,7 @@ const estilos = StyleSheet.create({
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
-        marginTop: "10%",
+        marginTop: "5%",
         padding: "5%",
     },
     tipoAtribuicao: {
@@ -175,7 +183,8 @@ const estilos = StyleSheet.create({
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "center",
-        marginTop: "10%",
+        marginTop: "5%",
+        marginBottom: "5%",
         padding: "5%",
         gap:"5%",
         backgroundColor:"#FFF1EC",
@@ -202,5 +211,19 @@ const estilos = StyleSheet.create({
     textoData:{
         fontFamily: Fonts.regular,
         fontSize: 16
+    },
+    botao:{
+        borderWidth: 0.8,
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '5%',
+        borderRadius: 45,
+        height: '6%',
+        width: "80%",
+        marginBottom: "2%"
+    },
+    textoBotao:{
+        fontFamily: Fonts.bold,
+        fontSize: 20
     }
 })
