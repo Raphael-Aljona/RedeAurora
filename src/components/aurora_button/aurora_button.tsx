@@ -16,8 +16,7 @@ export default function AuroraButton({onPress, text}: ButtonProps) {
 
 const styles = StyleSheet.create({
     button: {
-        height: "14%",
-        width: "50%",
+        padding: 20,
         marginTop: "5%",
         backgroundColor: Colors.laranja_btn,
 

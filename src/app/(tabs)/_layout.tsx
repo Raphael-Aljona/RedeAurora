@@ -1,9 +1,29 @@
 import { Tabs } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
 import {SafeAreaView} from "react-native-safe-area-context";
+import {Colors} from "../../constants/theme";
+import {
+    Montserrat_400Regular,
+    Montserrat_600SemiBold,
+    Montserrat_700Bold,
+    useFonts
+} from "@expo-google-fonts/montserrat";
 
 
 export default function TabsLayout() {
+
+
+    const [loaded] = useFonts({
+        Montserrat_400Regular,
+        Montserrat_600SemiBold,
+        Montserrat_700Bold
+    })
+
+    if (!loaded) {
+        return;
+    }
+
+
     return (
         <SafeAreaView style={{flex: 1}}>
             <Tabs
@@ -14,40 +34,12 @@ export default function TabsLayout() {
                 }}
             >
                 <Tabs.Screen
-                    name="listagemItem/index"
+                    name="dashboard/index"
                     options={{
                         title: "Dashboard",
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons
-                                name="list-outline"
-                                color={color}
-                                size={size}
-                            />
-                        ),
-                    }}
-                />
-
-                <Tabs.Screen
-                    name="exportar_itens/index"
-                    options={{
-                        title: "Listagem",
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons
-                                name="add-circle-outline"
-                                color={color}
-                                size={size}
-                            />
-                        ),
-                    }}
-                />
-
-                <Tabs.Screen
-                    name="detalhes_item/index"
-                    options={{
-                        title: "Detalhes",
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons
-                                name="notifications-outline"
+                                name="home"
                                 color={color}
                                 size={size}
                             />
@@ -61,13 +53,28 @@ export default function TabsLayout() {
                         title: "Adicionar",
                         tabBarIcon: ({ color, size }) => (
                             <Ionicons
-                                name="person-outline"
+                                name="add-circle-outline"
                                 color={color}
                                 size={size}
                             />
                         ),
                     }}
                 />
+
+                <Tabs.Screen
+                    name="detalhes_item/index"
+                    options={{
+                        title: "Perfil",
+                        tabBarIcon: ({ color, size }) => (
+                            <Ionicons
+                                name="notifications-outline"
+                                color={color}
+                                size={size}
+                            />
+                        ),
+                    }}
+                />
+
             </Tabs>
         </SafeAreaView>
     )

@@ -167,4 +167,32 @@ const estilos = StyleSheet.create({
         height: 25,
         width: 25
     },
+    Data: {
+        borderWidth: 0.7,
+        width: "90%",
+        height: "25%",
+        borderColor: "#A33F00",
+        alignItems: "flex-start",
+        justifyContent: "center",
+        marginTop: "10%",
+        padding: "5%",
+    },
+    dataRegistro: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "8%",
+    },
+    dataAlteracao: {
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: "8%",
+    },
+    iconesData: {
+        height: 25,
+        width: 25
+    },
 })
