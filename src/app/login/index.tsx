@@ -2,14 +2,15 @@ import {View, Text, TextInput, StyleSheet, Alert} from "react-native";
 import AuroraButton from "../../components/aurora_button/aurora_button";
 import {useRouter} from "expo-router";
 import React, { useState } from 'react';
+import { auth } from "../../services/autenticacao";
 
 
 
-export default function telaLogin(){
+export default function Login(){
     const router = useRouter();
 
     function acessar() {
-        router.push("/listagem_item") 
+        router.push("/(tabs)/dashboard)") 
     }
      function recuperarSenha() {
         router.push("/recuperar_senha")
@@ -30,7 +31,7 @@ export default function telaLogin(){
 
     setLoading(true);
     try {
-      await Login(email, senha);
+      await auth(email, senha);
       
       // Toast nativo / Alerta
       Alert.alert("Sucesso", "Login realizado com sucesso!");

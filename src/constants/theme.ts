@@ -4,7 +4,14 @@ export const Colors = {
     marrom_escuro: "#501B00",
     branco: "#FFFFFF",
     backgroundColor: "#FFF7ED",
-    cinza: "#636467"
+    cinza: "#636467",
+    corDeFundo: "#F3F4F6",
+    corBtnVerde: "#10B981",
+    corTextoSecundario: "#7D7D7D",
+    inputBorder: '#575351',
+    colorBtnBlue: '#006FFF',
+    btn_verde: '#10B981',
+    inputBg: '#F2F2F4',
 
 }
 
@@ -24,10 +31,15 @@ export const TitleLabel = {
     marginBottom: 8,
 }
 
-export const Button = {
-    padding: 10,
-    borderRadius: 5,
-    backgroundColor: Colors.laranja_btn
+export const Text = {
+    fontFamily: Fonts.semiBold,
+    fontSize: 16,
+    marginBottom: 8,
+}
+export const TextoInput = {
+    fontFamily: Fonts.regular,
+    fontSize: 16,
+
 }
 export const ButtonText = {
     color: "#F3F4F6",
