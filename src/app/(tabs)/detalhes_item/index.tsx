@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, Image, Pressable} from "react-native";
-import { Fonts } from "../../constants/theme";
+import { Fonts } from "../../../constants/theme";
 import { ScrollView } from "react-native";
 
 export default function DetalhesItem() {
@@ -8,7 +8,7 @@ export default function DetalhesItem() {
         <View style={estilos.Tela}>
             <ScrollView>
                 <View style={estilos.Header}>
-                    <Image source={require('../../assets')} style={estilos.seta} />
+                    <Image source={require('../../../../assets/seta.png')} style={estilos.seta} />
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
