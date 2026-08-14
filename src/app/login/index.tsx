@@ -10,7 +10,7 @@ export default function Login(){
     const router = useRouter();
 
     function acessar() {
-        router.push("/(tabs)/dashboard)") 
+        router.push("/(tabs)/dashboard") 
     }
      function recuperarSenha() {
         router.push("/recuperar_senha")
@@ -29,19 +29,21 @@ export default function Login(){
       return;
     }
 
-    setLoading(true);
+    // setLoading(true);
     try {
+        console.log("alksdjflaskjdfs")
+
       await auth(email, senha);
       
       // Toast nativo / Alerta
       Alert.alert("Sucesso", "Login realizado com sucesso!");
       
       // Redireciona para a tela principal
-      router.push("/home");
+      acessar();
     } catch (error)  {
       Alert.alert("Erro", "E-mail ou senha inválidos.");
     } finally {
-      setLoading(false);
+    //   setLoading(false);
     }
   }
 
@@ -58,17 +60,21 @@ export default function Login(){
                 <Text style={estilos.label}>E-mail</Text>
                 <TextInput 
                     placeholder="Digite seu e-mail" 
+                    value={email}
+                    onChangeText={setEmail}
                     style={estilos.input} 
                 />
                 
                 <Text style={estilos.label}>Senha</Text>
                 <TextInput 
                     placeholder="Digite sua Senha" 
+                    value={senha}
+                    onChangeText={setSenha}
                     secureTextEntry={true} 
                     style={estilos.input}
                 />
                 
-                <AuroraButton text="Pressione" onPress={acessar} />
+                <AuroraButton text="Pressione" onPress={Autenticar} />
                 <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
             </View>
         </View>
