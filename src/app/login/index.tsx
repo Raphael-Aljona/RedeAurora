@@ -10,7 +10,7 @@ export default function Login(){
     const router = useRouter();
 
     function acessar() {
-        router.push("/(tabs)/dashboard") 
+        router.push("/(tabs)/dashboard")
     }
      function recuperarSenha() {
         router.push("/recuperar_senha")
