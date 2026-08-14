@@ -62,20 +62,6 @@ export default function TabsLayout() {
                 />
 
                 <Tabs.Screen
-                    name="detalhes_item/index"
-                    options={{
-                        title: "Perfil",
-                        tabBarIcon: ({ color, size }) => (
-                            <Ionicons
-                                name="notifications-outline"
-                                color={color}
-                                size={size}
-                            />
-                        ),
-                    }}
-                />
-
-                <Tabs.Screen
                     name="perfil/index"
                     options={{
                         title: "Perfil",

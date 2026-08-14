@@ -6,7 +6,7 @@ export default function Login(){
     const router = useRouter();
 
     function acessar() {
-        router.push("/listagem_item")
+        router.push("/(tabs)/dashboard")
     }
      function recuperarSenha() {
         router.push("/recuperar_senha")
