@@ -4,7 +4,8 @@ import {useRouter} from "expo-router";
 import React, { useState } from 'react';
 
 
-export default function Login(){
+
+export default function telaLogin(){
     const router = useRouter();
 
     function acessar() {
@@ -29,22 +30,23 @@ export default function Login(){
 
     setLoading(true);
     try {
-      await(email, senha);
+      await Login(email, senha);
       
       // Toast nativo / Alerta
       Alert.alert("Sucesso", "Login realizado com sucesso!");
       
       // Redireciona para a tela principal
       router.push("/home");
-    } catch (error) {
+    } catch (error)  {
       Alert.alert("Erro", "E-mail ou senha inválidos.");
     } finally {
       setLoading(false);
     }
   }
 
-//testando umas coisa ai
+  //acho que tem mexer no catch(error)
 
+//testando umas coisa ai    
 
     return (
         <View style={estilos.main}>
