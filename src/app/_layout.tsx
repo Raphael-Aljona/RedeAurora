@@ -22,7 +22,7 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <Stack>
+            <Stack initialRouteName="login/index">
                 <Stack.Screen
                     name="login/index"
                     options={{
