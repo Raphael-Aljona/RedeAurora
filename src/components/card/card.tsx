@@ -72,6 +72,7 @@ const estilos = StyleSheet.create({
     ViewSubtexto:{
         flexDirection: "row",
         justifyContent: "flex-start",
+        alignItems: "center",
         marginBottom: 24
     },
 
@@ -91,9 +92,10 @@ const estilos = StyleSheet.create({
         width: 300,
         height: 40,
         justifyContent: "flex-end",
-        alignItems: "flex-end",
+        alignItems: "center",
         borderTopWidth: 1,
-        borderColor: "rgba(225, 227, 228, 1)"
+        borderColor: "rgba(225, 227, 228, 1)",
+        paddingTop: 25
 
     },
 
@@ -105,6 +107,7 @@ const estilos = StyleSheet.create({
 
     ImagemViewInferior:{
         marginLeft: 4,
+        marginTop: 3
     }
     
 })

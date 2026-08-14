@@ -1,6 +1,6 @@
 import React from "react";
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import Card from "../../components/card/card";
+import Card from "../../../components/card/card";
 
 export default function ListagemItem() {
     return (
@@ -8,27 +8,27 @@ export default function ListagemItem() {
             <Text style={estilos.Titulo}>Lista de Patrimonio</Text>
             <Text style={estilos.Subtitulo}>Gerencie e visualize todos os ativos da empresa.</Text>
             <View style={estilos.ViewCaixaTexto}>
-                <Image style={estilos.ImagemCaixaTexto} source={require('../../../assets/imgs/lupa.png')} />
+                <Image style={estilos.ImagemCaixaTexto} source={require('../../../../assets/imgs/lupa.png')} />
                 <TextInput placeholder="Buscar ativos..." style={estilos.CaixaDeTexto}/>
             </View>
             <Pressable style={estilos.BotaoFiltrar}>
-                <Image style={estilos.ImagemFiltrar} source={require('../../../assets/imgs/filtro.png')} />
+                <Image style={estilos.ImagemFiltrar} source={require('../../../../assets/imgs/filtro.png')} />
                 <Text style={estilos.TextoFiltrar}>Filtros</Text>
             </Pressable>
             <Pressable style={estilos.BotaoExportar}>
-                <Image style={estilos.ImagemExportar} source={require('../../../assets/imgs/exportar.png')}/>
+                <Image style={estilos.ImagemExportar} source={require('../../../../assets/imgs/exportar.png')}/>
                 <Text style={estilos.TextoExportar}>Exportar Lista</Text>
             </Pressable>
             <Card></Card>
             <View style={estilos.NavegacaoPagina}>
                 <Pressable style={estilos.BotaoEsquerda}><Image style={estilos.ImagemEsquerda}
-                                                                source={require('../../../assets/imgs/setaEsquerda.png')}/></Pressable>
+                                                                source={require('../../../../assets/imgs/setaEsquerda.png')}/></Pressable>
                 <Text style={estilos.TextoPagina}>Pagina 1 de 12</Text>
                 <Pressable style={estilos.BotaoDireito}><Image style={estilos.ImagemDireita}
-                                                               source={require('../../../assets/imgs/setaDireita.png')}/></Pressable>
+                                                               source={require('../../../../assets/imgs/setaDireita.png')}/></Pressable>
             </View>
             <Pressable style={estilos.BotaoAdicionar}><Image style={estilos.ImagemAdicionar}
-                                                             source={require('../../../assets/imgs/adicionar.png')}/></Pressable>
+                                                             source={require('../../../../assets/imgs/adicionar.png')}/></Pressable>
         </View>
     )
 }
