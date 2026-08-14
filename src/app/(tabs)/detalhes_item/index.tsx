@@ -8,7 +8,7 @@ export default function DetalhesItem() {
         <View style={estilos.Tela}>
             <ScrollView>
                 <View style={estilos.Header}>
-                    <Image source={require('../../../../assets/seta.png')} style={estilos.seta} />
+                    <Image source={require('../../../assets/seta.png')} style={estilos.seta} />
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
@@ -16,7 +16,7 @@ export default function DetalhesItem() {
                     <Text style={estilos.texto}>#PA-2024-01</Text>
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
-                            <Image source={require('../../../../assets/descricao.png')}/>
+                            <Image source={require('../../../assets/descricao.png')}/>
                             <Text style={estilos.Titulo}> Descrição completa</Text>
                         </View>
                         <Text style={estilos.texto}>
@@ -34,12 +34,12 @@ export default function DetalhesItem() {
                     <View style={estilos.Classificacao}>
                         <Text style={estilos.Titulo}>Classificação</Text>
                         <View style={estilos.tipoClassificacao}>
-                            <Image source={require('../../../../assets/icon_classificacao.png')} style={estilos.iconeClassificacao} />
+                            <Image source={require('../../../assets/icon_classificacao.png')} style={estilos.iconeClassificacao} />
                             <Text style={estilos.texto}> tipo: </Text>
                             <Text style={estilos.texto}>mobiliário</Text>
                         </View>
                         <View style={estilos.tipoClassificacao}>
-                            <Image source={require('../../../../assets/icone_unidade.png')} style={estilos.iconeClassificacao} />
+                            <Image source={require('../../../assets/icone_unidade.png')} style={estilos.iconeClassificacao} />
                             <Text style={estilos.texto}> unidade: </Text>
                             <Text style={estilos.texto}>sede</Text>
                         </View>
@@ -47,27 +47,27 @@ export default function DetalhesItem() {
                     <View style={estilos.Atribuicao}>
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../../assets/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../assets/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Setor: </Text>
                             <Text style={estilos.texto}>Escritório</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../../assets/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../assets/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Responsável: </Text>
                             <Text style={estilos.texto}>João Silva</Text>
                         </View>    
                     </View>
                         <View style={estilos.Data}>
-                            <Image source={require('../../../../assets/icon_data.png')} style={estilos.iconesData}/>
+                            <Image source={require('../../../assets/icon_data.png')} style={estilos.iconesData}/>
                             <View style={estilos.dataRegistro}>
                                 <Text style={estilos.textoData}>Data de registro</Text>
                                 <Text style={estilos.textoData}>12/05/2024</Text>
                             </View>
                             <View style={estilos.dataAlteracao}>
-                                <Text style={estilos.textoData}>Data de registro</Text>
+                                <Text style={estilos.textoData}>Última auditoria</Text>
                                 <Text style={estilos.textoData}>12/05/2024</Text>
                             </View>
-                            <Image source={require('../../../../assets/icon_relogio.png')} style={estilos.iconesData}/>
+                            <Image source={require('../../../assets/icon_relogio.png')} style={estilos.iconesData}/>
                         </View>
                     <Pressable style={estilos.botao}>
                         <Text style={estilos.textoBotao}>Editar patrimônio</Text>
