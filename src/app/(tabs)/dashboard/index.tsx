@@ -4,11 +4,12 @@ import CardUnidade from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import {useEffect, useState} from "react";
-import {getAllUnidades} from "../../../services/unidades_service";
+import {getAllUnidades, getQtdItens} from "../../../services/unidades_service";
 
 type Unidades = {
     "id_unidade": number,
-    "nome": string
+    "nome_unidade": string,
+    quantidade_itens: number,
 }
 
 export default function Dashboard() {
@@ -18,7 +19,6 @@ export default function Dashboard() {
     async function getTodasUnidades() {
         try {
             const dados = await getAllUnidades();
-
             setUnidades(dados);
         } catch (error) {
             console.error(error)
@@ -28,6 +28,11 @@ export default function Dashboard() {
     useEffect(() => {
         getTodasUnidades();
     }, [])
+
+    const TotalItens = unidades.reduce(
+        (total, unidade) => total + unidade.quantidade_itens,
+        0
+    );
 
     console.log(unidades);
     console.log("unidades");
@@ -44,23 +49,23 @@ export default function Dashboard() {
 
                 <View style={styles.card}>
                     <View>
-                        <Text style={styles.titulo_card}>Unidade Principal</Text>
-                        <Text style={styles.unidade_card}>Unidade Central</Text>
+                        <Text style={styles.unidade_card}>Total Unidades</Text>
+
                     </View>
                     <View style={styles.total_itens_box}>
                         <Ionicons name="cube" color={Colors.branco} size={20}></Ionicons>
-                        <Text style={styles.itens_card}>Total: 154 itens</Text>
+                        <Text style={styles.itens_card}>{TotalItens} itens</Text>
                     </View>
                 </View>
                 <View>
-                    <Text style={styles.section_text}>Outras Unidades</Text>
+                    <Text style={styles.section_text}>Nossas Unidades</Text>
 
 
                     <FlatList data={unidades}
                               keyExtractor={(item) => item.id_unidade.toString()}
                               renderItem={(item) =>
-                                  <CardUnidade name={item.item.nome} color={Colors.laranja_btn}
-                                                                 icon={'construct'}></CardUnidade>}/>
+                                  <CardUnidade name={item.item.nome_unidade} color={Colors.laranja_btn}
+                                                                 icon={'construct'} qtd={item.item.quantidade_itens}></CardUnidade>}/>
                 </View>
             </View>
             <AuroraButton onPress={() => {
