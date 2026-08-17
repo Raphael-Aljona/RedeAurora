@@ -1,7 +1,10 @@
-import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
-import AuroraButton from "../../components/aurora_button/aurora_button";
-import { useRouter } from "expo-router";
+
 import { Fonts } from "../../constants/theme";
+import {View, Text, TextInput, StyleSheet, Alert, Pressable} from "react-native";
+import AuroraButton from "../../components/aurora_button/aurora_button";
+import {useRouter} from "expo-router";
+import React, { useState } from 'react';
+import { auth } from "../../services/autenticacao";
 
 export default function Login() {
     const router = useRouter();
@@ -14,7 +17,39 @@ export default function Login() {
     }
     function criarConta() {
         router.push("/criar_conta")
+    } // function so pra trocar de tela
+
+    const[email, setEmail] = useState('');
+    const[senha, setSenha] = useState(''); // estados para armazenar os valores 
+    const [loading, setLoading] = useState(false); //testando isso aqui ainda 
+    
+    async function Autenticar() {
+    if (!email || !senha) {
+      Alert.alert("Atenção", "Preencha todos os campos!");
+      return;
     }
+
+    // setLoading(true);
+    try {
+        console.log("alksdjflaskjdfs")
+
+      await auth(email, senha);
+      
+      // Toast nativo / Alerta
+      Alert.alert("Sucesso", "Login realizado com sucesso!");
+      
+      // Redireciona para a tela principal
+      acessar();
+    } catch (error)  {
+      Alert.alert("Erro", "E-mail ou senha inválidos.");
+    } finally {
+    //   setLoading(false);
+    }
+  }
+
+  //acho que tem mexer no catch(error)
+
+//testando umas coisa ai    
 
     return (
         <View style={estilos.main}>
@@ -23,20 +58,24 @@ export default function Login() {
                 <Text style={estilos.subtitulo}>Acesse sua conta para gerenciar ativos</Text>
 
                 <Text style={estilos.label}>E-mail</Text>
-                <TextInput
-                    placeholder="Digite seu e-mail"
-                    style={estilos.input}
+                <TextInput 
+                    placeholder="Digite seu e-mail" 
+                    value={email}
+                    onChangeText={setEmail}
+                    style={estilos.input} 
                 />
-
+                
                 <Text style={estilos.label}>Senha</Text>
-                <TextInput
-                    placeholder="Digite sua Senha"
-                    secureTextEntry={true}
+                <TextInput 
+                    placeholder="Digite sua Senha" 
+                    value={senha}
+                    onChangeText={setSenha}
+                    secureTextEntry={true} 
                     style={estilos.input}
                 />
-
-                <Pressable onPress={acessar} style={estilos.botao}>
-                    <Text style={estilos.texto}>ENTRAR</Text>
+                
+                <Pressable  onPress={Autenticar} style={estilos.botao}>
+                    <Text style={estilos.texto}>Entrar</Text>
                 </Pressable>
                 <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
             </View>
