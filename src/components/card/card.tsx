@@ -1,7 +1,35 @@
 import { Image, StyleSheet, Text, View } from "react-native"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BuscarItem } from "../../services/Lista_service";
+import axios from 'axios';
+
+interface Item{
+    "id_item": number
+    "nome": string
+    "codigo_patrimonio": string
+    "descricao": string
+    "id_setor": number
+    "condicao": string
+    "data": Date
+    "id_usuario": string
+}
 
 function Card() {
+
+    const [item, setItem] = useState<Item | null>(null);
+
+        useEffect(() => {
+        async function carregarDados() {
+            try {
+                const dadosItem = await BuscarItem();
+                setItem(dadosItem);
+            }catch(erro){
+                console.error(erro)
+            }
+        }
+        carregarDados();
+    }, []);
+
   return (
     <View style={estilos.ViewCard}>
         <View style={estilos.ViewSuperior}>
