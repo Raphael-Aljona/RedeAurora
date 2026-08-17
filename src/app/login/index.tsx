@@ -1,17 +1,18 @@
-import {View, Text, TextInput, StyleSheet} from "react-native";
+import { View, Text, TextInput, StyleSheet, Pressable } from "react-native";
 import AuroraButton from "../../components/aurora_button/aurora_button";
-import {useRouter} from "expo-router";
+import { useRouter } from "expo-router";
+import { Fonts } from "../../constants/theme";
 
-export default function Login(){
+export default function Login() {
     const router = useRouter();
 
     function acessar() {
         router.push("/(tabs)/dashboard")
     }
-     function recuperarSenha() {
+    function recuperarSenha() {
         router.push("/recuperar_senha")
     }
-     function criarConta() {
+    function criarConta() {
         router.push("/criar_conta")
     }
 
@@ -20,21 +21,23 @@ export default function Login(){
             <View style={estilos.container}>
                 <Text style={estilos.titulo}>Login</Text>
                 <Text style={estilos.subtitulo}>Acesse sua conta para gerenciar ativos</Text>
-                
+
                 <Text style={estilos.label}>E-mail</Text>
-                <TextInput 
-                    placeholder="Digite seu e-mail" 
-                    style={estilos.input} 
-                />
-                
-                <Text style={estilos.label}>Senha</Text>
-                <TextInput 
-                    placeholder="Digite sua Senha" 
-                    secureTextEntry={true} 
+                <TextInput
+                    placeholder="Digite seu e-mail"
                     style={estilos.input}
                 />
-                
-                <AuroraButton text="Pressione" onPress={acessar} />
+
+                <Text style={estilos.label}>Senha</Text>
+                <TextInput
+                    placeholder="Digite sua Senha"
+                    secureTextEntry={true}
+                    style={estilos.input}
+                />
+
+                <Pressable onPress={acessar} style={estilos.botao}>
+                    <Text style={estilos.texto}>ENTRAR</Text>
+                </Pressable>
                 <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
             </View>
         </View>
@@ -44,14 +47,14 @@ export default function Login(){
 const estilos = StyleSheet.create({
     main: {
         flex: 1,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: "#FFF8F6"
     },
     container: {
         width: "80%",
         maxWidth: 400,
-        justifyContent: 'center', 
+        justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#FFFFFF',
         borderWidth: 2,
@@ -86,7 +89,24 @@ const estilos = StyleSheet.create({
         marginBottom: 5,
         fontWeight: '500'
     },
-    recuperarSenha:{
+    recuperarSenha: {
         color: "#F06A22"
+    },
+    botao: {
+        padding: 20,
+        marginTop: "5%",
+        marginBottom: "5%",
+        backgroundColor: "#F06A22",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        borderRadius: 15,
+        width: '75%',
+        height: '14%'
+    },
+    texto: {
+        fontSize: 15,
+        fontFamily: Fonts.semiBold,
+        color: '#FFF',
     }
 })

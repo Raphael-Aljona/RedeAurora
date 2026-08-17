@@ -11,7 +11,7 @@ export async function getPatrimonio() {
     }
 }
 
-export async function getPatrimonioPorId(id: string) {
+export async function getPatrimonioPorId(id: number) {
     try {
         const response = await api.get(`Patrimonio/${id}`);
 
