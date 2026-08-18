@@ -1,8 +1,6 @@
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
 import React, {useEffect, useState} from "react";
 import {atualizarPerfil} from "../../../services/perfil_service";
-import {Colors} from "../../../constants/theme";
 
 type Usuario = {
     "nome": string,
@@ -32,31 +30,31 @@ export default function Perfil() {
             <View style={estilos.ViewSubtitulo}><Text style={estilos.Subtitulo}>ATIVA</Text></View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('')}/>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
                     <Text style={estilos.TextoInput}>Usuario</Text>
                 </View>
                 <TextInput style={estilos.Input} placeholder="joao.silva"></TextInput>
             </View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('')}/>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
                     <Text style={estilos.TextoInput}>E-mail</Text>
                 </View>
                 <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br"></TextInput>
             </View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('')}/>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
                     <Text style={estilos.TextoInput}>Senha</Text>
                 </View>
                 <TextInput style={estilos.Input} placeholder="*******"></TextInput>
             </View>
             <Pressable style={estilos.BotaoEditar}>
-                <Image style={estilos.ImagemBotaoEditar} source={require('')}/>
+                <Image style={estilos.ImagemBotaoEditar} source={require('../../../../assets/imgs/editar.png')}/>
                 <Text style={estilos.TextoBotaoEditar}>Editar Perfil</Text>
             </Pressable>
             <Pressable style={estilos.BotaoSair}>
-                <Image style={estilos.ImagemBotaoSair} source={require('')}/>
+                <Image style={estilos.ImagemBotaoSair} source={require('../../../../assets/imgs/sair.png')}/>
                 <Text style={estilos.TextoBotaoSair}>Sair / Logout</Text>
             </Pressable>
         </View>
@@ -73,7 +71,8 @@ const estilos = StyleSheet.create({
     TituloPerfil:{
         fontFamily: "Montserrat_700Bold",
         fontSize: 30,
-        color: "rgba(59, 44, 36, 1)"
+        color: "rgba(59, 44, 36, 1)",
+        marginTop: 48
     },
     ViewSubtitulo:{
         backgroundColor: "rgba(255, 235, 227, 1)",
@@ -81,7 +80,9 @@ const estilos = StyleSheet.create({
         width: 69,
         height: 28,
         alignItems: "center",
-        justifyContent: "center"
+        justifyContent: "center",
+        marginTop: 12,
+        marginBottom: 32 
     },
     Subtitulo:{
         color: "rgba(163, 107, 86, 1)",
@@ -95,7 +96,9 @@ const estilos = StyleSheet.create({
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        padding: 16
+        padding: 16,
+        marginBottom: 16,
+        borderRadius: 16
     },
     ViewTextoInput:{
         flexDirection: "row",
@@ -105,8 +108,6 @@ const estilos = StyleSheet.create({
         height: 20
     },
     ImagemInput:{
-        width: 20,
-        height: 18,
         marginRight: 12
     },
     TextoInput:{
@@ -132,7 +133,8 @@ const estilos = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: 350,
-        height: 56
+        height: 56,
+        marginTop: 32
     },
     ImagemBotaoEditar:{
         width: 14,
@@ -151,13 +153,18 @@ const estilos = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         width: 350,
-        height: 52
+        height: 52,
+        marginTop: 16 
 
     },
     ImagemBotaoSair:{
-
+        width: 14,
+        height: 14,
+        marginRight: 8
     },
     TextoBotaoSair:{
-
+        fontFamily: "Montserrat_700Bold",
+        fontSize: 16,
+        color: "white"
     }
 })
