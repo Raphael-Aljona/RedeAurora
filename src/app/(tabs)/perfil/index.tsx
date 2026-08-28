@@ -1,8 +1,6 @@
-import {Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import {Ionicons} from "@expo/vector-icons";
+import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import React, {useEffect, useState} from "react";
 import {atualizarPerfil} from "../../../services/perfil_service";
-import {Colors} from "../../../constants/theme";
 
 type Usuario = {
     "nome": string,
@@ -27,264 +25,146 @@ export default function Perfil() {
     }
 
     return (
-        <View style={styles.container}>
-            <View style={styles.cima}>
-                <Text style={styles.title}>Joao</Text>
-                <View style={styles.badge}>
-                    <Text style={styles.badgeText}>ATIVA</Text>
+        <View style={estilos.PaginaPerfil}>
+            <Text style={estilos.TituloPerfil}>João Silva</Text>
+            <View style={estilos.ViewSubtitulo}><Text style={estilos.Subtitulo}>ATIVA</Text></View>
+            <View style={estilos.ViewInput}>
+                <View style={estilos.ViewTextoInput}>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
+                    <Text style={estilos.TextoInput}>Usuario</Text>
                 </View>
+                <TextInput style={estilos.Input} placeholder="joao.silva"></TextInput>
             </View>
-
-            <View style={styles.campos}>
-                <View style={styles.usuario}>
-                    <View style={styles.cima_campo}>
-                        <Ionicons name="person" size={16} color="#8a8a8a"/>
-                        <Text style={styles.label}>Usuario</Text>
-                    </View>
-                    <TextInput placeholder={"joao"} style={styles.input} value={usuario?.nome} onChangeText={
-                        nome => {
-                            setUsuario(usuario => usuario ? {...usuario, nome} : usuario);
-                        }
-                    }></TextInput>
+            <View style={estilos.ViewInput}>
+                <View style={estilos.ViewTextoInput}>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
+                    <Text style={estilos.TextoInput}>E-mail</Text>
                 </View>
-                <View style={styles.email}>
-                    <View style={styles.cima_campo}>
-                        <Ionicons name="mail" size={16} color="#8a8a8a"/>
-                        <Text style={styles.label}>E-mail</Text>
-                    </View>
-                    <TextInput placeholder={"joao@gmail"} style={styles.input} value={usuario?.email}
-                               onChangeText={email => setUsuario(usuario => usuario ? {
-                                   ...usuario,
-                                   email
-                               } : usuario)}></TextInput>
-
-                </View>
-                <View style={styles.senha}>
-                    <View style={styles.cima_campo}>
-                        <Ionicons name="lock-closed" size={16} color="#8a8a8a"/>
-                        <Text style={styles.label}>Senha</Text>
-                    </View>
-                    <TextInput placeholder={"********"} style={styles.input} secureTextEntry
-                               onChangeText={senha => setUsuario(usuario => usuario ? {
-                                   ...usuario,
-                                   senha
-                               } : usuario)}></TextInput>
-                </View>
+                <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br"></TextInput>
             </View>
-
-            <Pressable style={styles.button_editar} onPress={atualizarUsuario}>
-                <Ionicons name="pencil" size={16} color="#3a2e2e" style={styles.buttonIcon}/>
-                <Text style={styles.button_text_editar}>Editar Perfil</Text>
+            <View style={estilos.ViewInput}>
+                <View style={estilos.ViewTextoInput}>
+                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
+                    <Text style={estilos.TextoInput}>Senha</Text>
+                </View>
+                <TextInput style={estilos.Input} placeholder="*******"></TextInput>
+            </View>
+            <Pressable style={estilos.BotaoEditar}>
+                <Image style={estilos.ImagemBotaoEditar} source={require('../../../../assets/imgs/editar.png')}/>
+                <Text style={estilos.TextoBotaoEditar}>Editar Perfil</Text>
             </Pressable>
-
-            <Pressable style={styles.button_sair}>
-                <Ionicons name="exit" size={18} color="#fff" style={styles.buttonIcon}/>
-                <Text style={styles.button_text_sair}>Sair / Logout</Text>
+            <Pressable style={estilos.BotaoSair}>
+                <Image style={estilos.ImagemBotaoSair} source={require('../../../../assets/imgs/sair.png')}/>
+                <Text style={estilos.TextoBotaoSair}>Sair / Logout</Text>
             </Pressable>
         </View>
-    )
-}
+    )}
 
-const styles = StyleSheet.create({
-    container: {
+const estilos = StyleSheet.create({
+    PaginaPerfil:{
         flex: 1,
-        backgroundColor:
-            Colors.backgroundColor,
-        paddingHorizontal:
-            20,
-        paddingTop:
-            40,
-    }
-    ,
-    cima: {
+        flexDirection:"column",
+        justifyContent: "flex-start",
         alignItems: "center",
-        marginBottom:
-            24,
-    }
-    ,
-    title: {
-        fontSize: 28,
-        fontWeight:
-            "bold",
-        color:
-            "#3a2e2e",
-        marginBottom:
-            10,
-    }
-    ,
-    badge: {
-        backgroundColor: "#f4c9bd",
-        paddingHorizontal:
-            16,
-        paddingVertical:
-            6,
-        borderRadius:
-            20,
-    }
-    ,
-    badgeText: {
-        color: "#a13d2b",
-        fontWeight:
-            "600",
-        fontSize:
-            12,
-        letterSpacing:
-            0.5,
-    }
-    ,
-    campos: {
-        gap: 16,
-        marginBottom:
-            24,
-    }
-    ,
-    usuario: {
-        backgroundColor: "#fff",
-        borderRadius:
-            16,
-        padding:
-            16,
-        shadowColor:
-            "#000",
-        shadowOffset:
-            {
-                width: 0, height:
-                    2
-            }
-        ,
-        shadowOpacity: 0.05,
-        shadowRadius:
-            6,
-        elevation:
-            2,
-    }
-    ,
-    email: {
-        backgroundColor: "#fff",
-        borderRadius:
-            16,
-        padding:
-            16,
-        shadowColor:
-            "#000",
-        shadowOffset:
-            {
-                width: 0, height:
-                    2
-            }
-        ,
-        shadowOpacity: 0.05,
-        shadowRadius:
-            6,
-        elevation:
-            2,
-    }
-    ,
-    senha: {
-        backgroundColor: "#fff",
-        borderRadius:
-            16,
-        padding:
-            16,
-        shadowColor:
-            "#000",
-        shadowOffset:
-            {
-                width: 0, height:
-                    2
-            }
-        ,
-        shadowOpacity: 0.05,
-        shadowRadius:
-            6,
-        elevation:
-            2,
-    }
-    ,
-    cima_campo: {
+        backgroundColor: "rgba(252, 248, 246, 1)"
+    },
+    TituloPerfil:{
+        fontFamily: "Montserrat_700Bold",
+        fontSize: 30,
+        color: "rgba(59, 44, 36, 1)",
+        marginTop: 48
+    },
+    ViewSubtitulo:{
+        backgroundColor: "rgba(255, 235, 227, 1)",
+        borderRadius: 9999,
+        width: 69,
+        height: 28,
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 12,
+        marginBottom: 32 
+    },
+    Subtitulo:{
+        color: "rgba(163, 107, 86, 1)",
+        fontFamily: "Montserrat_700Bold",
+        fontSize: 12
+    },
+    ViewInput:{
+        backgroundColor: "white",
+        width: 350,
+        height:99,
+        flexDirection: "column",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        padding: 16,
+        marginBottom: 16,
+        borderRadius: 16
+    },
+    ViewTextoInput:{
         flexDirection: "row",
-        alignItems:
-            "center",
-        gap:
-            8,
-        marginBottom:
-            8,
-    }
-    ,
-    label: {
-        color: "#8a8a8a",
-        fontSize:
-            13,
-    }
-    ,
-    input: {
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: 316,
+        height: 20
+    },
+    ImagemInput:{
+        marginRight: 12
+    },
+    TextoInput:{
+        fontFamily: "Montserrat_400Regular",
+        fontSize: 14,
+        color: "rgba(107, 114, 128, 1)"
+    },
+    Input:{
+        borderBottomWidth: 1,
+        width: 284,
+        height: 41,
+        flexDirection: "row",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        paddingLeft: 12
+    },
+    BotaoEditar:{
+        backgroundColor: "white",
+        borderRadius: 9999,
+        borderWidth: 2,
+        borderColor: "rgba(208, 180, 170, 1)",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+        width: 350,
+        height: 56,
+        marginTop: 32
+    },
+    ImagemBotaoEditar:{
+        width: 14,
+        height: 14,
+        marginRight: 8
+    },
+    TextoBotaoEditar:{
+        fontFamily: "Montserrat_700Bold",
         fontSize: 16,
-        color:
-            "#3a2e2e",
-        borderBottomWidth:
-            1,
-        borderBottomColor:
-            "#e0d5d0",
-        paddingBottom:
-            8,
-    }
-    ,
-    button_editar: {
+        color: "rgba(59, 44, 36, 1)"
+    },
+    BotaoSair:{
+        backgroundColor: "rgba(193, 25, 32, 1)",
+        borderRadius: 9999,
         flexDirection: "row",
-        justifyContent:
-            "center",
-        alignItems:
-            "center",
-        backgroundColor:
-            "#fff",
-        borderWidth:
-            1.5,
-        borderColor:
-            "#e8b8ab",
-        borderRadius:
-            30,
-        paddingVertical:
-            14,
-        marginBottom:
-            14,
-        gap:
-            8,
+        justifyContent: "center",
+        alignItems: "center",
+        width: 350,
+        height: 52,
+        marginTop: 16 
+
+    },
+    ImagemBotaoSair:{
+        width: 14,
+        height: 14,
+        marginRight: 8
+    },
+    TextoBotaoSair:{
+        fontFamily: "Montserrat_700Bold",
+        fontSize: 16,
+        color: "white"
     }
-    ,
-    button_text_editar: {
-        color: "#3a2e2e",
-        fontWeight:
-            "600",
-        fontSize:
-            15,
-    }
-    ,
-    button_sair: {
-        flexDirection: "row",
-        justifyContent:
-            "center",
-        alignItems:
-            "center",
-        backgroundColor:
-            "#b8221f",
-        borderRadius:
-            30,
-        paddingVertical:
-            16,
-        gap:
-            8,
-    }
-    ,
-    button_text_sair: {
-        color: "#fff",
-        fontWeight:
-            "700",
-        fontSize:
-            16,
-    }
-    ,
-    buttonIcon: {
-        marginRight: 4,
-    }
-    ,
-});
+})
