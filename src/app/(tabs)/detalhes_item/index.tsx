@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
 import { Fonts } from "../../../constants/theme";
 import { ScrollView } from "react-native";
-import { getPatrimonioPorId } from "../../../services/patrimonio_service";
+import { patrimonioService } from "../../../services/patrimonio_service";
 import { useEffect, useState } from "react";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useDetalhePatrimonio } from "../../../hooks/useDetalhePatrimonio";
 
 type Patrimonio = {
     id_item: number;
@@ -16,6 +17,8 @@ type Patrimonio = {
     id_usuario: string;
 }
 
+const { id } = useLocalSearchParams<{ id: string }>();
+const { patrimonios, formatarData } = useDetalhePatrimonio();
 const router = useRouter();
 
 function editar() {
@@ -24,11 +27,11 @@ function editar() {
 
 export default function DetalhesItem() {
 
-    const [Patrimonios, setPatrimonios] = useState<Patrimonio[]>([]);
+    const [patrimonios, setPatrimonios] = useState<Patrimonio[]>([]);
 
     async function getPorId() {
         try {
-            const dados = await getPatrimonioPorId(11);
+            const dados = await patrimonioService.getPatrimonioPorId(11);
             setPatrimonios(dados);
         } catch (error) {
             console.error(error);
