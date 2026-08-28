@@ -1,7 +1,7 @@
 import {api} from "./api";
 
-
-export async function getPatrimonio() {
+export const patrimonioService = {
+ async  getPatrimonio() {
     try {
         const response = await api.get("Patrimonio");
 
@@ -9,9 +9,9 @@ export async function getPatrimonio() {
     } catch (err: any) {
         throw new Error(err.message);
     }
-}
+},
 
-export async function getPatrimonioPorId(id: number) {
+ async  getPatrimonioPorId(id: number) {
     try {
         const response = await api.get(`Patrimonio/${id}`);
 
@@ -19,9 +19,9 @@ export async function getPatrimonioPorId(id: number) {
     } catch (err: any) {
         throw new Error(err.message);
     }
-}
+},
 
-export async function importarPatrimonio(arquivo: File) {
+ async  importarPatrimonio(arquivo: File) {
     try {
         const formData = new FormData();
 
@@ -35,4 +35,5 @@ export async function importarPatrimonio(arquivo: File) {
     } catch (err: any) {
         throw new Error(err.message);
     }
+}
 }
