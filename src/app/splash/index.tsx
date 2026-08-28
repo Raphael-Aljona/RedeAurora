@@ -5,7 +5,7 @@ export default function Splash() {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../../assets/LogoAurora.png')}
+        source={require('../../../assets/imgs/LogoAurora.png')}
         style={styles.image}
         resizeMode="cover"
       />
