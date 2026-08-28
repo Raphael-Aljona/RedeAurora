@@ -7,7 +7,7 @@ export async function auth(dados: dados) : Promise<respostaLogin>{
 
         const Token = response.data.token
 
-        if(Token != null)
+        if(Token)
         {
             await AsyncStorage.setItem(process.env.EXPO_PUBLIC_TOKEN_KEY, Token)
         }

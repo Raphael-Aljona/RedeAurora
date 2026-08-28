@@ -25,16 +25,19 @@ export default function Login() {
     const [loading, setLoading] = useState(false); //testando isso aqui ainda 
     
     async function Autenticar() {
+
+         const dado : dados = {
+            email: email,
+            senha: senha
+         }
+         
     if (!email || !senha) {
       Alert.alert("Atenção", "Preencha todos os campos!");
       return;
     }
     // setLoading(true);
     try {
-         const dado : dados = {
-            email: email,
-            senha: senha
-         }
+        
       await auth(dado);
       
       // Toast nativo / Alerta
