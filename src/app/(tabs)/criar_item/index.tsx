@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../../constants/theme";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import SelectDropdown from "react-native-select-dropdown";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 
@@ -43,22 +42,6 @@ export default function CriarItem() {
     ];
 
     // Fim das opções do SelectDropdown
-
-    // Constante e condicionais para o uso do DateTimePicker
-    const [dataEntrada, setDataEntrada] = useState(new Date());
-    const [mostrarDatePicker, setMostrarDatePicker] = useState(false);
-
-    const onChangeData = (event: any, dataSelecionada?: Date) => {
-        if (Platform.OS === "android") {
-            setMostrarDatePicker(false);
-        }
-        if (dataSelecionada) {
-            setDataEntrada(dataSelecionada);
-        }
-    };
-    // Fim das condicionais do DateTimePicker
-
-
 
 
     return (
