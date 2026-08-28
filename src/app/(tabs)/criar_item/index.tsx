@@ -75,21 +75,6 @@ export default function CriarItem() {
                 <TextInput style={styles.input} placeholder="Código do Patrimônio *" />
                 <TextInput style={styles.input} placeholder="Descrição do Patrimônio *" />
 
-                {/* DateTimePicker configurado */}
-                <TouchableOpacity style={styles.input} onPress={() => setMostrarDatePicker(true)}>
-                    <Text style={styles.inputTexto}>Data de entrada: {dataEntrada.toLocaleDateString("pt-br")}
-
-                    </Text>
-                </TouchableOpacity>
-                {mostrarDatePicker && (
-
-                    <DateTimePicker
-                        value={dataEntrada}
-                        mode="date"
-                        display={Platform.OS === "ios" ? "inline" : "default"}
-                        onChange={onChangeData} />
-                )}
-                {/* Configuração do DateTimePicker finalizada */}
 
                 {/* Inserindo o SelectDropdown para a escolha da condição do item  */}
                 <SelectDropdown
@@ -123,35 +108,6 @@ export default function CriarItem() {
                 />
 
                 <SelectDropdown
-                    data={opcoesTipo}
-                    onSelect={(selectedItem) => setTipo(selectedItem)}
-                    renderButton={(selectedItem, isOpened) => (
-                        <View style={styles.dropdownButtonStyle}>
-                            <Text
-                                style={[
-                                    styles.inputTexto,
-                                    !selectedItem && { color: "#9E9E9E" },
-                                ]}
-                            >
-                                {selectedItem || "Tipo do item *"}
-                            </Text>
-                        </View>
-                    )}
-
-                    renderItem={(item, index, isSelected) => (
-                        <View
-                            style={[
-                                styles.inputTexto,
-                                isSelected && { backgroundColor: "#E0E0E0" },
-                            ]}
-                        >
-                            <Text style={styles.inputTexto && { padding: 10 }}>{item}</Text>
-                        </View>
-                    )}
-                    showsVerticalScrollIndicator={false}
-                    dropdownStyle={styles.dropdownMenuStyle}
-                />
-                <SelectDropdown
                     data={opcoesSetor}
                     onSelect={(selectedItem) => setSetor(selectedItem)}
                     renderButton={(selectedItem, isOpened) => (
@@ -163,35 +119,6 @@ export default function CriarItem() {
                                 ]}
                             >
                                 {selectedItem || "Setor *"}
-                            </Text>
-                        </View>
-                    )}
-
-                    renderItem={(item, index, isSelected) => (
-                        <View
-                            style={[
-                                styles.inputTexto,
-                                isSelected && { backgroundColor: "#E0E0E0" },
-                            ]}
-                        >
-                            <Text style={styles.inputTexto && { padding: 10 }}>{item}</Text>
-                        </View>
-                    )}
-                    showsVerticalScrollIndicator={false}
-                    dropdownStyle={styles.dropdownMenuStyle}
-                />
-                <SelectDropdown
-                    data={opcoesUsuario}
-                    onSelect={(selectedItem) => setUsuario(selectedItem)}
-                    renderButton={(selectedItem, isOpened) => (
-                        <View style={styles.dropdownButtonStyle}>
-                            <Text
-                                style={[
-                                    styles.inputTexto,
-                                    !selectedItem && { color: "#9E9E9E" },
-                                ]}
-                            >
-                                {selectedItem || "Usuário responsável *"}
                             </Text>
                         </View>
                     )}
