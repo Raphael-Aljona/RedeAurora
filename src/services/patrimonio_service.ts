@@ -1,27 +1,22 @@
+import { Patrimonio } from "../../@types/patrimonio";
 import {api} from "./api";
 
 export const patrimonioService = {
- async  getPatrimonio() {
-    try {
-        const response = await api.get("Patrimonio");
 
-        return response.data;
-    } catch (err: any) {
-        throw new Error(err.message);
-    }
-},
+ async listar(): Promise<Patrimonio[]> {
+        //requisicao:
+        //Obs. se estamos trabalhando com lista não esqueça do [] array
+        const resposta = await api.get<Patrimonio[]>("Patrimonio");
 
- async  getPatrimonioPorId(id: number) {
-    try {
-        const response = await api.get(`Patrimonio/${id}`);
+        return resposta.data;
+    },
 
-        return response.data;
-    } catch (err: any) {
-        throw new Error(err.message);
-    }
-},
+ async buscarPorId(id: number | string): Promise<Patrimonio> {
+        const resposta = await api.get<Patrimonio>(`Patrimonio/${id}`);
+        return resposta.data;
+    },
 
- async  importarPatrimonio(arquivo: File) {
+ async  exportarPatrimonio(arquivo: File) {
     try {
         const formData = new FormData();
 
