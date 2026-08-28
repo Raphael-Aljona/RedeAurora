@@ -5,37 +5,17 @@ import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import {useEffect, useState} from "react";
 import {getAllUnidades, getQtdItens} from "../../../services/unidades_service";
-
-type Unidades = {
-    "id_unidade": number,
-    "nome_unidade": string,
-    quantidade_itens: number,
-}
+import {Unidade} from "../../../@types/setor";
+import {useDashboard} from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-    const [unidades, setUnidades] = useState<Unidades[]>([]);
-
-    async function getTodasUnidades() {
-        try {
-            const dados = await getAllUnidades();
-            setUnidades(dados);
-        } catch (error) {
-            console.error(error)
-        }
-    }
-
-    useEffect(() => {
-        getTodasUnidades();
-    }, [])
+   const {unidades, getTodasUnidades} = useDashboard();
 
     const TotalItens = unidades.reduce(
         (total, unidade) => total + unidade.quantidade_itens,
         0
     );
-
-    console.log(unidades);
-    console.log("unidades");
 
     return (
 
