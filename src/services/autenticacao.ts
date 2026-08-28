@@ -1,14 +1,15 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { api } from "./api";
+import { dados, respostaLogin } from "../@types/autenticacao";
 
-export async function auth(email:string, senha:string){
-    try{
-        const response = await api.post("/Autenticacao/login", {
-            "email": email,
-            "senha": senha
-        })
+export async function auth(dados: dados) : Promise<respostaLogin>{
+        const response = await api.post<respostaLogin>("/Autenticacao/login", dados)
 
-        console.log(response.status)
-    }catch(e){
+        const Token = response.data.token
 
-    }
+        if(Token != null)
+        {
+            await AsyncStorage.setItem(process.env.EXPO_PUBLIC_TOKEN_KEY, Token)
+        }
+        return response.data        
 }
