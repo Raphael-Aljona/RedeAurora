@@ -1,22 +1,62 @@
-import { View, Text, StyleSheet, Image, Pressable} from "react-native";
-import { Fonts } from "../../constants/theme";
+import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import { Fonts } from "../../../constants/theme";
 import { ScrollView } from "react-native";
+import { patrimonioService } from "../../../services/patrimonio_service";
+import { useEffect, useState } from "react";
+import { useLocalSearchParams, useRouter } from "expo-router";
+import { useDetalhePatrimonio } from "../../../hooks/useDetalhePatrimonio";
+
+type Patrimonio = {
+    id_item: number;
+    nome: string;
+    codigo_patrimonio: string;
+    descricao: string;
+    id_setor: number;
+    condicao: string;
+    data: string;
+    id_usuario: string;
+}
+
+const { id } = useLocalSearchParams<{ id: string }>();
+const { patrimonios, formatarData } = useDetalhePatrimonio();
+const router = useRouter();
+
+function editar() {
+        router.push("/(tabs)/criar_item")
+    }
 
 export default function DetalhesItem() {
+
+    const [patrimonios, setPatrimonios] = useState<Patrimonio[]>([]);
+
+    async function getPorId() {
+        try {
+            const dados = await patrimonioService.getPatrimonioPorId(11);
+            setPatrimonios(dados);
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getPorId();
+    }, [])
+
     return (
 
         <View style={estilos.Tela}>
             <ScrollView>
                 <View style={estilos.Header}>
-                    <Image source={require('../../../assets/seta.png')} style={estilos.seta} />
+                    <Image source={require('../../../../assets/imgs/seta.png')} style={estilos.seta} />
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
                     <Text style={estilos.NomePatrimonio}>Cadeira Ergonômica Office</Text>
                     <Text style={estilos.texto}>#PA-2024-01</Text>
+                    <Text style={estilos.condicao}>Danificado</Text>
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
-                            <Image source={require('../../../assets/descricao.png')}/>
+                            <Image source={require('../../../../assets/imgs/descricao.png')} />
                             <Text style={estilos.Titulo}> Descrição completa</Text>
                         </View>
                         <Text style={estilos.texto}>
@@ -31,46 +71,33 @@ export default function DetalhesItem() {
                             setor administrativo.
                         </Text>
                     </View>
-                    <View style={estilos.Classificacao}>
-                        <Text style={estilos.Titulo}>Classificação</Text>
-                        <View style={estilos.tipoClassificacao}>
-                            <Image source={require('../../../assets/icon_classificacao.png')} style={estilos.iconeClassificacao} />
-                            <Text style={estilos.texto}> tipo: </Text>
-                            <Text style={estilos.texto}>mobiliário</Text>
-                        </View>
-                        <View style={estilos.tipoClassificacao}>
-                            <Image source={require('../../../assets/icone_unidade.png')} style={estilos.iconeClassificacao} />
-                            <Text style={estilos.texto}> unidade: </Text>
-                            <Text style={estilos.texto}>sede</Text>
-                        </View>
-                    </View>
                     <View style={estilos.Atribuicao}>
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../assets/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Setor: </Text>
                             <Text style={estilos.texto}>Escritório</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../assets/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Responsável: </Text>
                             <Text style={estilos.texto}>João Silva</Text>
-                        </View>    
-                    </View>
-                        <View style={estilos.Data}>
-                            <Image source={require('../../../assets/icon_data.png')} style={estilos.iconesData}/>
-                            <View style={estilos.dataRegistro}>
-                                <Text style={estilos.textoData}>Data de registro</Text>
-                                <Text style={estilos.textoData}>12/05/2024</Text>
-                            </View>
-                            <View style={estilos.dataAlteracao}>
-                                <Text style={estilos.textoData}>Data de registro</Text>
-                                <Text style={estilos.textoData}>12/05/2024</Text>
-                            </View>
-                            <Image source={require('../../../assets/icon_relogio.png')} style={estilos.iconesData}/>
                         </View>
+                    </View>
+                    <View style={estilos.Data}>
+                        <Image source={require('../../../../assets/imgs/icon_data.png')} style={estilos.iconesData} />
+                        <View style={estilos.dataRegistro}>
+                            <Text style={estilos.textoData}>Data de registro</Text>
+                            <Text style={estilos.textoData}>12/05/2024</Text>
+                        </View>
+                        <View style={estilos.dataAlteracao}>
+                            <Text style={estilos.textoData}>Última auditoria</Text>
+                            <Text style={estilos.textoData}>12/05/2024</Text>
+                        </View>
+                        <Image source={require('../../../../assets/imgs/icon_relogio.png')} style={estilos.iconesData} />
+                    </View>
                     <Pressable style={estilos.botao}>
-                        <Text style={estilos.textoBotao}>Editar patrimônio</Text>
+                        <Text style={estilos.textoBotao} onPress={editar}>Editar patrimônio</Text>
                     </Pressable>
                     <Pressable style={estilos.botao}>
                         <Text style={estilos.textoBotao}>Baixar relatório em tabela / PDF</Text>
@@ -87,6 +114,15 @@ const estilos = StyleSheet.create({
         color: "#A33F00",
         fontFamily: Fonts.bold,
         fontSize: 25,
+    },
+    condicao:{
+        color: "#A33F00",
+        fontFamily: Fonts.regular,
+        fontSize: 15,
+        borderWidth: 0.8,
+        borderColor: "#A33F00",
+        borderRadius: 45,
+        padding: "1%",
     },
     Header: {
         marginBottom: "2%",
@@ -111,7 +147,7 @@ const estilos = StyleSheet.create({
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        height:"auto"
+        height: "auto"
     },
     Tela: {
         flex: 1,
@@ -122,47 +158,28 @@ const estilos = StyleSheet.create({
     Descricao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "30%",
+        height: "35%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
         marginTop: "5%",
-        padding: "5%"
+        padding: "5%",
+        borderRadius: 10
     },
     texto: {
         fontSize: 20,
         fontFamily: Fonts.regular,
     },
-    Classificacao: {
-        borderWidth: 0.7,
-        width: "90%",
-        height: "15%",
-        borderColor: "#A33F00",
-        alignItems: "flex-start",
-        justifyContent: "center",
-        marginTop: "5%",
-        padding: "5%",
-    },
-    tipoClassificacao: {
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "8%",
-    },
-    iconeClassificacao: {
-        height: 25,
-        width: 25
-    },
     Atribuicao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "15%",
+        height: "20%",
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
         marginTop: "5%",
         padding: "5%",
+        borderRadius: 10
     },
     tipoAtribuicao: {
         display: "flex",
@@ -185,9 +202,10 @@ const estilos = StyleSheet.create({
         marginTop: "5%",
         marginBottom: "5%",
         padding: "5%",
-        gap:"5%",
-        backgroundColor:"#FFF1EC",
+        gap: "5%",
+        backgroundColor: "#FFF1EC",
         flexDirection: "row",
+        borderRadius: 10
     },
     dataRegistro: {
         display: "flex",
@@ -207,21 +225,21 @@ const estilos = StyleSheet.create({
         height: 20,
         width: 20
     },
-    textoData:{
+    textoData: {
         fontFamily: Fonts.regular,
         fontSize: 16
     },
-    botao:{
+    botao: {
         borderWidth: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5%',
         borderRadius: 45,
-        height: '5%',
+        height: '6%',
         width: "80%",
         marginBottom: "2%"
     },
-    textoBotao:{
+    textoBotao: {
         fontFamily: Fonts.bold,
         fontSize: 14
     }

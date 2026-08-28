@@ -1,7 +1,35 @@
 import { Image, StyleSheet, Text, View } from "react-native"
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { BuscarItem } from "../../services/Lista_service";
+import axios from 'axios';
+
+interface Item{
+    "id_item": number
+    "nome": string
+    "codigo_patrimonio": string
+    "descricao": string
+    "id_setor": number
+    "condicao": string
+    "data": Date
+    "id_usuario": string
+}
 
 function Card() {
+
+    const [item, setItem] = useState<Item | null>(null);
+
+        useEffect(() => {
+        async function carregarDados() {
+            try {
+                const dadosItem = await BuscarItem();
+                setItem(dadosItem);
+            }catch(erro){
+                console.error(erro)
+            }
+        }
+        carregarDados();
+    }, []);
+
   return (
     <View style={estilos.ViewCard}>
         <View style={estilos.ViewSuperior}>
@@ -72,6 +100,7 @@ const estilos = StyleSheet.create({
     ViewSubtexto:{
         flexDirection: "row",
         justifyContent: "flex-start",
+        alignItems: "center",
         marginBottom: 24
     },
 
@@ -91,9 +120,10 @@ const estilos = StyleSheet.create({
         width: 300,
         height: 40,
         justifyContent: "flex-end",
-        alignItems: "flex-end",
+        alignItems: "center",
         borderTopWidth: 1,
-        borderColor: "rgba(225, 227, 228, 1)"
+        borderColor: "rgba(225, 227, 228, 1)",
+        paddingTop: 25
 
     },
 
@@ -105,6 +135,7 @@ const estilos = StyleSheet.create({
 
     ImagemViewInferior:{
         marginLeft: 4,
+        marginTop: 3
     }
     
 })

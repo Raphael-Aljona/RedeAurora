@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
         padding: 20,
         marginTop: "5%",
         backgroundColor: Colors.laranja_btn,
-
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
