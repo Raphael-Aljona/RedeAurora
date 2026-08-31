@@ -1,6 +1,6 @@
 export interface Unidade {
-    id_unidade: number,
-    nome_unidade: string,
+    id_setor: number,
+    nome_setor: string,
     quantidade_itens: number,
 }
 
@@ -13,4 +13,12 @@ export interface Item {
     "condicao": string | null,
     "data": string | null,
     "id_usuario": string | null
+}
+
+export interface ItemSetor {
+    "id_setor": number,
+    "id_item": number,
+    "nome_setor": string,
+    "nome_item": string,
+    "codigo_patrimonio": string
 }

@@ -1,48 +1,56 @@
-import {View, Text, StyleSheet} from "react-native";
+import {View, Text, StyleSheet, Pressable} from "react-native";
 import {Icon, IconProps} from "expo-router/build/native-tabs";
 import {Colors, Title, TitleLabel} from "../../constants/theme";
 import {Ionicons} from "@expo/vector-icons";
 import React from "react";
+import {router} from "expo-router";
 
 type CardProps = {
-    onPress?: () => void;
     color: string;
     icon: keyof typeof Ionicons.glyphMap;
     name: string;
     qtd: number;
+    id: number;
 }
 
-export default function CardUnidade ({icon, color, onPress, name, qtd}:CardProps) {
-    return (
-        <View style={styles.card}>
-            <View style={styles.card_direita}>
+export default function CardUnidade({icon, color, name, qtd, id}: CardProps) {
+    function direcionarDetalheOs() {
+        router.push(`/listagem_item/${id}`, )
+    }
 
-                <View style={styles.icon}>
-                    <Ionicons
-                        name={icon}
-                        color={color}
-                        size={25}
-                    />
+    return (
+        <Pressable onPress={direcionarDetalheOs}>
+            <View style={styles.card}>
+                <View style={styles.card_direita}>
+
+                    <View style={styles.icon}>
+                        <Ionicons
+                            name={icon}
+                            color={color}
+                            size={25}
+                        />
+                    </View>
+                    <View>
+                        <Text style={styles.title_card}>
+                            {name}
+                        </Text>
+                        <Text style={styles.subtitle_card}>{qtd} itens</Text>
+                    </View>
                 </View>
-                <View>
-                    <Text style={styles.title_card}>
-                        {name}
-                    </Text>
-                    <Text style={styles.subtitle_card}>{qtd} itens</Text>
-                </View>
+                <Ionicons
+                    name='chevron-forward'
+                    size={25}
+                    color={Colors.laranja_btn}
+                />
             </View>
-            <Ionicons
-                name='chevron-forward'
-                size={25}
-                color={Colors.laranja_btn}
-            />
-        </View>
+
+        </Pressable>
     );
 }
 
 const styles = StyleSheet.create(
     {
-        card:{
+        card: {
             width: "100%",
             borderWidth: 1,
             borderColor: "#FFF7ED",
@@ -64,7 +72,7 @@ const styles = StyleSheet.create(
         },
 
         subtitle_card: {
-          ...TitleLabel,
+            ...TitleLabel,
             fontSize: 14,
             color: Colors.cinza,
         },

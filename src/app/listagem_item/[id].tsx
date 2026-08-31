@@ -1,8 +1,16 @@
 import React from "react";
-import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
+import {FlatList, Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import Card from "../../components/card/card";
+import useDetalhesSetor from "../../hooks/useDetalhesSetor";
+import CardUnidade from "../../components/card_unidade/card_unidade";
+import {Colors} from "../../constants/theme";
 
 export default function ListagemItem() {
+
+    const {itensSetor} = useDetalhesSetor();
+
+    console.log(itensSetor);
+
     return (
         <View style={estilos.Pagina}>
             <Text style={estilos.Titulo}>Lista de Patrimonio</Text>
@@ -19,7 +27,12 @@ export default function ListagemItem() {
                 <Image style={estilos.ImagemExportar} source={require('../../../assets/imgs/exportar.png')}/>
                 <Text style={estilos.TextoExportar}>Exportar Lista</Text>
             </Pressable>
-            <Card></Card>
+            <FlatList data={itensSetor}
+                      keyExtractor={(item) => item.id_item.toString()}
+                      renderItem={(item) =>
+                          <Card item={item.item} ></Card>}/>
+
+
             <View style={estilos.NavegacaoPagina}>
                 <Pressable style={estilos.BotaoEsquerda}><Image style={estilos.ImagemEsquerda}
                                                                 source={require('../../../assets/imgs/setaEsquerda.png')}/></Pressable>

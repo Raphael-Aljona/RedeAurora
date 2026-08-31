@@ -10,7 +10,7 @@ import {useDashboard} from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-   const {unidades, getTodasUnidades} = useDashboard();
+    const {unidades, getTodasUnidades} = useDashboard();
 
     const TotalItens = unidades.reduce(
         (total, unidade) => total + unidade.quantidade_itens,
@@ -18,7 +18,6 @@ export default function Dashboard() {
     );
 
     return (
-
         <View style={styles.container}>
             <View style={styles.cima}>
                 <View>
@@ -42,10 +41,11 @@ export default function Dashboard() {
 
 
                     <FlatList data={unidades}
-                              keyExtractor={(item) => item.id_unidade.toString()}
+                              keyExtractor={(item) => item.id_setor.toString()}
                               renderItem={(item) =>
-                                  <CardUnidade name={item.item.nome_unidade} color={Colors.laranja_btn}
-                                                                 icon={'construct'} qtd={item.item.quantidade_itens}></CardUnidade>}/>
+                                  <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
+                                               icon={'construct'} qtd={item.item.quantidade_itens}
+                                               id={item.item.id_setor}></CardUnidade>}/>
                 </View>
             </View>
             <AuroraButton onPress={() => {
