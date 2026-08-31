@@ -1,7 +1,6 @@
 import {Image, Pressable, StyleSheet, Text, View} from "react-native"
 import React, { useEffect, useState } from 'react';
 import { BuscarItem } from "../../services/Lista_service";
-import axios from 'axios';
 import {ItemSetor} from "../../@types/setor";
 import {useRouter} from "expo-router";
 type CardProps = {
