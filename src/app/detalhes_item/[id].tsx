@@ -1,37 +1,29 @@
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
-import { Fonts } from "../../../constants/theme";
+import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
+import { Fonts } from "../../constants/theme";
 import { ScrollView } from "react-native";
-import { patrimonioService } from "../../../services/patrimonio_service";
+import { patrimonioService } from "../../services/patrimonio_service";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
-import { useDetalhePatrimonio } from "../../../hooks/useDetalhePatrimonio";
-
-type Patrimonio = {
-    id_item: number;
-    nome: string;
-    codigo_patrimonio: string;
-    descricao: string;
-    id_setor: number;
-    condicao: string;
-    data: string;
-    id_usuario: string;
-}
+import { useDetalhePatrimonio } from "../../hooks/useDetalhePatrimonio";
+import { Ionicons } from "@expo/vector-icons";
+import { Patrimonio } from "../../@types/patrimonio";
 
 const { id } = useLocalSearchParams<{ id: string }>();
-const { patrimonios, formatarData } = useDetalhePatrimonio();
+const { patrimonios, formatarData } = useDetalhePatrimonio(id);
 const router = useRouter();
 
 function editar() {
-        router.push("/(tabs)/criar_item")
-    }
+    router.push("/(tabs)/criar_item")
+}
 
 export default function DetalhesItem() {
 
-    const [patrimonios, setPatrimonios] = useState<Patrimonio[]>([]);
+    const [patrimonios, setPatrimonios] = useState<Patrimonio>();
 
     async function getPorId() {
         try {
-            const dados = await patrimonioService.getPatrimonioPorId(11);
+            const dados = await patrimonioService.buscarPorId("11");
+            // console.log(dados);
             setPatrimonios(dados);
         } catch (error) {
             console.error(error);
@@ -47,54 +39,36 @@ export default function DetalhesItem() {
         <View style={estilos.Tela}>
             <ScrollView>
                 <View style={estilos.Header}>
-                    <Image source={require('../../../../assets/imgs/seta.png')} style={estilos.seta} />
+                    <TouchableOpacity onPress={() => router.back()}>
+                        <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
+                    </TouchableOpacity>
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
-                    <Text style={estilos.NomePatrimonio}>Cadeira Ergonômica Office</Text>
-                    <Text style={estilos.texto}>#PA-2024-01</Text>
-                    <Text style={estilos.condicao}>Danificado</Text>
+                    <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text>
+                    <Text style={estilos.texto}>{patrimonios?.codigo_patrimonio}</Text>
+                    <Text style={estilos.condicao}>{patrimonios?.condicao}</Text>
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
-                            <Image source={require('../../../../assets/imgs/descricao.png')} />
+                            <Image source={require('../../../assets/imgs/descricao.png')} />
                             <Text style={estilos.Titulo}> Descrição completa</Text>
                         </View>
                         <Text style={estilos.texto}>
-                            Cadeira ergonômica de alto padrão,
-                            modelo Executive Mesh, com ajuste
-                            de altura a gás, apoio de braços
-                            ajustável em 3D, encosto reclinável
-                            com trava em 4 posições e apoio
-                            lombar dinâmico. Base em alumínio
-                            polido com rodízios em PU anti-
-                            risco. Adquirida para renovação do
-                            setor administrativo.
+                            {patrimonios?.descricao}
                         </Text>
                     </View>
                     <View style={estilos.Atribuicao}>
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Setor: </Text>
-                            <Text style={estilos.texto}>Escritório</Text>
+                            <Text style={estilos.texto}>{patrimonios?.id_setor}</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
-                            <Image source={require('../../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
+                            <Image source={require('../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Responsável: </Text>
-                            <Text style={estilos.texto}>João Silva</Text>
+                            <Text style={estilos.texto}>{patrimonios?.id_usuario}</Text>
                         </View>
-                    </View>
-                    <View style={estilos.Data}>
-                        <Image source={require('../../../../assets/imgs/icon_data.png')} style={estilos.iconesData} />
-                        <View style={estilos.dataRegistro}>
-                            <Text style={estilos.textoData}>Data de registro</Text>
-                            <Text style={estilos.textoData}>12/05/2024</Text>
-                        </View>
-                        <View style={estilos.dataAlteracao}>
-                            <Text style={estilos.textoData}>Última auditoria</Text>
-                            <Text style={estilos.textoData}>12/05/2024</Text>
-                        </View>
-                        <Image source={require('../../../../assets/imgs/icon_relogio.png')} style={estilos.iconesData} />
                     </View>
                     <Pressable style={estilos.botao}>
                         <Text style={estilos.textoBotao} onPress={editar}>Editar patrimônio</Text>
@@ -115,7 +89,7 @@ const estilos = StyleSheet.create({
         fontFamily: Fonts.bold,
         fontSize: 25,
     },
-    condicao:{
+    condicao: {
         color: "#A33F00",
         fontFamily: Fonts.regular,
         fontSize: 15,
@@ -173,13 +147,14 @@ const estilos = StyleSheet.create({
     Atribuicao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "20%",
+        height: "30%",
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
         marginTop: "5%",
         padding: "5%",
-        borderRadius: 10
+        borderRadius: 10,
+        marginBottom: "5%"
     },
     tipoAtribuicao: {
         display: "flex",
