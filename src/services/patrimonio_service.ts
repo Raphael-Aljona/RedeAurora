@@ -1,4 +1,4 @@
-import { Patrimonio } from "../../@types/patrimonio";
+import { Patrimonio } from "../@types/patrimonio";
 import {api} from "./api";
 
 export const patrimonioService = {
@@ -12,7 +12,7 @@ export const patrimonioService = {
     },
 
  async buscarPorId(id: number | string): Promise<Patrimonio> {
-        const resposta = await api.get<Patrimonio>(`Patrimonio/${id}`);
+        const resposta = await api.get<Patrimonio>(`Item/${id}`);
         return resposta.data;
     },
 

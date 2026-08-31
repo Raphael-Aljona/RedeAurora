@@ -1,5 +1,5 @@
 import { useState, useEffect} from "react";
-import { Patrimonio } from "../../@types/patrimonio";
+import { Patrimonio } from "../@types/patrimonio";
 import { patrimonioService } from "../services/patrimonio_service";
 
 

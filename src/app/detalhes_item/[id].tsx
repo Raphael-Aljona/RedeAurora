@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useDetalhePatrimonio } from "../../hooks/useDetalhePatrimonio";
 import { Ionicons } from "@expo/vector-icons";
-import { Patrimonio } from "../../../@types/patrimonio";
+import { Patrimonio } from "../../@types/patrimonio";
 
 const { id } = useLocalSearchParams<{ id: string }>();
 const { patrimonios, formatarData } = useDetalhePatrimonio(id);
@@ -22,7 +22,8 @@ export default function DetalhesItem() {
 
     async function getPorId() {
         try {
-            const dados = await patrimonioService.buscarPorId(id);
+            const dados = await patrimonioService.buscarPorId("11");
+            // console.log(dados);
             setPatrimonios(dados);
         } catch (error) {
             console.error(error);
@@ -73,10 +74,6 @@ export default function DetalhesItem() {
                         <Image source={require('../../../assets/imgs/icon_data.png')} style={estilos.iconesData} />
                         <View style={estilos.dataRegistro}>
                             <Text style={estilos.textoData}>Data de registro</Text>
-                            <Text style={estilos.textoData}>{formatarData(patrimonios?.data_hora)}</Text>
-                        </View>
-                        <View style={estilos.dataAlteracao}>
-                            <Text style={estilos.textoData}>Última auditoria</Text>
                             <Text style={estilos.textoData}>{formatarData(patrimonios?.data_hora)}</Text>
                         </View>
                         <Image source={require('../../../assets/imgs/icon_relogio.png')} style={estilos.iconesData} />

@@ -2,6 +2,8 @@ import { Image, StyleSheet, Text, View } from "react-native"
 import React, { useEffect, useState } from 'react';
 import { BuscarItem } from "../../services/Lista_service";
 import axios from 'axios';
+import { router } from "expo-router";
+import { useRouter } from "expo-router";
 
 interface Item{
     "id_item": number
