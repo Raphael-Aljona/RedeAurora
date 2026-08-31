@@ -2,7 +2,7 @@ import {api} from "./api";
 
 export async function getAllUnidades() {
     try {
-        const response = await api.get('Item/quantidade-por-unidade');
+        const response = await api.get('Item/Quantidade-por-Setor');
         return response.data;
     } catch (error) {
         console.error(error);
@@ -12,6 +12,16 @@ export async function getAllUnidades() {
 export async function getQtdItens() {
     try {
         const response = await api.get('Item');
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getQntPorSetor(id: string) {
+    try {
+        const response = await api.get(`Item/Itens-por-setor/${id}`);
         return response.data;
     }
     catch (error) {
