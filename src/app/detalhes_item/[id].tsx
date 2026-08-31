@@ -70,14 +70,6 @@ export default function DetalhesItem() {
                             <Text style={estilos.texto}>{patrimonios?.id_usuario}</Text>
                         </View>
                     </View>
-                    <View style={estilos.Data}>
-                        <Image source={require('../../../assets/imgs/icon_data.png')} style={estilos.iconesData} />
-                        <View style={estilos.dataRegistro}>
-                            <Text style={estilos.textoData}>Data de registro</Text>
-                            <Text style={estilos.textoData}>{formatarData(patrimonios?.data_hora)}</Text>
-                        </View>
-                        <Image source={require('../../../assets/imgs/icon_relogio.png')} style={estilos.iconesData} />
-                    </View>
                     <Pressable style={estilos.botao}>
                         <Text style={estilos.textoBotao} onPress={editar}>Editar patrimônio</Text>
                     </Pressable>
@@ -155,13 +147,14 @@ const estilos = StyleSheet.create({
     Atribuicao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "20%",
+        height: "30%",
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
         marginTop: "5%",
         padding: "5%",
-        borderRadius: 10
+        borderRadius: 10,
+        marginBottom: "5%"
     },
     tipoAtribuicao: {
         display: "flex",
