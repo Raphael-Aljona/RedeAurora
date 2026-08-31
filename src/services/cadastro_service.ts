@@ -1,33 +1,23 @@
+import { criarItem } from "../@types/criarItem";
 import { api } from "./api";
 
-// get para os selects
-export async function listarSetor() {
-    try {
-        const response = await api.get("Setor");
-        return response;
-    } catch (error: any) {
-        throw new Error(error.response.data);
-    }
-}
-
-
-type ItemForm = {
-    codigo_patrimonio: string,
-    nome: string;
-    descricao: string;
-    id_setor: number[];
-    condicao: string;
-}
-
-export async function cadastrarItem(dados: ItemForm) {
-    try {
+export const criarItemService = {
+ 
+    async cadastrar(dados: criarItem): Promise<criarItem> {
         const formData = new FormData();
-        formData.append("codigo", dados.codigo_patrimonio);
-        formData.append("descricao", dados.descricao);
-        formData.append("condicao", dados.condicao);
-        dados.id_setor.forEach((id) => formData.append("setorID", id.toString()));
-    }
-    catch (error: any) {
-        throw new Error(error.response.data);
+        formData.append('CodigoPatrimonio', dados.codigo_patrimonio);
+        formData.append('NomeItem', dados.nome);
+        formData.append('Descricao', dados.descricao);
+        formData.append('SetorId', String(dados.id_setor));
+        formData.append('Condicao', dados.condicao);
+
+
+        const resposta = await api.post<criarItem>("criarItem", formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            },
+        }); 
+
+        return resposta.data;
     }
 }

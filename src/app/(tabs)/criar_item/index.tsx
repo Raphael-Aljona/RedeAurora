@@ -1,47 +1,57 @@
 import React, { useState } from "react";
-import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../../constants/theme";
 import SelectDropdown from "react-native-select-dropdown";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
+import { useSetor } from "../../../hooks/useSetor";
+import { useCriarItem } from "../../../hooks/useCriarItem";
+import { criarItem } from "../../../@types/criarItem";
 
 
 export default function CriarItem() {
-
-    // Adicionando constantes para o uso do select dropdown
-    const [condicao, setCondicao] = useState("");
-    // Opções para o SelectDropdown
+    const setor = useSetor();
+    const { criarItem } = useCriarItem();
     const opcoesCondicao = [
-        "Novo",
-        "Necessita Reparo",
-        "Quebrado",
+        { id: "1", nome: "Bom" },
+        { id: "2", nome: "Danificado" },
+        { id: "3", nome: "Inutilizável" }
     ];
-    const [tipo, setTipo] = useState("");
-    // Opções para o SelectDropdown
-    const opcoesTipo = [
-        "Eletrônico",
-        "Móvel",
-        "Ferramenta",
-        "Material de construção"
-    ];
-    const [setor, setSetor] = useState("");
-    // Opções para o SelectDropdown
-    const opcoesSetor = [
-        "Eletrônico",
-        "Móvel",
-        "Ferramenta",
-        "Material de construção"
-    ];
-    const [usuario, setUsuario] = useState("");
-    //Opções para o SelectDropdown
-    const opcoesUsuario = [
-        "Raphael",
-        "Vitor",
-        "João",
-        "Diego",
-        "Guilherme"
-    ];
+    const [codigo, setCodigo] = useState("");
+    const [nomeItem, setNomeItem] = useState("");
+    const [descricao, setDescricao] = useState("");
+    const [setorSelecionado, setSetorSelecionado] = useState<string>("");
+    const [condicao, setCondicao] = useState("");
 
-    // Fim das opções do SelectDropdown
+    async function handleSalvar() {
+        if (!nomeItem.trim() || !descricao.trim() || !codigo.trim() || !condicao.trim() || !setorSelecionado) {
+            Alert.alert("⚠ Atenção", "Preencha todos os campos obrigatórios (*).");
+            return;
+        }
+
+        // Monta o objeto final para mandar pro hook
+        const novoItem: criarItem = {
+            nome: nomeItem,
+            id_setor: Number(setorSelecionado),
+            descricao: descricao,
+            condicao: condicao,
+            codigo_patrimonio: codigo,
+        };
+
+        console.log(novoItem);
+
+        const sucesso = await criarItem(novoItem);
+
+        // Limpa os campos se deu certo
+        if (sucesso) {
+            setNomeItem("");
+            setSetorSelecionado("");
+            setDescricao("");
+            setCondicao("");
+            setCodigo("");
+
+            Alert.alert("Novo item adicionado");
+        }
+    }
 
 
     return (
@@ -91,8 +101,8 @@ export default function CriarItem() {
                 />
 
                 <SelectDropdown
-                    data={opcoesSetor}
-                    onSelect={(selectedItem) => setSetor(selectedItem)}
+                    data={setor}
+                    onSelect={(selectedItem) => setSetorSelecionado(selectedItem)}
                     renderButton={(selectedItem, isOpened) => (
                         <View style={styles.dropdownButtonStyle}>
                             <Text
