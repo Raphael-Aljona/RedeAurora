@@ -12,9 +12,9 @@ export default function CriarItem() {
     const setor = useSetor();
     const { criarItem } = useCriarItem();
     const opcoesCondicao = [
-        { id: "1", nome: "Bom" },
-        { id: "2", nome: "Danificado" },
-        { id: "3", nome: "Inutilizável" }
+        { nome: "Bom" },
+        { nome: "Danificado" },
+        { nome: "Inutilizável" }
     ];
     const [codigo, setCodigo] = useState("");
     const [nomeItem, setNomeItem] = useState("");

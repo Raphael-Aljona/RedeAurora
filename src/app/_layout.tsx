@@ -22,7 +22,12 @@ export default function RootLayout() {
 
     return (
         <SafeAreaProvider>
-            <Stack initialRouteName="login/index">
+            <Stack initialRouteName="splash/index">
+                <Stack.Screen name="splash/index"
+                    options={{
+                        title: "splash",
+                        headerShown: false,
+                    }} />
                 <Stack.Screen
                     name="login/index"
                     options={{

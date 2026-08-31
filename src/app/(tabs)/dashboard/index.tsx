@@ -1,16 +1,16 @@
-import {View, Text, StyleSheet, FlatList} from "react-native";
-import {Colors, Title, TitleLabel} from "../../../constants/theme";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { Colors, Title, TitleLabel } from "../../../constants/theme";
 import CardUnidade from "../../../components/card_unidade/card_unidade";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
-import {useEffect, useState} from "react";
-import {getAllUnidades, getQtdItens} from "../../../services/unidades_service";
-import {Unidade} from "../../../@types/setor";
-import {useDashboard} from "../../../hooks/useDashboard";
+import { useEffect, useState } from "react";
+import { getAllUnidades, getQtdItens } from "../../../services/unidades_service";
+import { Unidade } from "../../../@types/setor";
+import { useDashboard } from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-    const {unidades, getTodasUnidades} = useDashboard();
+    const { unidades, getTodasUnidades } = useDashboard();
 
     const TotalItens = unidades.reduce(
         (total, unidade) => total + unidade.quantidade_itens,
@@ -41,11 +41,11 @@ export default function Dashboard() {
 
 
                     <FlatList data={unidades}
-                              keyExtractor={(item) => item.id_setor.toString()}
-                              renderItem={(item) =>
-                                  <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
-                                               icon={'construct'} qtd={item.item.quantidade_itens}
-                                               id={item.item.id_setor}></CardUnidade>}/>
+                        keyExtractor={(item) => item.id_setor.toString()}
+                        renderItem={(item) =>
+                            <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
+                                icon={'construct'} qtd={item.item.quantidade_itens}
+                                id={item.item.id_setor}></CardUnidade>} />
                 </View>
             </View>
             <AuroraButton onPress={() => {
