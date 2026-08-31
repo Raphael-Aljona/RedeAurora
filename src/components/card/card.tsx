@@ -1,51 +1,38 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import {Image, Pressable, StyleSheet, Text, View} from "react-native"
 import React, { useEffect, useState } from 'react';
 import { BuscarItem } from "../../services/Lista_service";
-import axios from 'axios';
-
-interface Item{
-    "id_item": number
-    "nome": string
-    "codigo_patrimonio": string
-    "descricao": string
-    "id_setor": number
-    "condicao": string
-    "data": Date
-    "id_usuario": string
+import {ItemSetor} from "../../@types/setor";
+import {useRouter} from "expo-router";
+type CardProps = {
+    item: ItemSetor;
 }
 
-function Card() {
+function Card({item}:CardProps) {
 
-    const [item, setItem] = useState<Item | null>(null);
+    const router = useRouter();
 
-        useEffect(() => {
-        async function carregarDados() {
-            try {
-                const dadosItem = await BuscarItem();
-                setItem(dadosItem);
-            }catch(erro){
-                console.error(erro)
-            }
-        }
-        carregarDados();
-    }, []);
+    function navegarDetalhes(){
+        router.push(`/detalhes_item/${item.id_item}`)
+    }
 
   return (
-    <View style={estilos.ViewCard}>
-        <View style={estilos.ViewSuperior}>
-            <Image source={require('../../../assets/imgs/Background.png')} style={estilos.ImagemViewSuperior}/>
-            <View style={estilos.ViewTextoViewSuperior}><Text style={estilos.TextoViewSuperior}>ID: NB-DELL-001</Text></View>
-        </View>
-        <Text style={estilos.TextoPrincipal}>Notebook Dell Latitude</Text>
-        <View style={estilos.ViewSubtexto}>
-            <Image source={require('../../../assets/imgs/Container (1).png')} style={estilos.ImagemSubtexto}/>
-            <Text style={estilos.Subtexto}>Equipamentos de TI</Text>
-        </View>
-        <View style={estilos.ViewInferior}>
-            <Text style={estilos.TextoViewInferior}>VER DETALHES</Text>
-            <Image source={require('../../../assets/imgs/Container (2).png')} style={estilos.ImagemViewInferior}/>
-        </View>
-    </View>
+      <Pressable onPress={navegarDetalhes}>
+          <View style={estilos.ViewCard}>
+              <View style={estilos.ViewSuperior}>
+                  <Image source={require('../../../assets/imgs/Background.png')} style={estilos.ImagemViewSuperior}/>
+                  <View style={estilos.ViewTextoViewSuperior}><Text style={estilos.TextoViewSuperior}>{item.codigo_patrimonio}</Text></View>
+              </View>
+              <Text style={estilos.TextoPrincipal}>{item.nome_item}</Text>
+              <View style={estilos.ViewSubtexto}>
+                  <Image source={require('../../../assets/imgs/Container (1).png')} style={estilos.ImagemSubtexto}/>
+                  <Text style={estilos.Subtexto}>Equipamentos de TI</Text>
+              </View>
+              <View style={estilos.ViewInferior}>
+                  <Text style={estilos.TextoViewInferior}>VER DETALHES</Text>
+                  <Image source={require('../../../assets/imgs/Container (2).png')} style={estilos.ImagemViewInferior}/>
+              </View>
+          </View>
+      </Pressable>
 
   )
 }

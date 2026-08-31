@@ -5,6 +5,7 @@ import AuroraButton from "../../components/aurora_button/aurora_button";
 import {useRouter} from "expo-router";
 import React, { useState } from 'react';
 import { auth } from "../../services/autenticacao";
+import { dados } from "../../@types/autenticacao";
 
 export default function Login() {
     const router = useRouter();
@@ -24,16 +25,20 @@ export default function Login() {
     const [loading, setLoading] = useState(false); //testando isso aqui ainda 
     
     async function Autenticar() {
+
+         const dado : dados = {
+            email: email,
+            senha: senha
+         }
+         
     if (!email || !senha) {
       Alert.alert("Atenção", "Preencha todos os campos!");
       return;
     }
-
     // setLoading(true);
     try {
-        console.log("alksdjflaskjdfs")
-
-      await auth(email, senha);
+        
+      await auth(dado);
       
       // Toast nativo / Alerta
       Alert.alert("Sucesso", "Login realizado com sucesso!");
