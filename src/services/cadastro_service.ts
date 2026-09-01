@@ -2,21 +2,21 @@ import { criarItem } from "../@types/criarItem";
 import { api } from "./api";
 
 export const criarItemService = {
- 
+
     async cadastrar(dados: criarItem): Promise<criarItem> {
-        const formData = new FormData();
-        formData.append('CodigoPatrimonio', dados.codigo_patrimonio);
-        formData.append('NomeItem', dados.nome);
-        formData.append('Descricao', dados.descricao);
-        formData.append('SetorId', String(dados.id_setor));
-        formData.append('Condicao', dados.condicao);
 
+        console.log("dados recebidos no service: ", dados);
 
-        const resposta = await api.post<criarItem>("criarItem", formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        }); 
+        const resposta = await api.post("/Item", {
+            nome: dados.nome,
+            codigo_patrimonio: dados.codigo_patrimonio,
+            descricao: dados.descricao,
+            id_setor: dados.id_setor,
+            condicao: dados.condicao
+        },);
+
+        console.log("resposta do service: ", resposta.data);
+        console.log("resposta do service: ", resposta.status);
 
         return resposta.data;
     }

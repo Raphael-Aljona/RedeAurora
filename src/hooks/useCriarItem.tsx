@@ -8,6 +8,7 @@ export function useCriarItem() {
 
 
     async function criarItem(dados: criarItem) {
+        console.log("dados recebidos no hook: ", dados);
         try {
             const novoItem = await criarItemService.cadastrar(dados);
 
@@ -16,7 +17,7 @@ export function useCriarItem() {
             return novoItem;
 
         } catch (error) {
-            Alert.alert("Erro!", "Problema ao cadastrar a OS!")
+            Alert.alert("Erro!", "Problema ao cadastrar o Item!")
         }
     }
 

@@ -1,34 +1,35 @@
 import React, { useState } from "react";
-import { Alert, Platform, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
-import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../../constants/theme";
+import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import AuroraButton from "../../../components/aurora_button/aurora_button";
-import { useSetor } from "../../../hooks/useSetor";
-import { useCriarItem } from "../../../hooks/useCriarItem";
 import { criarItem } from "../../../@types/criarItem";
-
+import AuroraButton from "../../../components/aurora_button/aurora_button";
+import { Colors, TextoInput, Title, TitleLabel } from "../../../constants/theme";
+import { useCriarItem } from "../../../hooks/useCriarItem";
+import { useSetor } from "../../../hooks/useSetor";
 
 export default function CriarItem() {
     const setor = useSetor();
     const { criarItem } = useCriarItem();
-    const opcoesCondicao = [
-        { nome: "Bom" },
-        { nome: "Danificado" },
-        { nome: "Inutilizável" }
-    ];
+
+    const opcoesCondicao = ["Bom", "Danificado"];
+
     const [codigo, setCodigo] = useState("");
     const [nomeItem, setNomeItem] = useState("");
     const [descricao, setDescricao] = useState("");
-    const [setorSelecionado, setSetorSelecionado] = useState<string>("");
     const [condicao, setCondicao] = useState("");
+    const [setorSelecionado, setSetorSelecionado] = useState<number | string>("");
 
     async function handleSalvar() {
-        if (!nomeItem.trim() || !descricao.trim() || !codigo.trim() || !condicao.trim() || !setorSelecionado) {
+        if (
+            !nomeItem.trim() ||
+            !descricao.trim() ||
+            !codigo.trim() ||
+            !condicao.trim()
+        ) {
             Alert.alert("⚠ Atenção", "Preencha todos os campos obrigatórios (*).");
             return;
         }
 
-        // Monta o objeto final para mandar pro hook
         const novoItem: criarItem = {
             nome: nomeItem,
             id_setor: Number(setorSelecionado),
@@ -37,11 +38,8 @@ export default function CriarItem() {
             codigo_patrimonio: codigo,
         };
 
-        console.log(novoItem);
-
         const sucesso = await criarItem(novoItem);
 
-        // Limpa os campos se deu certo
         if (sucesso) {
             setNomeItem("");
             setSetorSelecionado("");
@@ -49,31 +47,42 @@ export default function CriarItem() {
             setCondicao("");
             setCodigo("");
 
-            Alert.alert("Novo item adicionado");
+            Alert.alert("Sucesso", "Novo item adicionado com sucesso!");
         }
     }
 
-
     return (
         <View style={{ flex: 1, backgroundColor: "#FFF8F6" }}>
-            <Text style={styles.titulo}>
-                Cadastro de Patrimônio
-            </Text>
+            <Text style={styles.titulo}>Cadastro de Patrimônio</Text>
             <Text style={styles.subTitulo}>
-                Preencha os dados abaixo para registrar um novo
-                item.
+                Preencha os dados abaixo para registrar um novo item.
             </Text>
 
             <View style={styles.main}>
-                <TextInput style={styles.input} placeholder="Código do Patrimônio *" />
-                <TextInput style={styles.input} placeholder="Descrição do Patrimônio *" />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Código do Patrimônio *"
+                    value={codigo}
+                    onChangeText={setCodigo}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nome do Item *"
+                    value={nomeItem}
+                    onChangeText={setNomeItem}
+                />
+                <TextInput
+                    style={styles.input}
+                    placeholder="Descrição do Patrimônio *"
+                    value={descricao}
+                    onChangeText={setDescricao}
+                />
 
-
-                {/* Inserindo o SelectDropdown para a escolha da condição do item  */}
+                {/* SelectDropdown de Condição Ajustado */}
                 <SelectDropdown
                     data={opcoesCondicao}
-                    onSelect={(selectedItem) => setCondicao(selectedItem)}
-                    renderButton={(selectedItem, isOpened) => (
+                    onSelect={(selectedItem: string) => setCondicao(selectedItem)}
+                    renderButton={(selectedItem) => (
                         <View style={styles.dropdownButtonStyle}>
                             <Text
                                 style={[
@@ -85,25 +94,27 @@ export default function CriarItem() {
                             </Text>
                         </View>
                     )}
-
                     renderItem={(item, index, isSelected) => (
                         <View
                             style={[
-                                styles.inputTexto,
+                                styles.dropdownItemStyle,
                                 isSelected && { backgroundColor: "#E0E0E0" },
                             ]}
                         >
-                            <Text style={styles.inputTexto && { padding: 10 }}>{item}</Text>
+                            <Text style={styles.inputTexto}>{item}</Text>
                         </View>
                     )}
                     showsVerticalScrollIndicator={false}
                     dropdownStyle={styles.dropdownMenuStyle}
                 />
 
+                {/* SelectDropdown de Setores */}
                 <SelectDropdown
                     data={setor}
-                    onSelect={(selectedItem) => setSetorSelecionado(selectedItem)}
-                    renderButton={(selectedItem, isOpened) => (
+                    onSelect={(selectedItem) => {
+                        setSetorSelecionado(selectedItem.setorId)
+                    }}
+                    renderButton={(selectedItem) => (
                         <View style={styles.dropdownButtonStyle}>
                             <Text
                                 style={[
@@ -111,32 +122,30 @@ export default function CriarItem() {
                                     !selectedItem && { color: "#9E9E9E" },
                                 ]}
                             >
-                                {selectedItem || "Setor *"}
+                                {selectedItem ? selectedItem.nome : "Setor *"}
                             </Text>
                         </View>
                     )}
-
                     renderItem={(item, index, isSelected) => (
                         <View
                             style={[
-                                styles.inputTexto,
+                                styles.dropdownItemStyle,
                                 isSelected && { backgroundColor: "#E0E0E0" },
                             ]}
                         >
-                            <Text style={styles.inputTexto && { padding: 10 }}>{item}</Text>
+                            <Text style={styles.inputTexto}>{item.nome || item.descricao}</Text>
                         </View>
                     )}
                     showsVerticalScrollIndicator={false}
                     dropdownStyle={styles.dropdownMenuStyle}
                 />
-                {/* Configuração do SelectDropdown finalizada */}
-                <AuroraButton onPress={() => {
-                }}
-                    text="Salvar patrimônio"></AuroraButton>
+
+                <AuroraButton onPress={handleSalvar} text="Salvar patrimônio" />
             </View>
         </View>
     );
 }
+
 const styles = StyleSheet.create({
     titulo: {
         ...Title,
@@ -159,7 +168,6 @@ const styles = StyleSheet.create({
         borderColor: 'gray',
         borderRadius: 15,
         padding: 20
-
     },
     input: {
         borderWidth: 1.5,
@@ -168,7 +176,6 @@ const styles = StyleSheet.create({
         padding: 15,
         height: "9%",
         ...TextoInput,
-
     },
     inputTexto: {
         ...TextoInput,
@@ -210,4 +217,4 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         color: '#151E26',
     },
-})
+});

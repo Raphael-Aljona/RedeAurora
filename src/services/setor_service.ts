@@ -4,7 +4,7 @@ import { api } from "./api";
 
 export const SetorService = {
     async listar(): Promise<setor[]> {
-        const resposta = await api.get<setor[]>("Local");
+        const resposta = await api.get<setor[]>("Setor");
         return resposta.data;
     }
 }
