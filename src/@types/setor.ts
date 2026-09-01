@@ -1,4 +1,4 @@
-export interface Unidade {
+export interface Setor {
     id_setor: number,
     nome_setor: string,
     quantidade_itens: number,

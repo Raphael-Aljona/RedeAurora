@@ -1,6 +1,6 @@
 import {api} from "./api";
 
-export async function getAllUnidades() {
+export async function getAllSetores() {
     try {
         const response = await api.get('Item/Quantidade-por-Setor');
         return response.data;

@@ -13,7 +13,7 @@ type CardProps = {
     id: number;
 }
 
-export default function CardUnidade({icon, color, name, qtd, id}: CardProps) {
+export default function CardSetor({icon, color, name, qtd, id}: CardProps) {
     function direcionarDetalheOs() {
         router.push(`/listagem_item/${id}`, )
     }
