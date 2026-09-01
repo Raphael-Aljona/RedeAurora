@@ -1,6 +1,5 @@
-import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, Pressable, TouchableOpacity, ScrollView } from "react-native";
 import { Fonts } from "../../constants/theme";
-import { ScrollView } from "react-native";
 import { patrimonioService } from "../../services/patrimonio_service";
 import { useEffect, useState } from "react";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -8,22 +7,23 @@ import { useDetalhePatrimonio } from "../../hooks/useDetalhePatrimonio";
 import { Ionicons } from "@expo/vector-icons";
 import { Patrimonio } from "../../@types/patrimonio";
 
-const { id } = useLocalSearchParams<{ id: string }>();
-const { patrimonios, formatarData } = useDetalhePatrimonio(id);
-const router = useRouter();
-
-function editar() {
-    router.push("/(tabs)/criar_item")
-}
-
 export default function DetalhesItem() {
+    
+    const { id } = useLocalSearchParams<{ id: string }>();
+    const { patrimonios: patrimonioHook, formatarData } = useDetalhePatrimonio(id);
+    const router = useRouter();
 
     const [patrimonios, setPatrimonios] = useState<Patrimonio>();
 
+    function editar() {
+        router.push("/(tabs)/criar_item");
+    }
+
     async function getPorId() {
         try {
-            const dados = await patrimonioService.buscarPorId("11");
-            // console.log(dados);
+            // Usa o ID vindo da rota se existir, ou o fallback "11"
+            const idBusca = id || "11"; 
+            const dados = await patrimonioService.buscarPorId(idBusca);
             setPatrimonios(dados);
         } catch (error) {
             console.error(error);
@@ -32,10 +32,9 @@ export default function DetalhesItem() {
 
     useEffect(() => {
         getPorId();
-    }, [])
+    }, [id]);
 
     return (
-
         <View style={estilos.Tela}>
             <ScrollView>
                 <View style={estilos.Header}>
@@ -48,6 +47,7 @@ export default function DetalhesItem() {
                     <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text>
                     <Text style={estilos.texto}>{patrimonios?.codigo_patrimonio}</Text>
                     <Text style={estilos.condicao}>{patrimonios?.condicao}</Text>
+                    
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
                             <Image source={require('../../../assets/imgs/descricao.png')} />
@@ -57,6 +57,7 @@ export default function DetalhesItem() {
                             {patrimonios?.descricao}
                         </Text>
                     </View>
+
                     <View style={estilos.Atribuicao}>
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
@@ -70,8 +71,9 @@ export default function DetalhesItem() {
                             <Text style={estilos.texto}>{patrimonios?.id_usuario}</Text>
                         </View>
                     </View>
-                    <Pressable style={estilos.botao}>
-                        <Text style={estilos.textoBotao} onPress={editar}>Editar patrimônio</Text>
+
+                    <Pressable style={estilos.botao} onPress={editar}>
+                        <Text style={estilos.textoBotao}>Editar patrimônio</Text>
                     </Pressable>
                     <Pressable style={estilos.botao}>
                         <Text style={estilos.textoBotao}>Baixar relatório em tabela / PDF</Text>
@@ -79,8 +81,7 @@ export default function DetalhesItem() {
                 </View>
             </ScrollView>
         </View>
-
-    )
+    );
 }
 
 const estilos = StyleSheet.create({
@@ -132,7 +133,6 @@ const estilos = StyleSheet.create({
     Descricao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "35%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -147,7 +147,6 @@ const estilos = StyleSheet.create({
     Atribuicao: {
         borderWidth: 0.7,
         width: "90%",
-        height: "30%",
         borderColor: "#A33F00",
         justifyContent: "center",
         alignItems: "flex-start",
@@ -167,50 +166,12 @@ const estilos = StyleSheet.create({
         height: 25,
         width: 25
     },
-    Data: {
-        borderWidth: 0.7,
-        width: "90%",
-        height: "10%",
-        borderColor: "#A33F00",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: "5%",
-        marginBottom: "5%",
-        padding: "5%",
-        gap: "5%",
-        backgroundColor: "#FFF1EC",
-        flexDirection: "row",
-        borderRadius: 10
-    },
-    dataRegistro: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "8%",
-    },
-    dataAlteracao: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "8%",
-    },
-    iconesData: {
-        height: 20,
-        width: 20
-    },
-    textoData: {
-        fontFamily: Fonts.regular,
-        fontSize: 16
-    },
     botao: {
         borderWidth: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5%',
         borderRadius: 45,
-        height: '6%',
         width: "80%",
         marginBottom: "2%"
     },
@@ -218,4 +179,4 @@ const estilos = StyleSheet.create({
         fontFamily: Fonts.bold,
         fontSize: 14
     }
-})
+});
