@@ -1,20 +1,19 @@
-import {View, Text, StyleSheet, FlatList, ScrollView} from "react-native";
-import {Colors, Title, TitleLabel} from "../../../constants/theme";
+import { View, Text, StyleSheet, FlatList, ScrollView } from "react-native";
+import { Colors, Title, TitleLabel } from "../../../constants/theme";
 import CardSetor from "../../../components/card_unidade/card_unidade";
-import {Ionicons} from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
-import {useEffect, useRef, useState} from "react";
-import {Unidade} from "../../../@types/setor";
-import {useDashboard} from "../../../hooks/useDashboard";
+import { useEffect, useRef, useState } from "react";
+import { useDashboard } from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-    const {unidades, getTodasUnidades} = useDashboard();
+    const { setores, getTodosSetores } = useDashboard();
 
     const flatListRef = useRef(null);
 
-    const TotalItens = unidades.reduce(
-        (total, unidade) => total + unidade.quantidade_itens,
+    const TotalItens = setores.reduce(
+        (total, setor) => total + setor.quantidade_itens,
         0
     );
 
@@ -43,12 +42,12 @@ export default function Dashboard() {
                     <FlatList
                         style={styles.lista}
                         ref={flatListRef}
-                        scrollEnabled={true} data={unidades}
+                        scrollEnabled={true} data={setores}
                         keyExtractor={(item) => item.id_setor.toString()}
                         renderItem={(item) =>
-                            <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
-                                         icon={'construct'} qtd={item.item.quantidade_itens}
-                                         id={item.item.id_setor}></CardUnidade>}/>
+                            <CardSetor name={item.item.nome_setor} color={Colors.laranja_btn}
+                                icon={'construct'} qtd={item.item.quantidade_itens}
+                                id={item.item.id_setor} />} />
                 </View>
 
 
@@ -125,7 +124,7 @@ const styles = StyleSheet.create(
             ...Title,
         },
 
-        lista:{
+        lista: {
             height: 340,
         }
     }
