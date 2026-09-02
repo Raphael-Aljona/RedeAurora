@@ -51,6 +51,8 @@ export default function CriarItem() {
         }
     }
 
+    console.log("setores recebidos no componente: ", setor);
+
     return (
         <View style={{ flex: 1, backgroundColor: "#FFF8F6" }}>
             <Text style={styles.titulo}>Cadastro de Patrimônio</Text>
@@ -112,7 +114,7 @@ export default function CriarItem() {
                 <SelectDropdown
                     data={setor}
                     onSelect={(selectedItem) => {
-                        setSetorSelecionado(selectedItem.setorId)
+                        setSetorSelecionado(selectedItem.id_setor)
                     }}
                     renderButton={(selectedItem) => (
                         <View style={styles.dropdownButtonStyle}>
@@ -122,7 +124,7 @@ export default function CriarItem() {
                                     !selectedItem && { color: "#9E9E9E" },
                                 ]}
                             >
-                                {selectedItem ? selectedItem.nome : "Setor *"}
+                                {selectedItem ? selectedItem.nome_setor : "Setor *"}
                             </Text>
                         </View>
                     )}
@@ -133,7 +135,7 @@ export default function CriarItem() {
                                 isSelected && { backgroundColor: "#E0E0E0" },
                             ]}
                         >
-                            <Text style={styles.inputTexto}>{item.nome || item.descricao}</Text>
+                            <Text style={styles.inputTexto}>{item.nome_setor || item.descricao}</Text>
                         </View>
                     )}
                     showsVerticalScrollIndicator={false}
