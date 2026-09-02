@@ -6,9 +6,11 @@ import { useLocalSearchParams, useRouter } from "expo-router";
 import { useDetalhePatrimonio } from "../../hooks/useDetalhePatrimonio";
 import { Ionicons } from "@expo/vector-icons";
 import { Patrimonio } from "../../@types/patrimonio";
+import AuroraButton from '../../components/aurora_button/aurora_button';
+
 
 export default function DetalhesItem() {
-    
+
     const { id } = useLocalSearchParams<{ id: string }>();
     const { patrimonios: patrimonioHook, formatarData } = useDetalhePatrimonio(id);
     const router = useRouter();
@@ -18,11 +20,14 @@ export default function DetalhesItem() {
     function editar() {
         router.push("/(tabs)/criar_item");
     }
+    function baixarRelatorio(){
+        
+    }
 
     async function getPorId() {
         try {
             // Usa o ID vindo da rota se existir, ou o fallback "11"
-            const idBusca = id || "11"; 
+            const idBusca = id || "11";
             const dados = await patrimonioService.buscarPorId(idBusca);
             setPatrimonios(dados);
         } catch (error) {
@@ -44,14 +49,14 @@ export default function DetalhesItem() {
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
-                    <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text>
+                    <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text> /
                     <Text style={estilos.texto}>{patrimonios?.codigo_patrimonio}</Text>
                     <Text style={estilos.condicao}>{patrimonios?.condicao}</Text>
-                    
+
                     <View style={estilos.Descricao}>
                         <View style={estilos.Header}>
                             <Image source={require('../../../assets/imgs/descricao.png')} />
-                            <Text style={estilos.Titulo}> Descrição completa</Text>
+                            <Text style={estilos.Titulo}> Descrição completa </Text>
                         </View>
                         <Text style={estilos.texto}>
                             {patrimonios?.descricao}
@@ -64,20 +69,19 @@ export default function DetalhesItem() {
                             <Image source={require('../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Setor: </Text>
                             <Text style={estilos.texto}>{patrimonios?.id_setor}</Text>
+                            
                         </View>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.texto}> Responsável: </Text>
-                            <Text style={estilos.texto}>{patrimonios?.id_usuario}</Text>
+                            <Text style={estilos.texto}>{patrimonios?.nome}</Text>
                         </View>
                     </View>
+                    <AuroraButton text="Editar patrimônio" onPress={editar} />
+                    <AuroraButton text="Baixar relatório em tabela / PDF" onPress={baixarRelatorio} /> 
 
-                    <Pressable style={estilos.botao} onPress={editar}>
-                        <Text style={estilos.textoBotao}>Editar patrimônio</Text>
-                    </Pressable>
-                    <Pressable style={estilos.botao}>
-                        <Text style={estilos.textoBotao}>Baixar relatório em tabela / PDF</Text>
-                    </Pressable>
+                    
+
                 </View>
             </ScrollView>
         </View>
@@ -141,8 +145,9 @@ const estilos = StyleSheet.create({
         borderRadius: 10
     },
     texto: {
-        fontSize: 20,
+        fontSize: 15,
         fontFamily: Fonts.regular,
+        
     },
     Atribuicao: {
         borderWidth: 0.7,
@@ -161,11 +166,15 @@ const estilos = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: "8%",
+        flexWrap: "wrap",
     },
     iconeAtribuicao: {
         height: 25,
         width: 25
     },
+    
+
+    //Container
     botao: {
         borderWidth: 0.8,
         alignItems: 'center',
