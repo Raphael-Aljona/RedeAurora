@@ -44,7 +44,7 @@ export default function Dashboard() {
                               keyExtractor={(item) => item.id_setor.toString()}
                               renderItem={(item) =>
                                   <CardSetor nome={item.item.nome_setor} color={Colors.laranja_btn}
-                                               icon={'construct'} qtd={item.item.quantidade_itens}
+                                               icon={'construct'} quantidade={item.item.quantidade_itens}
                                                id={item.item.id_setor}></CardSetor>}/>
                 </View>
             </View>
