@@ -17,6 +17,9 @@ export function useCriarItem() {
             return novoItem;
 
         } catch (error) {
+            console.log(error);
+            console.log("errorasdadsasdadsad");
+
             Alert.alert("Erro!", "Problema ao cadastrar o Item!")
         }
     }
