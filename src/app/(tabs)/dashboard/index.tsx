@@ -1,16 +1,17 @@
-import {View, Text, StyleSheet, FlatList} from "react-native";
+import {View, Text, StyleSheet, FlatList, ScrollView} from "react-native";
 import {Colors, Title, TitleLabel} from "../../../constants/theme";
-import CardUnidade from "../../../components/card_unidade/card_unidade";
+import CardSetor from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
-import {useEffect, useState} from "react";
-import {getAllUnidades, getQtdItens} from "../../../services/unidades_service";
+import {useEffect, useRef, useState} from "react";
 import {Unidade} from "../../../@types/setor";
 import {useDashboard} from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
     const {unidades, getTodasUnidades} = useDashboard();
+
+    const flatListRef = useRef(null);
 
     const TotalItens = unidades.reduce(
         (total, unidade) => total + unidade.quantidade_itens,
@@ -23,13 +24,13 @@ export default function Dashboard() {
                 <View>
                     <Text style={styles.titulo}>Bem-vindo João</Text>
                     <Text style={styles.subtitle}>Acompanhe a distribuição e valor dos seus
+
                         patrimônios entre as unidades</Text>
                 </View>
 
                 <View style={styles.card}>
                     <View>
                         <Text style={styles.unidade_card}>Total Unidades</Text>
-
                     </View>
                     <View style={styles.total_itens_box}>
                         <Ionicons name="cube" color={Colors.branco} size={20}></Ionicons>
@@ -39,14 +40,18 @@ export default function Dashboard() {
                 <View>
                     <Text style={styles.section_text}>Nossas Unidades</Text>
 
-
-                    <FlatList data={unidades}
-                              keyExtractor={(item) => item.id_setor.toString()}
-                              renderItem={(item) =>
-                                  <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
-                                               icon={'construct'} qtd={item.item.quantidade_itens}
-                                               id={item.item.id_setor}></CardUnidade>}/>
+                    <FlatList
+                        style={styles.lista}
+                        ref={flatListRef}
+                        scrollEnabled={true} data={unidades}
+                        keyExtractor={(item) => item.id_setor.toString()}
+                        renderItem={(item) =>
+                            <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
+                                         icon={'construct'} qtd={item.item.quantidade_itens}
+                                         id={item.item.id_setor}></CardUnidade>}/>
                 </View>
+
+
             </View>
             <AuroraButton onPress={() => {
             }} text="Adicionar nova unidade"></AuroraButton>
@@ -118,7 +123,10 @@ const styles = StyleSheet.create(
 
         section_text: {
             ...Title,
+        },
 
+        lista:{
+            height: 340,
         }
     }
 )

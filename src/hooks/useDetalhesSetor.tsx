@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {ItemSetor} from "../@types/setor";
-import {getQntPorSetor} from "../services/unidades_service";
+import {getQntPorSetor} from "../services/setor_service";
 
 export default function useDetalhesSetor() {
 

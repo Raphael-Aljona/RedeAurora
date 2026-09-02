@@ -67,14 +67,13 @@ export default function DetalhesItem() {
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> Setor: </Text>
-                            <Text style={estilos.texto}>{patrimonios?.id_setor}</Text>
-                            
+                            <Text style={estilos.textoUsuario}> Setor: </Text>
+                            <Text style={estilos.textoUsuario}>{patrimonios?.id_setor}</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> Responsável: </Text>
-                            <Text style={estilos.texto}>{patrimonios?.nome}</Text>
+                            <Text style={estilos.textoUsuario}> Responsável: </Text>
+                            <Text style={estilos.textoUsuario}>{patrimonios?.id_usuario}</Text>
                         </View>
                     </View>
                     <AuroraButton text="Editar patrimônio" onPress={editar} />
@@ -136,7 +135,8 @@ const estilos = StyleSheet.create({
     },
     Descricao: {
         borderWidth: 0.7,
-        width: "90%",
+        width: "80%",
+        height: "25%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -151,12 +151,13 @@ const estilos = StyleSheet.create({
     },
     Atribuicao: {
         borderWidth: 0.7,
-        width: "90%",
+        width: "80%",
+        height: "35%",
         borderColor: "#A33F00",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "flex-start",
         marginTop: "5%",
-        padding: "5%",
+        padding: "18%",
         borderRadius: 10,
         marginBottom: "5%"
     },
@@ -165,27 +166,28 @@ const estilos = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "8%",
-        flexWrap: "wrap",
+        marginTop: "5%"
     },
     iconeAtribuicao: {
         height: 25,
         width: 25
     },
-    
-
-    //Container
     botao: {
         borderWidth: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
         padding: '5%',
         borderRadius: 45,
+        height: '8%',
         width: "80%",
         marginBottom: "2%"
     },
     textoBotao: {
         fontFamily: Fonts.bold,
         fontSize: 14
-    }
-});
+    },
+     textoUsuario: {
+        fontSize: 14,
+        fontFamily: Fonts.regular,
+     }
+})

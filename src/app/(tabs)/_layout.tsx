@@ -74,23 +74,6 @@ export default function TabsLayout() {
                         ),
                     }}
                 />
-
-                {/*<Tabs.Screen*/}
-                {/*    name="listagem_item/index"*/}
-                {/*    options={{*/}
-                {/*        title: "Exportar",*/}
-                {/*        tabBarIcon: ({ color, size }) => (*/}
-                {/*            <Ionicons*/}
-                {/*                name="notifications-outline"*/}
-                {/*                color={color}*/}
-                {/*                size={size}*/}
-                {/*            />*/}
-                {/*        ),*/}
-                {/*    }}*/}
-                {/*/>*/}
-
-
-
             </Tabs>
 
         </SafeAreaView>

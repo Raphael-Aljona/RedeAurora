@@ -1,26 +1,26 @@
 import {Text} from "react-native";
-import {Unidade} from "../@types/setor";
+import {Setor} from "../@types/setor";
 import {useEffect, useState} from "react";
-import {getAllUnidades} from "../services/unidades_service";
+import {getAllSetores} from "../services/setor_service";
 
 export function useDashboard () {
-    const [unidades, setUnidades] = useState<Unidade[]>([]);
-
-    async function getTodasUnidades() {
+    const [setores, setSetores] = useState<Setor[]>([]);
+    
+    async function getTodosSetores() {
         try {
-            const dados = await getAllUnidades();
-            setUnidades(dados);
+            const dados = await getAllSetores();
+            setSetores(dados);
         } catch (error) {
             console.error(error)
         }
     }
 
     useEffect(() => {
-        getTodasUnidades();
+        getTodosSetores();
     }, [])
 
     return {
-        unidades,
-        getTodasUnidades,
+        setores,
+        getTodosSetores,
     }
 }
