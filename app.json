@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "RedeAuroraMobile",
-    "slug": "RedeAuroraMobile",
+    "slug": "redeaurora",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./src/assets/icon.png",
@@ -21,7 +21,8 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.raphaelaljonasteam.redeaurora"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -29,6 +30,13 @@
     "plugins": [
       "expo-font",
       "expo-router"
-    ]
+    ],
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "7dcb72ae-1666-4c34-af16-630916a01326"
+      }
+    },
+    "owner": "raphaelaljonas-team"
   }
 }
