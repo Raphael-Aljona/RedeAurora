@@ -1,10 +1,30 @@
-import { useEffect, useState } from "react";
-import { setor } from "../@types/criarItem";
-import { api } from "./api";
+import {api} from "./api";
 
-export const SetorService = {
-    async listar(): Promise<setor[]> {
-        const resposta = await api.get<setor[]>("Setor");
-        return resposta.data;
+export async function getAllSetores() {
+    try {
+        const response = await api.get('Item/Quantidade-por-Setor');
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getQtdItens() {
+    try {
+        const response = await api.get('Item');
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
+    }
+}
+
+export async function getQntPorSetor(id: string) {
+    try {
+        const response = await api.get(`Item/Itens-por-setor/${id}`);
+        return response.data;
+    }
+    catch (error) {
+        console.error(error);
     }
 }

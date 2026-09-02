@@ -1,7 +1,12 @@
-export interface Unidade {
+export interface Setor {
     id_setor: number,
     nome_setor: string,
     quantidade_itens: number,
+}
+
+export interface SetorCadastro {
+    nome: string,
+    id_unidade: number
 }
 
 export interface Item {
@@ -17,5 +22,8 @@ export interface Item {
 
 export interface ItemSetor {
     "id_setor": number,
+    "id_item": number,
     "nome_setor": string,
+    "nome_item": string,
+    "codigo_patrimonio": string
 }
