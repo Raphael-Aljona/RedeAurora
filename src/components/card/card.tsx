@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { BuscarItem } from "../../services/Lista_service";
 import {ItemSetor} from "../../@types/setor";
 import {useRouter} from "expo-router";
+
 type CardProps = {
     item: ItemSetor;
 }
@@ -15,7 +16,7 @@ function Card({item}:CardProps) {
         router.push(`/detalhes_item/${item.id_item}`)
     }
 
-  return (
+    return (
       <Pressable onPress={navegarDetalhes}>
           <View style={estilos.ViewCard}>
               <View style={estilos.ViewSuperior}>

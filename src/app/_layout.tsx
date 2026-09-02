@@ -7,6 +7,7 @@ import {
 } from "@expo-google-fonts/montserrat";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
+import {Colors} from "../constants/theme";
 
 export default function RootLayout() {
 
@@ -33,6 +34,20 @@ export default function RootLayout() {
                     options={{
                         title: "login",
                         headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="listagem_item/[id]"
+                    options={{
+                        title: "Listagem",
+                        headerShown: true,
+                    }}
+                />
+                <Stack.Screen
+                    name="detalhes_item/[id]"
+                    options={{
+                        title: "Detalhes",
+                        headerShown: true,
                     }}
                 />
                 <Stack.Screen
