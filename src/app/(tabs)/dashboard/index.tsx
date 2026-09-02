@@ -8,7 +8,6 @@ import {getAllSetores, getQtdItens} from "../../../services/setor_service";
 import {Setor} from "../../../@types/setor";
 import {useDashboard} from "../../../hooks/useDashboard";
 import { router } from "expo-router";
-
 export default function Dashboard() {
 
     const {setores, getTodosSetores} = useDashboard();
@@ -44,7 +43,7 @@ export default function Dashboard() {
                     <FlatList data={setores}
                               keyExtractor={(item) => item.id_setor.toString()}
                               renderItem={(item) =>
-                                  <CardSetor name={item.item.nome_setor} color={Colors.laranja_btn}
+                                  <CardSetor nome={item.item.nome_setor} color={Colors.laranja_btn}
                                                icon={'construct'} qtd={item.item.quantidade_itens}
                                                id={item.item.id_setor}></CardSetor>}/>
                 </View>
