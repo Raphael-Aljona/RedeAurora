@@ -1,19 +1,20 @@
-import {View, Text, StyleSheet, FlatList} from "react-native";
+import {View, Text, StyleSheet, FlatList, ScrollView} from "react-native";
 import {Colors, Title, TitleLabel} from "../../../constants/theme";
 import CardSetor from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
-import {useEffect, useState} from "react";
-import {getAllSetores, getQtdItens} from "../../../services/setor_service";
-import {Setor} from "../../../@types/setor";
+import {useEffect, useRef, useState} from "react";
+import {Unidade} from "../../../@types/setor";
 import {useDashboard} from "../../../hooks/useDashboard";
-import { router } from "expo-router";
+
 export default function Dashboard() {
 
-    const {setores, getTodosSetores} = useDashboard();
+    const {unidades, getTodasUnidades} = useDashboard();
 
-    const TotalItens = setores.reduce(
-        (total, setor) => total + setor.quantidade_itens,
+    const flatListRef = useRef(null);
+
+    const TotalItens = unidades.reduce(
+        (total, unidade) => total + unidade.quantidade_itens,
         0
     );
 
@@ -23,13 +24,13 @@ export default function Dashboard() {
                 <View>
                     <Text style={styles.titulo}>Bem-vindo João</Text>
                     <Text style={styles.subtitle}>Acompanhe a distribuição e valor dos seus
-                        patrimônios entre as setores</Text>
+
+                        patrimônios entre as unidades</Text>
                 </View>
 
                 <View style={styles.card}>
                     <View>
-                        <Text style={styles.unidade_card}>Total setores</Text>
-
+                        <Text style={styles.unidade_card}>Total Unidades</Text>
                     </View>
                     <View style={styles.total_itens_box}>
                         <Ionicons name="cube" color={Colors.branco} size={20}></Ionicons>
@@ -37,20 +38,23 @@ export default function Dashboard() {
                     </View>
                 </View>
                 <View>
-                    <Text style={styles.section_text}>Nossas setores</Text>
+                    <Text style={styles.section_text}>Nossas Unidades</Text>
 
-
-                    <FlatList data={setores}
-                              keyExtractor={(item) => item.id_setor.toString()}
-                              renderItem={(item) =>
-                                  <CardSetor nome={item.item.nome_setor} color={Colors.laranja_btn}
-                                               icon={'construct'} quantidade={item.item.quantidade_itens}
-                                               id={item.item.id_setor}></CardSetor>}/>
+                    <FlatList
+                        style={styles.lista}
+                        ref={flatListRef}
+                        scrollEnabled={true} data={unidades}
+                        keyExtractor={(item) => item.id_setor.toString()}
+                        renderItem={(item) =>
+                            <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
+                                         icon={'construct'} qtd={item.item.quantidade_itens}
+                                         id={item.item.id_setor}></CardUnidade>}/>
                 </View>
+
+
             </View>
             <AuroraButton onPress={() => {
-                router.push("/(tabs)/criar_setor")
-            }} text="Adicionar novo setor"></AuroraButton>
+            }} text="Adicionar nova unidade"></AuroraButton>
         </View>
     );
 }
@@ -119,7 +123,10 @@ const styles = StyleSheet.create(
 
         section_text: {
             ...Title,
+        },
 
+        lista:{
+            height: 340,
         }
     }
 )
