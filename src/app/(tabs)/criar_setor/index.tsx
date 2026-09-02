@@ -3,13 +3,15 @@ import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert, K
 import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../../constants/theme";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import { api } from "../../../services/api";
+import { SetorCadastro } from "../../../@types/setor";
+import { router } from "expo-router";
 
 export default function CriarSetor() {
     const [nomeSetor, setNomeSetor] = useState("");
     const [carregando, setCarregando] = useState(false);
 
     const handleSalvar = async () => {
-        if (!nomeSetor || nomeSetor.trim().length === 0) {
+        if (!nomeSetor) {
             Alert.alert("Atenção", "Por favor, preencha o nome do setor.");
             return;
         }
@@ -18,7 +20,7 @@ export default function CriarSetor() {
 
         try {
             
-            await api.post('/Setor', { nome: nomeSetor });
+            await api.post("/Setor", { nome: nomeSetor, id_unidade: 1 } as SetorCadastro);
 
             Alert.alert("Sucesso", `Setor "${nomeSetor}" criado com sucesso!`, [
                 { text: "OK", onPress: () => {
@@ -26,9 +28,9 @@ export default function CriarSetor() {
                 }}
             ]);
 
-        } catch (error) {
+        } catch (error: any) {
             Alert.alert("Erro", "Não foi possível cadastrar o setor. Tente novamente.");
-            console.error(error);
+            console.error(error.message);
         } finally {
             setCarregando(false);
         }
@@ -47,7 +49,10 @@ export default function CriarSetor() {
                 />
 
                 <AuroraButton 
-                    onPress={handleSalvar}
+                    onPress={() => {
+                        handleSalvar();
+                        router.push("/(tabs)/dashboard");
+                    }}
                     text={carregando ? "Salvando..." : "Salvar setor"}
                 />
             </View>

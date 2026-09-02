@@ -4,6 +4,11 @@ export interface Setor {
     quantidade_itens: number,
 }
 
+export interface SetorCadastro {
+    nome: string,
+    id_unidade: number
+}
+
 export interface Item {
     "id_item": number,
     "nome": string | null,
