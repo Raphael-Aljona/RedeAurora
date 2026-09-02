@@ -61,13 +61,13 @@ export default function DetalhesItem() {
                         <Text style={estilos.Titulo}>Atribuição</Text>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_atribuicao.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> Setor: </Text>
-                            <Text style={estilos.texto}>{patrimonios?.id_setor}</Text>
+                            <Text style={estilos.textoUsuario}> Setor: </Text>
+                            <Text style={estilos.textoUsuario}>{patrimonios?.id_setor}</Text>
                         </View>
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
-                            <Text style={estilos.texto}> Responsável: </Text>
-                            <Text style={estilos.texto}>{patrimonios?.id_usuario}</Text>
+                            <Text style={estilos.textoUsuario}> Responsável: </Text>
+                            <Text style={estilos.textoUsuario}>{patrimonios?.id_usuario}</Text>
                         </View>
                     </View>
                     <Pressable style={estilos.botao}>
@@ -131,8 +131,8 @@ const estilos = StyleSheet.create({
     },
     Descricao: {
         borderWidth: 0.7,
-        width: "90%",
-        height: "35%",
+        width: "80%",
+        height: "25%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
@@ -146,13 +146,13 @@ const estilos = StyleSheet.create({
     },
     Atribuicao: {
         borderWidth: 0.7,
-        width: "90%",
-        height: "30%",
+        width: "80%",
+        height: "35%",
         borderColor: "#A33F00",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         alignItems: "flex-start",
         marginTop: "5%",
-        padding: "5%",
+        padding: "18%",
         borderRadius: 10,
         marginBottom: "5%"
     },
@@ -161,48 +161,11 @@ const estilos = StyleSheet.create({
         flexDirection: "row",
         alignItems: "center",
         justifyContent: "center",
-        marginTop: "8%",
+        marginTop: "5%"
     },
     iconeAtribuicao: {
         height: 25,
         width: 25
-    },
-    Data: {
-        borderWidth: 0.7,
-        width: "90%",
-        height: "10%",
-        borderColor: "#A33F00",
-        justifyContent: "center",
-        alignItems: "center",
-        marginTop: "5%",
-        marginBottom: "5%",
-        padding: "5%",
-        gap: "5%",
-        backgroundColor: "#FFF1EC",
-        flexDirection: "row",
-        borderRadius: 10
-    },
-    dataRegistro: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "8%",
-    },
-    dataAlteracao: {
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        marginTop: "8%",
-    },
-    iconesData: {
-        height: 20,
-        width: 20
-    },
-    textoData: {
-        fontFamily: Fonts.regular,
-        fontSize: 16
     },
     botao: {
         borderWidth: 0.8,
@@ -210,12 +173,16 @@ const estilos = StyleSheet.create({
         justifyContent: 'center',
         padding: '5%',
         borderRadius: 45,
-        height: '6%',
+        height: '8%',
         width: "80%",
         marginBottom: "2%"
     },
     textoBotao: {
         fontFamily: Fonts.bold,
         fontSize: 14
-    }
+    },
+     textoUsuario: {
+        fontSize: 14,
+        fontFamily: Fonts.regular,
+     }
 })

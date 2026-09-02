@@ -1,10 +1,9 @@
 import {View, Text, StyleSheet, FlatList, ScrollView} from "react-native";
 import {Colors, Title, TitleLabel} from "../../../constants/theme";
-import CardUnidade from "../../../components/card_unidade/card_unidade";
+import CardSetor from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import {useEffect, useRef, useState} from "react";
-import {getAllUnidades, getQtdItens} from "../../../services/unidades_service";
 import {Unidade} from "../../../@types/setor";
 import {useDashboard} from "../../../hooks/useDashboard";
 
@@ -25,13 +24,13 @@ export default function Dashboard() {
                 <View>
                     <Text style={styles.titulo}>Bem-vindo João</Text>
                     <Text style={styles.subtitle}>Acompanhe a distribuição e valor dos seus
+
                         patrimônios entre as unidades</Text>
                 </View>
 
                 <View style={styles.card}>
                     <View>
                         <Text style={styles.unidade_card}>Total Unidades</Text>
-
                     </View>
                     <View style={styles.total_itens_box}>
                         <Ionicons name="cube" color={Colors.branco} size={20}></Ionicons>
