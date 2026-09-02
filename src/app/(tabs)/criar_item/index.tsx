@@ -133,6 +133,7 @@ export default function CriarItem() {
                             style={[
                                 styles.dropdownItemStyle,
                                 isSelected && { backgroundColor: "#E0E0E0" },
+
                             ]}
                         >
                             <Text style={styles.inputTexto}>{item.nome_setor || item.descricao}</Text>
