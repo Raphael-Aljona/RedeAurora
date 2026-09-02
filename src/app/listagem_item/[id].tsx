@@ -14,7 +14,8 @@ import { Picker } from "@react-native-picker/picker";
 export default function ListagemItem() {
 
     const {itensSetor} = useDetalhesSetor();
-    const [itensFiltrados, setItensFiltrados] = useState<ItemSetor[]>([])
+    const [itensFiltrados, setItensFiltrados] = useState<ItemSetor[]>([]);
+    const [filtroSelecionado, setFiltroSelecionado] = useState<string>("");
 
     function fetchItensFiltrados(busca?: string) {
         const data = itensSetor.filter(value => value.nome_item.toString().includes(busca ?? ""));
@@ -73,10 +74,22 @@ export default function ListagemItem() {
                     console.log("Filtrar");
                 }}/>
             </View>
-            <Pressable style={estilos.BotaoFiltrar} onPress={}>
-                <Image style={estilos.ImagemFiltrar} source={require('../../../assets/imgs/filtro.png')}/>
-                <Text style={estilos.TextoFiltrar}>Filtros</Text>
-            </Pressable>
+            {/*<Pressable style={estilos.BotaoFiltrar} onPress={}>*/}
+            {/*    <Image style={estilos.ImagemFiltrar} source={require('../../../assets/imgs/filtro.png')}/>*/}
+            {/*    <Text style={estilos.TextoFiltrar}>Filtros</Text>*/}
+            {/*</Pressable>*/}
+            <Picker
+                selectedValue={filtroSelecionado}
+                onValueChange={(itemValue) => setFiltroSelecionado(itemValue)}
+                dropdownIconColor="#666"
+                style={estilos.picker}
+            >
+                <Picker.Item
+                    label="Selecione o local/setor..."
+                    value=""
+                    color="#A0A0A0"
+                />
+            </Picker>
             <Pressable style={estilos.BotaoExportar} onPress={event => {
                 exportarExcel(itensSetor);
             }}>
@@ -291,5 +304,19 @@ const estilos = StyleSheet.create({
         height: 1,
         backgroundColor: '#E0E0E0',
         width: '100%'
-    }
+    },
+
+    pickerContainer: {
+        backgroundColor: '#F4F5F7',
+        borderWidth: 1,
+        borderColor: '#E5E5EA',
+        borderRadius: 8,
+        justifyContent: 'center',
+        overflow: 'hidden',
+    },
+
+    picker: {
+        height: 50,
+        width: '100%',
+    },
 })
