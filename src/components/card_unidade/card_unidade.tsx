@@ -1,9 +1,9 @@
-import {View, Text, StyleSheet, Pressable} from "react-native";
-import {Icon, IconProps} from "expo-router/build/native-tabs";
-import {Colors, Title, TitleLabel} from "../../constants/theme";
-import {Ionicons} from "@expo/vector-icons";
+import { View, Text, StyleSheet, Pressable } from "react-native";
+import { Icon, IconProps } from "expo-router/build/native-tabs";
+import { Colors, Title, TitleLabel } from "../../constants/theme";
+import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import {router} from "expo-router";
+import { router } from "expo-router";
 
 type CardProps = {
     color: string;
@@ -13,9 +13,9 @@ type CardProps = {
     id: number;
 }
 
-export default function CardUnidade({icon, color, name, qtd, id}: CardProps) {
+export default function CardUnidade({ icon, color, name, qtd, id }: CardProps) {
     function direcionarDetalheOs() {
-        router.push(`/listagem_item/${id}`, )
+        router.push(`/listagem_item/${id}`,)
     }
 
     return (
