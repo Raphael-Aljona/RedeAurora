@@ -11,7 +11,9 @@ export default function useDetalhesSetor() {
     const [itensFiltrados, setItensFiltrados] = useState<ItemSetor[]>([]);
 
     function fetchItensFiltrados(busca?: string) {
-        const data = itensSetor.filter(value => value.nome_item.toLowerCase().toString().includes(busca?.toLowerCase() ?? ""));
+        const data = itensSetor.filter(value =>
+            value.nome_item.toLowerCase().toString().includes(busca?.toLowerCase() ?? "") ||
+            value.codigo_patrimonio.toLowerCase().toString().includes(busca?.toLowerCase() ?? ""));
 
         setItensFiltrados(data);
     }

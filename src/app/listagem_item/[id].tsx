@@ -14,7 +14,6 @@ import { Picker } from "@react-native-picker/picker";
 export default function ListagemItem() {
 
     const {exportarExcel, fetchItensFiltrados, itensFiltrados} = useDetalhesSetor();
-    const [filtroSelecionado, setFiltroSelecionado] = useState<string>("");
 
     const handleFiltrar = (busca:string) =>{
         fetchItensFiltrados(busca)
