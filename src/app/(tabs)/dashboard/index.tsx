@@ -5,17 +5,20 @@ import { Ionicons } from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import { useEffect, useRef, useState } from "react";
 import { useDashboard } from "../../../hooks/useDashboard";
+import { router } from "expo-router";
 
 export default function Dashboard() {
 
     const { setores, getTodosSetores } = useDashboard();
-
     const flatListRef = useRef(null);
-
     const TotalItens = setores.reduce(
         (total, setor) => total + setor.quantidade_itens,
         0
     );
+
+    useEffect(() => {
+        getTodosSetores();
+    }, [getTodosSetores]);
 
     return (
         <View style={styles.container}>
@@ -53,7 +56,8 @@ export default function Dashboard() {
 
             </View>
             <AuroraButton onPress={() => {
-            }} text="Adicionar nova unidade"></AuroraButton>
+                router.push("/(tabs)/criar_setor")
+            }} text="Adicionar novo setor"></AuroraButton>
         </View>
     );
 }
