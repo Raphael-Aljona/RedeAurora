@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {FlatList, Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
 import Card from "../../components/card/card";
 import useDetalhesSetor from "../../hooks/useDetalhesSetor";
@@ -13,53 +13,15 @@ import { Picker } from "@react-native-picker/picker";
 
 export default function ListagemItem() {
 
-    const {itensSetor} = useDetalhesSetor();
-    const [itensFiltrados, setItensFiltrados] = useState<ItemSetor[]>([]);
-    const [filtroSelecionado, setFiltroSelecionado] = useState<string>("");
+    const {exportarExcel, fetchItensFiltrados, itensFiltrados} = useDetalhesSetor();
 
-    function fetchItensFiltrados(busca?: string) {
-        const data = itensSetor.filter(value => value.nome_item.toString().includes(busca ?? ""));
-
-        setItensFiltrados(data);
+    const handleFiltrar = (busca:string) =>{
+        fetchItensFiltrados(busca)
     }
 
-    async function exportarExcel(lista: any) {
-        try {
-            const worksheet = XLSX.utils.json_to_sheet(lista);
-
-            const workbook = XLSX.utils.book_new();
-
-            XLSX.utils.book_append_sheet(workbook, worksheet, "Patrimônios");
-
-            const base64 = XLSX.write(workbook, {
-                type: "base64",
-                bookType: "xlsx",
-            });
-
-            const file = new File(Paths.cache, "patrimônios.xlsx");
-
-            file.create({
-                overwrite: true,
-            });
-
-            file.write(base64, {
-                encoding: "base64",
-            });
-
-            if (await Sharing.isAvailableAsync()) {
-                await Sharing.shareAsync(file.uri, {
-                    mimeType:
-                        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-                    dialogTitle: "Exportar patrimônios",
-                    UTI:
-                        "com.microsoft.excel.xlsx",
-                });
-            }
-        } catch (error) {
-            console.error("Erro ao exportar Excel:", error);
-        }
+    const handleExportarExcel = () => {
+        exportarExcel(itensFiltrados);
     }
-
 
     return (
         <View style={estilos.Pagina}>
@@ -68,31 +30,10 @@ export default function ListagemItem() {
             <View style={estilos.ViewCaixaTexto}>
                 <Image style={estilos.ImagemCaixaTexto} source={require('../../../assets/imgs/lupa.png')}/>
                 <TextInput placeholder="Buscar ativos..." style={estilos.CaixaDeTexto} onChangeText={text => {
-                    fetchItensFiltrados(text)
-                    console.log(text)
-                    console.log(itensFiltrados)
-                    console.log("Filtrar");
+                    handleFiltrar(text);
                 }}/>
             </View>
-            {/*<Pressable style={estilos.BotaoFiltrar} onPress={}>*/}
-            {/*    <Image style={estilos.ImagemFiltrar} source={require('../../../assets/imgs/filtro.png')}/>*/}
-            {/*    <Text style={estilos.TextoFiltrar}>Filtros</Text>*/}
-            {/*</Pressable>*/}
-            <Picker
-                selectedValue={filtroSelecionado}
-                onValueChange={(itemValue) => setFiltroSelecionado(itemValue)}
-                dropdownIconColor="#666"
-                style={estilos.picker}
-            >
-                <Picker.Item
-                    label="Selecione o local/setor..."
-                    value=""
-                    color="#A0A0A0"
-                />
-            </Picker>
-            <Pressable style={estilos.BotaoExportar} onPress={event => {
-                exportarExcel(itensSetor);
-            }}>
+            <Pressable style={estilos.BotaoExportar} onPress={handleExportarExcel}>
                 <Image style={estilos.ImagemExportar} source={require('../../../assets/imgs/exportar.png')}/>
                 <Text style={estilos.TextoExportar}>Exportar Lista</Text>
             </Pressable>
