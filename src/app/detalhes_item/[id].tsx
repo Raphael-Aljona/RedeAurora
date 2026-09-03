@@ -9,6 +9,7 @@ import { Patrimonio } from "../../@types/patrimonio";
 import AuroraButton from '../../components/aurora_button/aurora_button';
 
 
+
 export default function DetalhesItem() {
 
     const { id } = useLocalSearchParams<{ id: string }>();
@@ -191,3 +192,4 @@ const estilos = StyleSheet.create({
         fontFamily: Fonts.regular,
      }
 })
+
