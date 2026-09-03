@@ -10,10 +10,13 @@ import * as Sharing from "expo-sharing";
 import {ItemSetor} from "../../@types/setor";
 import {Ionicons} from "@expo/vector-icons";
 import { Picker } from "@react-native-picker/picker";
+import { useLocalSearchParams } from 'expo-router';
 
 export default function ListagemItem() {
 
-    const {exportarExcel, fetchItensFiltrados, itensFiltrados} = useDetalhesSetor();
+    const { id } = useLocalSearchParams<{ id: string }>();
+
+    const {exportarExcel, fetchItensFiltrados, itensFiltrados} = useDetalhesSetor(id);
 
     const handleFiltrar = (busca:string) =>{
         fetchItensFiltrados(busca)

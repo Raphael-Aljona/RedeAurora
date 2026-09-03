@@ -13,7 +13,7 @@ function Card({ item }: CardProps) {
     const router = useRouter();
 
     function navegarDetalhes() {
-        router.push(`/detalhes_item/${item.id_setor}`)
+        router.push({pathname: `/detalhes_item/${item.id_setor}`, params:{idItem: item.id_item}})
     }
 
     return (
