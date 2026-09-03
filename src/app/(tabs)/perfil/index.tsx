@@ -1,59 +1,89 @@
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import React, {useEffect, useState} from "react";
 import {atualizarPerfil} from "../../../services/perfil_service";
 
-type Usuario = {
-    "nome": string,
-    "email": string,
-    "senha": string
-}
+import { auth } from "../../../services/autenticacao";
+import { dados } from "../../../@types/autenticacao";
+import { api } from "../../../services/api";
+import { Usuario, UsuarioAtualizar } from "../../../@types/Usuario";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { useState } from "react";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function Perfil() {
 
-    const [usuario, setUsuario] = useState<Usuario>({
-        nome: "",
-        senha: "",
-        email: "",
-    });
+    const [Nome, setNome] = useState<string>("")
+    const [Senha, setSenha] = useState<string>("")
+    const[Email, setEmail] = useState<string>("")
+
+    const {usuario, logout} = useAuth();
 
     async function atualizarUsuario() {
-        console.log('Usuario pode ser nulo')
-        if (usuario == null) return;
+
+
+        if (!Nome || !Senha || !Email ) 
+            {
+                console.log("Não tem todos os dados preenchidos")
+                return
+            }
         console.log('Enviando para a API')
 
-        atualizarPerfil(usuario, "");
+
+       
+        const AtualizarUsuario : UsuarioAtualizar = {
+            nome: Nome,
+            email: Email,
+            senha: Senha
+        }
+
+        try{
+            await api.put(`/Usuario/${usuario?.id}`, AtualizarUsuario)
+            
+            alert("Usuario alterado com sucesso")
+
+            logout()
+        }catch{
+            alert("Não foi possivel atualizar o usuario")
+
+            setNome("")
+            setSenha("")
+            setEmail("")
+            
+        }
+         
+
+         
     }
 
     return (
         <View style={estilos.PaginaPerfil}>
-            <Text style={estilos.TituloPerfil}>João Silva</Text>
+            <Text style={estilos.TituloPerfil}>{usuario?.nome}</Text>
             <View style={estilos.ViewSubtitulo}><Text style={estilos.Subtitulo}>ATIVA</Text></View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
                     <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
                     <Text style={estilos.TextoInput}>Usuario</Text>
                 </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva"></TextInput>
+                <TextInput style={estilos.Input} placeholder="joao.silva" onChangeText={setNome} value={Nome}></TextInput>
             </View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
                     <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
                     <Text style={estilos.TextoInput}>E-mail</Text>
                 </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br"></TextInput>
+                <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br" onChangeText={setEmail} value={Email}></TextInput>
             </View>
             <View style={estilos.ViewInput}>
                 <View style={estilos.ViewTextoInput}>
                     <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
                     <Text style={estilos.TextoInput}>Senha</Text>
                 </View>
-                <TextInput style={estilos.Input} placeholder="*******"></TextInput>
+                <TextInput style={estilos.Input} placeholder="*******" onChangeText={setSenha} value={Senha}></TextInput>
             </View>
-            <Pressable style={estilos.BotaoEditar}>
+            <Pressable style={estilos.BotaoEditar} onPress={atualizarUsuario}>
                 <Image style={estilos.ImagemBotaoEditar} source={require('../../../../assets/imgs/editar.png')}/>
                 <Text style={estilos.TextoBotaoEditar}>Editar Perfil</Text>
             </Pressable>
-            <Pressable style={estilos.BotaoSair}>
+            <Pressable style={estilos.BotaoSair} onPress={logout}>
                 <Image style={estilos.ImagemBotaoSair} source={require('../../../../assets/imgs/sair.png')}/>
                 <Text style={estilos.TextoBotaoSair}>Sair / Logout</Text>
             </Pressable>

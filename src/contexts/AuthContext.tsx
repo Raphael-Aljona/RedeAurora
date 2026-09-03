@@ -1,23 +1,28 @@
 import { jwtDecode } from "jwt-decode";
-import React, { createContext, useContext, useEffect, useState } from "react";
+
 import { AuthContextData, dados, UsuarioPayload } from "../@types/autenticacao";
 import { Usuario, UsuarioToken } from "../@types/Usuario";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { auth } from "../services/autenticacao";
 import { router } from "expo-router";
+import { createContext, useContext, useEffect, useState } from "react";
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData)
 
 export function decodificarToken(token: string) : UsuarioToken | null{
     try{
         const decoded = jwtDecode<UsuarioPayload>(token);
+        console.log(decoded)
         return {
+            id: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier"],
             nome: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"],
             email: decoded["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress"]
         }
     }catch{
+        console.log("ferrou")
         return null
     }
+    
 
 }
 
@@ -28,6 +33,7 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = (({children})
 
     useEffect(() => {
         //then - então
+        
         AsyncStorage.getItem(process.env.EXPO_PUBLIC_TOKEN_KEY).then((tokenSalvo)=> {
             if(tokenSalvo){
                 setToken(tokenSalvo)
@@ -38,8 +44,8 @@ export const AuthProvider: React.FC<{children: React.ReactNode}> = (({children})
 
     }, [])
 
-    async function login(dados: dados){
-        const resposta = await auth(dados);
+    async function login(dado: dados){
+        const resposta = await auth(dado);
 
         if(resposta.token){
             setToken(resposta.token)

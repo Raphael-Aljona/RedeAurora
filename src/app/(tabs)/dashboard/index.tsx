@@ -6,8 +6,11 @@ import AuroraButton from "../../../components/aurora_button/aurora_button";
 import { useEffect, useRef, useState } from "react";
 import { useDashboard } from "../../../hooks/useDashboard";
 import { router } from "expo-router";
+import { useAuth } from "../../../contexts/AuthContext";
 
 export default function Dashboard() {
+
+    const {usuario, logout} = useAuth();
 
     const { setores, getTodosSetores } = useDashboard();
     const flatListRef = useRef(null);
@@ -24,7 +27,7 @@ export default function Dashboard() {
         <View style={styles.container}>
             <View style={styles.cima}>
                 <View>
-                    <Text style={styles.titulo}>Bem-vindo João</Text>
+                    <Text style={styles.titulo}>Bem-vindo {usuario?.nome}</Text>
                     <Text style={styles.subtitle}>Acompanhe a distribuição e valor dos seus
 
                         patrimônios entre as unidades</Text>

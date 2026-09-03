@@ -8,6 +8,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import {Colors} from "../constants/theme";
+import { AuthProvider } from "../contexts/AuthContext";
 
 export default function RootLayout() {
 
@@ -22,6 +23,7 @@ export default function RootLayout() {
     }
 
     return (
+        <AuthProvider>
         <SafeAreaProvider>
             <Stack initialRouteName="splash/index">
                 <Stack.Screen name="splash/index"
@@ -59,5 +61,6 @@ export default function RootLayout() {
 
             </Stack>
         </SafeAreaProvider>
+        </AuthProvider>
     );
 }
