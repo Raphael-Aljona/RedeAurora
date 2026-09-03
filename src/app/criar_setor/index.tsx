@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Platform, StyleSheet, Text, TextInput, TouchableOpacity, View, Alert, Keyboard } from "react-native";
-import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../../constants/theme";
-import AuroraButton from "../../../components/aurora_button/aurora_button";
-import { api } from "../../../services/api";
-import { SetorCadastro } from "../../../@types/setor";
+import { Colors, Fonts, TextoInput, Title, TitleLabel } from "../../constants/theme";
+import AuroraButton from "../../components/aurora_button/aurora_button";
+import { api } from "../../services/api";
+import { SetorCadastro } from "../../@types/setor";
 import { router } from "expo-router";
 
 export default function CriarSetor() {
@@ -51,7 +51,7 @@ export default function CriarSetor() {
                 <AuroraButton 
                     onPress={() => {
                         handleSalvar();
-                        router.push("/(tabs)/dashboard");
+                        router.replace("/(tabs)/dashboard");
                     }}
                     text={carregando ? "Salvando..." : "Salvar setor"}
                 />
