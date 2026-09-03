@@ -4,12 +4,11 @@ import CardSetor from "../../../components/card_unidade/card_unidade";
 import {Ionicons} from "@expo/vector-icons";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import {useEffect, useRef, useState} from "react";
-import {Unidade} from "../../../@types/setor";
 import {useDashboard} from "../../../hooks/useDashboard";
 
 export default function Dashboard() {
 
-    const {unidades, getTodasUnidades} = useDashboard();
+    const {setores: unidades} = useDashboard();
 
     const flatListRef = useRef(null);
 
@@ -45,10 +44,10 @@ export default function Dashboard() {
                         ref={flatListRef}
                         scrollEnabled={true} data={unidades}
                         keyExtractor={(item) => item.id_setor.toString()}
-                        renderItem={(item) =>
-                            <CardUnidade name={item.item.nome_setor} color={Colors.laranja_btn}
-                                         icon={'construct'} qtd={item.item.quantidade_itens}
-                                         id={item.item.id_setor}></CardUnidade>}/>
+                        renderItem={({item}) =>
+                            <CardSetor name={item.nome_setor} color={Colors.laranja_btn}
+                                         icon={'construct'} qtd={item.quantidade_itens}
+                                         id={item.id_setor}></CardSetor>}/>
                 </View>
 
 
