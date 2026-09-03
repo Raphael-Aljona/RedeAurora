@@ -11,33 +11,14 @@ import AuroraButton from '../../components/aurora_button/aurora_button';
 
 export default function DetalhesItem() {
 
-    const { id } = useLocalSearchParams<{ id: string }>();
-    const { patrimonios: patrimonioHook, formatarData } = useDetalhePatrimonio(id);
-    const router = useRouter();
+    const { idItem } = useLocalSearchParams<{ idItem: string }>();
 
-    const [patrimonios, setPatrimonios] = useState<Patrimonio>();
+    const { patrimonios, formatarData } = useDetalhePatrimonio(idItem);
+    const router = useRouter();
 
     function editar() {
         router.push("/(tabs)/criar_item");
     }
-    function baixarRelatorio(){
-        
-    }
-
-    async function getPorId() {
-        try {
-            // Usa o ID vindo da rota se existir, ou o fallback "11"
-            const idBusca = id || "11";
-            const dados = await patrimonioService.buscarPorId(idBusca);
-            setPatrimonios(dados);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    useEffect(() => {
-        getPorId();
-    }, [id]);
 
     return (
         <View style={estilos.Tela}>
@@ -49,7 +30,7 @@ export default function DetalhesItem() {
                     <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
                 </View>
                 <View style={estilos.Main}>
-                    <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text> /
+                    <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text>
                     <Text style={estilos.texto}>{patrimonios?.codigo_patrimonio}</Text>
                     <Text style={estilos.condicao}>{patrimonios?.condicao}</Text>
 
@@ -73,14 +54,10 @@ export default function DetalhesItem() {
                         <View style={estilos.tipoAtribuicao}>
                             <Image source={require('../../../assets/imgs/icon_responsavel.png')} style={estilos.iconeAtribuicao} />
                             <Text style={estilos.textoUsuario}> Responsável: </Text>
-                            <Text style={estilos.textoUsuario}>{patrimonios?.id_usuario}</Text>
+                            <Text style={estilos.textoUsuario}>{patrimonios?.nome_usuario}</Text>
                         </View>
                     </View>
                     <AuroraButton text="Editar patrimônio" onPress={editar} />
-                    <AuroraButton text="Baixar relatório em tabela / PDF" onPress={baixarRelatorio} /> 
-
-                    
-
                 </View>
             </ScrollView>
         </View>

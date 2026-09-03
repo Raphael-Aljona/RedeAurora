@@ -5,7 +5,7 @@ import * as XLSX from "xlsx";
 import {File, Paths} from "expo-file-system";
 import * as Sharing from "expo-sharing";
 
-export default function useDetalhesSetor() {
+export default function useDetalhesSetor(id: string) {
 
     const [itensSetor, setitensSetor] = useState<ItemSetor[]>([]);
     const [itensFiltrados, setItensFiltrados] = useState<ItemSetor[]>([]);
@@ -29,7 +29,7 @@ export default function useDetalhesSetor() {
     }
 
     useEffect(() => {
-        getItensPorSetor("2");
+        getItensPorSetor(id);
     }, [])
 
     async function exportarExcel(lista: any) {

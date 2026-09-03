@@ -11,7 +11,7 @@ export function useDetalhePatrimonio(id: string) {
             const dados = await patrimonioService.buscarPorId(id);
             setPatrimonios(dados)
         } catch (error) {
-            console.log("Não foi possível carregar os detalhes do patrimônio.")
+            console.log(error)
         }
         
     }

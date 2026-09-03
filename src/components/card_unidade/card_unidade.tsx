@@ -15,7 +15,7 @@ type CardProps = {
 
 export default function CardUnidade({ icon, color, name, qtd, id }: CardProps) {
     function direcionarDetalheOs() {
-        router.push(`/listagem_item/${id}`,)
+        router.push({pathname: `/listagem_item/${id}`, params:{id: id}})
     }
 
     return (
