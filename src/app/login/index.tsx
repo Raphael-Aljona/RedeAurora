@@ -14,7 +14,7 @@ export default function Login() {
         router.push("/(tabs)/dashboard")
     }
     function recuperarSenha() {
-        router.push("/recuperar_senha")
+        router.push("/RecuperarSenha")
     }
     function criarConta() {
         router.push("/criar_conta")
@@ -82,7 +82,9 @@ export default function Login() {
                 <Pressable  onPress={Autenticar} style={estilos.botao}>
                     <Text style={estilos.texto}>Entrar</Text>
                 </Pressable>
+                 <Pressable onPress={recuperarSenha}>
                 <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
+                </Pressable>
             </View>
         </View>
     )

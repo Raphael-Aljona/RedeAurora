@@ -58,6 +58,13 @@ export default function RootLayout() {
                         headerShown: false,
                     }}
                 />
+                <Stack.Screen
+                    name="RecuperarSenha/index"
+                    options={{
+                        title: "Recuperar",
+                        headerShown: false,
+                    }}
+                />
 
             </Stack>
         </SafeAreaProvider>
