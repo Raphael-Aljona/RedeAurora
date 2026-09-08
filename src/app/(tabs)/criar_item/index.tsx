@@ -84,7 +84,7 @@ export default function CriarItem() {
                 />
                 <View style={styles.imagemInput}>
                 <Text style={styles.Texto}>Descrição do Patrimônio</Text>
-                <Ionicons name="information-circle-outline" size={24} color="black" />
+                <Ionicons name="document" size={18} color="black" />
                 </View>
                 <TextInput
                     style={styles.input}
@@ -96,7 +96,7 @@ export default function CriarItem() {
                 {/* SelectDropdown de Condição Ajustado */}
                 <View style={styles.imagemInput}>
                 <Text style={styles.Texto}>Condição do Item</Text>
-                <Ionicons name="information-circle-outline" size={24} color="black" />
+                <Ionicons name="options" size={20} color="black" />
                 </View>
                 <SelectDropdown
                     data={opcoesCondicao}
@@ -130,7 +130,7 @@ export default function CriarItem() {
                 {/* SelectDropdown de Setores */}
                 <View style={styles.imagemInput}>
                 <Text style={styles.Texto}>Setor</Text>
-                <Ionicons name="home-outline" size={20} color="black" />
+                <Ionicons name="options" size={20} color="black" />
                 </View>
                 <SelectDropdown
                     data={setor}

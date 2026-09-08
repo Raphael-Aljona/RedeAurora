@@ -5,6 +5,7 @@ import AuroraButton from "../../components/aurora_button/aurora_button";
 import { api } from "../../services/api";
 import { SetorCadastro } from "../../@types/setor";
 import { router } from "expo-router";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function CriarSetor() {
     const [nomeSetor, setNomeSetor] = useState("");
@@ -40,7 +41,10 @@ export default function CriarSetor() {
         <View style={{ flex: 1, backgroundColor: "#FFF8F6" }}>
             <Text style={styles.titulo}>Cadastro de Setor</Text>
             <View style={styles.main}>
+                <View style={styles.imagemInput}>
                 <Text style={styles.Texto}>Nome do Setor</Text>
+                <Ionicons name="location" size={24} color="black" />
+                </View>
                 <TextInput 
                     style={styles.input} 
                     placeholder="Nome do Setor *" 
@@ -80,6 +84,11 @@ const styles = StyleSheet.create({
         height: "38%",
         ...TextoInput,
     }, 
+    imagemInput: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
     main: {
         justifyContent: "space-between",
         height: "30%",
