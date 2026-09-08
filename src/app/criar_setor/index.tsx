@@ -40,6 +40,7 @@ export default function CriarSetor() {
         <View style={{ flex: 1, backgroundColor: "#FFF8F6" }}>
             <Text style={styles.titulo}>Cadastro de Setor</Text>
             <View style={styles.main}>
+                <Text style={styles.Texto}>Nome do Setor</Text>
                 <TextInput 
                     style={styles.input} 
                     placeholder="Nome do Setor *" 
@@ -66,12 +67,17 @@ const styles = StyleSheet.create({
         marginTop: "5%",
         marginLeft: "14%",
     },
+    Texto: {
+        fontSize: 20,
+        fontWeight: "bold",
+        marginBottom: 5,
+    },
     input: {
         borderWidth: 1.5,
         borderColor: Colors.inputBorder,
         borderRadius: 10,
         padding: 15,
-        height: "40%",
+        height: "38%",
         ...TextoInput,
     }, 
     main: {
