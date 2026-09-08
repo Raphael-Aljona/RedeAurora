@@ -5,7 +5,7 @@ export interface UsuarioToken{
 }
 
 export interface Usuario{
-    id: string,
+    id_usuario: string,
     nome: string,
     email: string,
     senha: string

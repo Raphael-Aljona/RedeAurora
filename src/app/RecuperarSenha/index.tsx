@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react'
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native'
 import { Fonts } from '../../constants/theme'
 import { useAuth } from '../../contexts/AuthContext';
-import { useRecuperarSenha } from '../../hooks/useRecuperarSenha';
 import { api } from '../../services/api';
 import { Usuario, UsuarioAtualizar } from '../../@types/Usuario';
 import { router } from 'expo-router';
+import { BuscandoUsuarioEmail } from '../../services/Recuperar_senha';
 
 function Recuperar() {
 
@@ -13,11 +13,7 @@ function Recuperar() {
     const[senha1, setSenha1] = useState('');
     const[senha2, setSenha2] = useState('');
 
-    const {usuarios, getUsuario} = useRecuperarSenha()
-
-    useEffect(() => {
-    getUsuario();
-    }, [getUsuario]);
+    
     
     
 
@@ -27,7 +23,9 @@ function Recuperar() {
             return
         }
             try{
-                const UsuarioEscolhido = usuarios.find(u => u.email === email)
+
+                const UsuarioEscolhido: Usuario = await BuscandoUsuarioEmail(email)
+
 
                 if (!UsuarioEscolhido) return alert("email não encontrado")
                 
@@ -37,9 +35,10 @@ function Recuperar() {
                     senha: senha1
                 }
                 
-                await api.put(`/Usuario/${UsuarioEscolhido?.id}`, usuarioRedefinicao)
+                await api.put(`/Usuario/${UsuarioEscolhido.id_usuario}`, usuarioRedefinicao)
 
                 router.push("/login")
+                alert("senha alterada com sucesso");
             }catch{
                 alert("erro na atualizacao da senha");
             }
