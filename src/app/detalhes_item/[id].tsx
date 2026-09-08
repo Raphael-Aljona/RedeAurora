@@ -24,12 +24,7 @@ export default function DetalhesItem() {
     return (
         <View style={estilos.Tela}>
             <ScrollView>
-                <View style={estilos.Header}>
-                    <TouchableOpacity onPress={() => router.back()}>
-                        <Ionicons name="arrow-back" size={24} color="#1a1a1a" />
-                    </TouchableOpacity>
-                    <Text style={estilos.Titulo}>Detalhes do patrimônio</Text>
-                </View>
+            
                 <View style={estilos.Main}>
                     <Text style={estilos.NomePatrimonio}>{patrimonios?.nome}</Text>
                     <Text style={estilos.texto}>{patrimonios?.codigo_patrimonio}</Text>
@@ -77,8 +72,10 @@ const estilos = StyleSheet.create({
         fontSize: 15,
         borderWidth: 0.8,
         borderColor: "#A33F00",
-        borderRadius: 45,
-        padding: "1%",
+        borderRadius: 14,
+        padding: 13,
+        marginTop: 5,
+        
     },
     Header: {
         marginBottom: "2%",
@@ -89,14 +86,11 @@ const estilos = StyleSheet.create({
         marginLeft: "1%",
         width: "100%",
     },
-    seta: {
-        height: 25,
-        width: 25,
-    },
+   
     NomePatrimonio: {
         fontFamily: Fonts.bold,
         fontSize: 25,
-        marginTop: '5%'
+        marginTop: 60
     },
     Main: {
         display: "flex",
@@ -113,14 +107,14 @@ const estilos = StyleSheet.create({
     },
     Descricao: {
         borderWidth: 0.7,
-        width: "80%",
-        height: "25%",
+        width: "90%",
         borderColor: "#A33F00",
         alignItems: "flex-start",
         justifyContent: "center",
         marginTop: "5%",
         padding: "5%",
-        borderRadius: 10
+        borderRadius: 10,
+        
     },
     texto: {
         fontSize: 15,
@@ -128,16 +122,16 @@ const estilos = StyleSheet.create({
         
     },
     Atribuicao: {
-        borderWidth: 0.7,
-        width: "80%",
-        height: "35%",
+      borderWidth: 0.7,
+        width: "90%",
         borderColor: "#A33F00",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: "flex-start",
         marginTop: "5%",
-        padding: "18%",
+        padding: "5%",
         borderRadius: 10,
-        marginBottom: "5%"
+        marginBottom: "5%",
+        
     },
     tipoAtribuicao: {
         display: "flex",
@@ -154,7 +148,7 @@ const estilos = StyleSheet.create({
         borderWidth: 0.8,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: '5%',
+        padding: '15%',
         borderRadius: 45,
         height: '8%',
         width: "80%",
