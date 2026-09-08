@@ -45,3 +45,13 @@ export const ButtonText = {
     color: "#F3F4F6",
     fontFamily: Fonts.bold,
 }
+
+export const Input = {
+    width: "100%",
+    borderWidth: 1,
+    borderColor: "#444444",
+    padding: 12,
+    borderRadius: 5,
+    marginBottom: 15,
+    marginTop: 5
+}

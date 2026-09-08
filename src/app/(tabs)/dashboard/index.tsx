@@ -59,7 +59,7 @@ export default function Dashboard() {
 
             </View>
             <AuroraButton onPress={() => {
-                router.push("/(tabs)/criar_setor")
+                router.push("criar_setor")
             }} text="Adicionar novo setor"></AuroraButton>
         </View>
     );

@@ -39,6 +39,13 @@ export default function RootLayout() {
                     }}
                 />
                 <Stack.Screen
+                    name="criar_setor/index"
+                    options={{
+                        title: "Criar setor",
+                        headerShown: true,
+                    }}
+                />
+                <Stack.Screen
                     name="listagem_item/[id]"
                     options={{
                         title: "Listagem",
