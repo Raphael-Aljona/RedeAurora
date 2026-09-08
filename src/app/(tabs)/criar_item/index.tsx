@@ -1,12 +1,12 @@
 import React, {useState} from "react";
-import {Alert, StyleSheet, Text, TextInput, View} from "react-native";
+import {Alert, StyleSheet, Text, TextInput, View, Image} from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
 import {criarItem} from "../../../@types/criarItem";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
 import {Colors, TextoInput, Title, TitleLabel, Input} from "../../../constants/theme";
 import {useCriarItem} from "../../../hooks/useCriarItem";
 import {useSetor} from "../../../hooks/useSetor";
-
+import { Ionicons } from "@expo/vector-icons";
 
 export default function CriarItem() {
     const setor = useSetor();
@@ -62,18 +62,30 @@ export default function CriarItem() {
             </Text>
 
             <View style={styles.main}>
+                <View style={styles.imagemInput}>
+                <Text style={styles.Texto}>Código do Patrimônio</Text>
+                <Ionicons name="barcode-outline" size={28} color="black" />
+            </View>
                 <TextInput
                     style={styles.input}
                     placeholder="Código do Patrimônio *"
                     value={codigo}
                     onChangeText={setCodigo}
                 />
+                <View style={styles.imagemInput}>
+                <Text style={styles.Texto}>Nome do Item</Text>
+                <Ionicons name="pencil-outline" size={20} color="black" />
+                </View>
                 <TextInput
                     style={styles.input}
                     placeholder="Nome do Item *"
                     value={nomeItem}
                     onChangeText={setNomeItem}
                 />
+                <View style={styles.imagemInput}>
+                <Text style={styles.Texto}>Descrição do Patrimônio</Text>
+                <Ionicons name="document" size={18} color="black" />
+                </View>
                 <TextInput
                     style={styles.input}
                     placeholder="Descrição do Patrimônio *"
@@ -82,6 +94,10 @@ export default function CriarItem() {
                 />
 
                 {/* SelectDropdown de Condição Ajustado */}
+                <View style={styles.imagemInput}>
+                <Text style={styles.Texto}>Condição do Item</Text>
+                <Ionicons name="options" size={20} color="black" />
+                </View>
                 <SelectDropdown
                     data={opcoesCondicao}
                     onSelect={(selectedItem: string) => setCondicao(selectedItem)}
@@ -112,6 +128,10 @@ export default function CriarItem() {
                 />
 
                 {/* SelectDropdown de Setores */}
+                <View style={styles.imagemInput}>
+                <Text style={styles.Texto}>Setor</Text>
+                <Ionicons name="options" size={20} color="black" />
+                </View>
                 <SelectDropdown
                     data={setor}
                     onSelect={(selectedItem) => {
@@ -176,6 +196,16 @@ const styles = StyleSheet.create({
     input: {
         ...Input
     },
+    imagemInput: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: 5,
+    },
+    Texto:{
+        height: 25,
+        fontSize: 16,
+        fontWeight: 'bold',
+    },
 
     inputTexto: {
         ...TextoInput,
@@ -190,6 +220,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+        marginBottom: 15,
     },
     dropdownButtonTxtStyle: {
         flex: 1,
