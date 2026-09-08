@@ -6,6 +6,7 @@ import {useRouter} from "expo-router";
 import React, { useState } from 'react';
 import { auth } from "../../services/autenticacao";
 import { dados } from "../../@types/autenticacao";
+import {Colors, Input} from "../../constants/theme"
 
 export default function Login() {
     const router = useRouter();
@@ -14,7 +15,7 @@ export default function Login() {
         router.push("/(tabs)/dashboard")
     }
     function recuperarSenha() {
-        router.push("/recuperar_senha")
+        router.push("/RecuperarSenha")
     }
     function criarConta() {
         router.push("/criar_conta")
@@ -82,7 +83,9 @@ export default function Login() {
                 <Pressable  onPress={Autenticar} style={estilos.botao}>
                     <Text style={estilos.texto}>Entrar</Text>
                 </Pressable>
+                 <Pressable onPress={recuperarSenha}>
                 <Text style={estilos.recuperarSenha}>Recuperar minha senha</Text>
+                </Pressable>
             </View>
         </View>
     )
@@ -93,7 +96,7 @@ const estilos = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: "#FFF8F6"
+        backgroundColor: Colors.backgroundColor,
     },
     container: {
         width: "80%",
@@ -106,15 +109,11 @@ const estilos = StyleSheet.create({
         padding: 20,
         borderRadius: 10,
     },
+
     input: {
-        width: "100%",
-        borderWidth: 1,
-        borderColor: "#ddd",
-        padding: 12,
-        borderRadius: 5,
-        marginBottom: 15,
-        marginTop: 5
+        ...Input
     },
+
     titulo: {
         fontSize: 24,
         fontWeight: 'bold',

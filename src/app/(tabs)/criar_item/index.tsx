@@ -1,15 +1,16 @@
-import React, { useState } from "react";
-import { Alert, StyleSheet, Text, TextInput, View } from "react-native";
+import React, {useState} from "react";
+import {Alert, StyleSheet, Text, TextInput, View} from "react-native";
 import SelectDropdown from "react-native-select-dropdown";
-import { criarItem } from "../../../@types/criarItem";
+import {criarItem} from "../../../@types/criarItem";
 import AuroraButton from "../../../components/aurora_button/aurora_button";
-import { Colors, TextoInput, Title, TitleLabel } from "../../../constants/theme";
-import { useCriarItem } from "../../../hooks/useCriarItem";
-import { useSetor } from "../../../hooks/useSetor";
+import {Colors, TextoInput, Title, TitleLabel, Input} from "../../../constants/theme";
+import {useCriarItem} from "../../../hooks/useCriarItem";
+import {useSetor} from "../../../hooks/useSetor";
+
 
 export default function CriarItem() {
     const setor = useSetor();
-    const { criarItem } = useCriarItem();
+    const {criarItem} = useCriarItem();
 
     const opcoesCondicao = ["Bom", "Danificado"];
 
@@ -54,7 +55,7 @@ export default function CriarItem() {
     console.log("setores recebidos no componente: ", setor);
 
     return (
-        <View style={{ flex: 1, backgroundColor: "#FFF8F6" }}>
+        <View style={styles.container}>
             <Text style={styles.titulo}>Cadastro de Patrimônio</Text>
             <Text style={styles.subTitulo}>
                 Preencha os dados abaixo para registrar um novo item.
@@ -89,7 +90,7 @@ export default function CriarItem() {
                             <Text
                                 style={[
                                     styles.inputTexto,
-                                    !selectedItem && { color: "#9E9E9E" },
+                                    !selectedItem && {color: "#9E9E9E"},
                                 ]}
                             >
                                 {selectedItem || "Condição do item *"}
@@ -100,7 +101,7 @@ export default function CriarItem() {
                         <View
                             style={[
                                 styles.dropdownItemStyle,
-                                isSelected && { backgroundColor: "#E0E0E0" },
+                                isSelected && {backgroundColor: "#E0E0E0"},
                             ]}
                         >
                             <Text style={styles.inputTexto}>{item}</Text>
@@ -121,7 +122,7 @@ export default function CriarItem() {
                             <Text
                                 style={[
                                     styles.inputTexto,
-                                    !selectedItem && { color: "#9E9E9E" },
+                                    !selectedItem && {color: "#9E9E9E"},
                                 ]}
                             >
                                 {selectedItem ? selectedItem.nome_setor : "Setor *"}
@@ -132,7 +133,7 @@ export default function CriarItem() {
                         <View
                             style={[
                                 styles.dropdownItemStyle,
-                                isSelected && { backgroundColor: "#E0E0E0" },
+                                isSelected && {backgroundColor: "#E0E0E0"},
 
                             ]}
                         >
@@ -143,29 +144,29 @@ export default function CriarItem() {
                     dropdownStyle={styles.dropdownMenuStyle}
                 />
 
-                <AuroraButton onPress={handleSalvar} text="Salvar patrimônio" />
+                <AuroraButton onPress={handleSalvar} text="Salvar patrimônio"/>
             </View>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+    container: {
+        padding: 20,
+        backgroundColor: Colors.backgroundColor,
+        display: "flex",
+        justifyContent: "space-between",
+        height: "100%",
+    },
     titulo: {
         ...Title,
-        marginTop: "5%",
-        marginLeft: "3%",
     },
     subTitulo: {
         ...TitleLabel,
-        marginLeft: "3%",
     },
     main: {
         justifyContent: "space-between",
         height: "80%",
-        width: "94%",
-        marginTop: "5%",
-        marginLeft: "3%",
-        marginRight: "3%",
         backgroundColor: 'white',
         borderWidth: 2,
         borderColor: 'gray',
@@ -173,13 +174,9 @@ const styles = StyleSheet.create({
         padding: 20
     },
     input: {
-        borderWidth: 1.5,
-        borderColor: Colors.inputBorder,
-        borderRadius: 10,
-        padding: 15,
-        height: "9%",
-        ...TextoInput,
+        ...Input
     },
+
     inputTexto: {
         ...TextoInput,
         flex: 1,

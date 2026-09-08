@@ -8,6 +8,7 @@ import {
     Montserrat_700Bold,
     useFonts
 } from "@expo-google-fonts/montserrat";
+import { AuthProvider } from "../../contexts/AuthContext";
 
 
 export default function TabsLayout() {
@@ -25,6 +26,7 @@ export default function TabsLayout() {
 
 
     return (
+        <AuthProvider>
         <SafeAreaView style={{ flex: 1 }}>
             <Tabs
                 screenOptions={{
@@ -77,5 +79,6 @@ export default function TabsLayout() {
             </Tabs>
 
         </SafeAreaView>
+        </AuthProvider>
     )
 }

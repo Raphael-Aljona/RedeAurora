@@ -8,6 +8,7 @@ import {
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import React from "react";
 import {Colors} from "../constants/theme";
+import { AuthProvider } from "../contexts/AuthContext";
 
 export default function RootLayout() {
 
@@ -22,6 +23,7 @@ export default function RootLayout() {
     }
 
     return (
+        <AuthProvider>
         <SafeAreaProvider>
             <Stack initialRouteName="splash/index">
                 <Stack.Screen name="splash/index"
@@ -34,6 +36,13 @@ export default function RootLayout() {
                     options={{
                         title: "login",
                         headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="criar_setor/index"
+                    options={{
+                        title: "Criar setor",
+                        headerShown: true,
                     }}
                 />
                 <Stack.Screen
@@ -56,8 +65,16 @@ export default function RootLayout() {
                         headerShown: false,
                     }}
                 />
+                <Stack.Screen
+                    name="RecuperarSenha/index"
+                    options={{
+                        title: "Recuperar",
+                        headerShown: false,
+                    }}
+                />
 
             </Stack>
         </SafeAreaProvider>
+        </AuthProvider>
     );
 }
