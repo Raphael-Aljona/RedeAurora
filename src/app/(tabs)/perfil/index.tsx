@@ -1,5 +1,5 @@
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import {atualizarPerfil} from "../../../services/perfil_service";
+// import {atualizarPerfil} from "../../../services/perfil_service"; // Removido para evitar conflito com o estado
 
 import {auth} from "../../../services/autenticacao";
 import {dados} from "../../../@types/autenticacao";
@@ -16,17 +16,24 @@ export default function Perfil() {
     const [Senha, setSenha] = useState<string>("")
     const [Email, setEmail] = useState<string>("")
 
+    const [atualizarPerfil, setAtualizarPerfil] = useState<boolean>(false)
+
     const {usuario, logout} = useAuth();
 
+    async function HandleButtonAtualizar() {
+        if (!atualizarPerfil) {
+            setAtualizarPerfil(true)
+        } else {
+            await atualizarUsuario()
+        }
+    }
+
     async function atualizarUsuario() {
-
-
         if (!Nome || !Senha || !Email) {
             console.log("Não tem todos os dados preenchidos")
             return
         }
         console.log('Enviando para a API')
-
 
         const AtualizarUsuario: UsuarioAtualizar = {
             nome: Nome,
@@ -36,51 +43,52 @@ export default function Perfil() {
 
         try {
             await api.put(`/Usuario/${usuario?.id}`, AtualizarUsuario)
-
             alert("Usuario alterado com sucesso")
-
             logout()
         } catch {
             alert("Não foi possivel atualizar o usuario")
-
             setNome("")
             setSenha("")
             setEmail("")
-
         }
-
-
     }
 
     return (
         <View style={estilos.PaginaPerfil}>
             <Text style={estilos.TituloPerfil}>{usuario?.nome}</Text>
             <View style={estilos.ViewSubtitulo}><Text style={estilos.Subtitulo}>ATIVA</Text></View>
-            <View style={estilos.container_forms}>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
-                    <Text style={estilos.TextoInput}>Usuario</Text>
-                </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva" onChangeText={setNome}
-                           value={Nome}></TextInput>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
-                    <Text style={estilos.TextoInput}>E-mail</Text>
-                </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br" onChangeText={setEmail}
-                           value={Email}></TextInput>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
-                    <Text style={estilos.TextoInput}>Senha</Text>
-                </View>
-                <TextInput style={estilos.Input} placeholder="*******" onChangeText={setSenha}
-                           value={Senha}></TextInput>
-            </View>
 
-            <Pressable style={estilos.BotaoEditar} onPress={atualizarUsuario}>
+            {atualizarPerfil && (
+                <View style={estilos.container_forms}>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
+                        <Text style={estilos.TextoInput}>Usuario</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder={usuario?.nome} onChangeText={setNome}
+                               value={Nome}></TextInput>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
+                        <Text style={estilos.TextoInput}>E-mail</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder={usuario?.email} onChangeText={setEmail}
+                               value={Email}></TextInput>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
+                        <Text style={estilos.TextoInput}>Senha</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder="*******" onChangeText={setSenha}
+                               value={Senha}></TextInput>
+                </View>
+            )}
+
+            {/* Botão de Editar / Confirmar */}
+            <Pressable style={estilos.BotaoEditar} onPress={HandleButtonAtualizar}>
                 <Image style={estilos.ImagemBotaoEditar} source={require('../../../../assets/imgs/editar.png')}/>
-                <Text style={estilos.TextoBotaoEditar}>Confirmar alterações</Text>
+                <Text style={estilos.TextoBotaoEditar}>
+                    {atualizarPerfil ? "Confirmar alterações" : "Editar perfil"}
+                </Text>
             </Pressable>
+
             <Pressable style={estilos.BotaoSair} onPress={logout}>
                 <Image style={estilos.ImagemBotaoSair} source={require('../../../../assets/imgs/sair.png')}/>
                 <Text style={estilos.TextoBotaoSair}>Sair / Logout</Text>
@@ -143,8 +151,9 @@ const estilos = StyleSheet.create({
         fontSize: 14,
         color: "rgba(107, 114, 128, 1)"
     },
-    Input: {
-        ...Input
+    Inputs: {
+        ...Input,
+        backgroundColor: "#FFFF",
     },
     BotaoEditar: {
         backgroundColor: "white",
@@ -195,7 +204,6 @@ const estilos = StyleSheet.create({
         display: "flex",
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#FFFFFF',
         padding: 20,
         borderRadius: 10,
     }

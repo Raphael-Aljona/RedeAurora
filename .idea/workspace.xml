@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe52db6b-659a-43c8-98b4-f0b5df49671b" name="Changes" comment="" />
+    <list default="true" id="64a2cbbf-ab1e-4dc6-930e-5bdf268b16b1" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -45,7 +45,7 @@
     "node.js.selected.package.jshint": "",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "C:\\Users\\53789144851\\AppData\\Local\\Programs\\WebStorm 2026.2\\plugins\\javascript-plugin\\jsLanguageServicesImpl\\external"
+    "ts.external.directory.path": "C:\\Users\\43159446883\\Desktop\\RedeAuroraFront\\RedeAurora\\node_modules\\typescript\\lib"
   }
 }]]></component>
   <component name="RecentsManager">
