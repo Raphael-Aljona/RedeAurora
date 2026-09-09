@@ -1,10 +1,5 @@
 import {api} from "./api";
-
-interface Usuario{
-    "nome": string,
-    "email": string,
-    "senha": string
-}
+import {Usuario} from "../@types/perfil";
 
 export async function atualizarPerfil(usuario:Usuario, id:string){
     try{
