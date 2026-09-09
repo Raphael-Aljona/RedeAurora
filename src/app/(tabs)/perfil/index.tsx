@@ -1,80 +1,115 @@
 import {Image, Pressable, StyleSheet, Text, TextInput, View} from "react-native";
-import React, {useEffect, useState} from "react";
-import {atualizarPerfil} from "../../../services/perfil_service";
-
-type Usuario = {
-    "nome": string,
-    "email": string,
-    "senha": string
-}
+import {auth} from "../../../services/autenticacao";
+import {dados} from "../../../@types/autenticacao";
+import {api} from "../../../services/api";
+import {Usuario, UsuarioAtualizar} from "../../../@types/Usuario";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {useState} from "react";
+import {useAuth} from "../../../contexts/AuthContext";
+import {Colors, Title, TitleLabel, Input} from "../../../constants/theme";
 
 export default function Perfil() {
 
-    const [usuario, setUsuario] = useState<Usuario>({
-        nome: "",
-        senha: "",
-        email: "",
-    });
+    const [Nome, setNome] = useState<string>("")
+    const [Senha, setSenha] = useState<string>("")
+    const [Email, setEmail] = useState<string>("")
+
+    const [atualizarPerfil, setAtualizarPerfil] = useState<boolean>(false)
+
+    const {usuario, logout} = useAuth();
+
+    async function HandleButtonAtualizar() {
+        if (!atualizarPerfil) {
+            setAtualizarPerfil(true)
+        } else {
+            await atualizarUsuario()
+        }
+    }
 
     async function atualizarUsuario() {
-        console.log('Usuario pode ser nulo')
-        if (usuario == null) return;
+        if (!Nome || !Senha || !Email) {
+            console.log("Não tem todos os dados preenchidos")
+            return
+        }
         console.log('Enviando para a API')
 
-        atualizarPerfil(usuario, "");
+        const AtualizarUsuario: UsuarioAtualizar = {
+            nome: Nome,
+            email: Email,
+            senha: Senha
+        }
+
+        try {
+            await api.put(`/Usuario/${usuario?.id}`, AtualizarUsuario)
+            alert("Usuario alterado com sucesso")
+            logout()
+        } catch {
+            alert("Não foi possivel atualizar o usuario")
+            setNome("")
+            setSenha("")
+            setEmail("")
+        }
     }
 
     return (
         <View style={estilos.PaginaPerfil}>
-            <Text style={estilos.TituloPerfil}>João Silva</Text>
+            <Text style={estilos.TituloPerfil}>{usuario?.nome}</Text>
             <View style={estilos.ViewSubtitulo}><Text style={estilos.Subtitulo}>ATIVA</Text></View>
-            <View style={estilos.ViewInput}>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
-                    <Text style={estilos.TextoInput}>Usuario</Text>
+
+            {atualizarPerfil && (
+                <View style={estilos.container_forms}>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/user.png')}/>
+                        <Text style={estilos.TextoInput}>Usuario</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder={usuario?.nome} onChangeText={setNome}
+                               value={Nome}></TextInput>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
+                        <Text style={estilos.TextoInput}>E-mail</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder={usuario?.email} onChangeText={setEmail}
+                               value={Email}></TextInput>
+                    <View style={estilos.ViewTextoInput}>
+                        <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
+                        <Text style={estilos.TextoInput}>Senha</Text>
+                    </View>
+                    <TextInput style={estilos.Inputs} placeholder="*******" onChangeText={setSenha}
+                               value={Senha}></TextInput>
                 </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva"></TextInput>
-            </View>
-            <View style={estilos.ViewInput}>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/email.png')}/>
-                    <Text style={estilos.TextoInput}>E-mail</Text>
-                </View>
-                <TextInput style={estilos.Input} placeholder="joao.silva@redeaurora.com.br"></TextInput>
-            </View>
-            <View style={estilos.ViewInput}>
-                <View style={estilos.ViewTextoInput}>
-                    <Image style={estilos.ImagemInput} source={require('../../../../assets/imgs/senha.png')}/>
-                    <Text style={estilos.TextoInput}>Senha</Text>
-                </View>
-                <TextInput style={estilos.Input} placeholder="*******"></TextInput>
-            </View>
-            <Pressable style={estilos.BotaoEditar}>
+            )}
+
+            {/* Botão de Editar / Confirmar */}
+            <Pressable style={estilos.BotaoEditar} onPress={HandleButtonAtualizar}>
                 <Image style={estilos.ImagemBotaoEditar} source={require('../../../../assets/imgs/editar.png')}/>
-                <Text style={estilos.TextoBotaoEditar}>Editar Perfil</Text>
+                <Text style={estilos.TextoBotaoEditar}>
+                    {atualizarPerfil ? "Confirmar alterações" : "Editar perfil"}
+                </Text>
             </Pressable>
-            <Pressable style={estilos.BotaoSair}>
+
+            <Pressable style={estilos.BotaoSair} onPress={logout}>
                 <Image style={estilos.ImagemBotaoSair} source={require('../../../../assets/imgs/sair.png')}/>
                 <Text style={estilos.TextoBotaoSair}>Sair / Logout</Text>
             </Pressable>
         </View>
-    )}
+    )
+}
 
 const estilos = StyleSheet.create({
-    PaginaPerfil:{
+    PaginaPerfil: {
         flex: 1,
-        flexDirection:"column",
+        flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
-        backgroundColor: "rgba(252, 248, 246, 1)"
+        backgroundColor: Colors.backgroundColor
     },
-    TituloPerfil:{
+    TituloPerfil: {
         fontFamily: "Montserrat_700Bold",
         fontSize: 30,
         color: "rgba(59, 44, 36, 1)",
         marginTop: 48
     },
-    ViewSubtitulo:{
+    ViewSubtitulo: {
         backgroundColor: "rgba(255, 235, 227, 1)",
         borderRadius: 9999,
         width: 69,
@@ -82,17 +117,17 @@ const estilos = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
         marginTop: 12,
-        marginBottom: 32 
+        marginBottom: 32
     },
-    Subtitulo:{
+    Subtitulo: {
         color: "rgba(163, 107, 86, 1)",
         fontFamily: "Montserrat_700Bold",
         fontSize: 12
     },
-    ViewInput:{
+    ViewInput: {
         backgroundColor: "white",
         width: 350,
-        height:99,
+        height: 99,
         flexDirection: "column",
         justifyContent: "flex-start",
         alignItems: "center",
@@ -100,31 +135,25 @@ const estilos = StyleSheet.create({
         marginBottom: 16,
         borderRadius: 16
     },
-    ViewTextoInput:{
+
+    ViewTextoInput: {
+        display: "flex",
         flexDirection: "row",
-        justifyContent: "flex-start",
         alignItems: "center",
-        width: 316,
-        height: 20
+        gap: 5,
+        width: "100%",
     },
-    ImagemInput:{
-        marginRight: 12
-    },
-    TextoInput:{
+
+    TextoInput: {
         fontFamily: "Montserrat_400Regular",
         fontSize: 14,
         color: "rgba(107, 114, 128, 1)"
     },
-    Input:{
-        borderBottomWidth: 1,
-        width: 284,
-        height: 41,
-        flexDirection: "row",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        paddingLeft: 12
+    Inputs: {
+        ...Input,
+        backgroundColor: "#FFFF",
     },
-    BotaoEditar:{
+    BotaoEditar: {
         backgroundColor: "white",
         borderRadius: 9999,
         borderWidth: 2,
@@ -136,17 +165,17 @@ const estilos = StyleSheet.create({
         height: 56,
         marginTop: 32
     },
-    ImagemBotaoEditar:{
+    ImagemBotaoEditar: {
         width: 14,
         height: 14,
         marginRight: 8
     },
-    TextoBotaoEditar:{
+    TextoBotaoEditar: {
         fontFamily: "Montserrat_700Bold",
         fontSize: 16,
         color: "rgba(59, 44, 36, 1)"
     },
-    BotaoSair:{
+    BotaoSair: {
         backgroundColor: "rgba(193, 25, 32, 1)",
         borderRadius: 9999,
         flexDirection: "row",
@@ -154,17 +183,26 @@ const estilos = StyleSheet.create({
         alignItems: "center",
         width: 350,
         height: 52,
-        marginTop: 16 
+        marginTop: 16
 
     },
-    ImagemBotaoSair:{
+    ImagemBotaoSair: {
         width: 14,
         height: 14,
         marginRight: 8
     },
-    TextoBotaoSair:{
+    TextoBotaoSair: {
         fontFamily: "Montserrat_700Bold",
         fontSize: 16,
         color: "white"
+    },
+    container_forms: {
+        width: "80%",
+        maxWidth: 400,
+        display: "flex",
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 20,
+        borderRadius: 10,
     }
 })
